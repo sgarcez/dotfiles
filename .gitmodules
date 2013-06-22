@@ -1,0 +1,12 @@
+[submodule "vim/bundle/ctrp.vim"]
+	path = vim/bundle/ctrp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/bundle/vim-powerline"]
+	path = vim/bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/bundle/pydiction"]
+	path = vim/bundle/pydiction
+	url = https://github.com/rkulla/pydiction.git
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
