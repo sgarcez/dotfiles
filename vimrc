@@ -37,14 +37,14 @@ inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
+" noremap <C-Z> :update<CR>
+" vnoremap <C-Z> <C-C>:update<CR>
+" inoremap <C-Z> <C-O>:update<CR>
 
 
 " Quick quit command
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
+"noremap <Leader>e :quit<CR>  " Quit current window
+"noremap <Leader>E :qa!<CR>   " Quit all windows
 
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
@@ -141,6 +141,15 @@ set noswapfile
 
 " NerdTree
 map <leader>n :NERDTreeToggle<CR>
+
+" enable system copy
+" vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+vmap <leader>c y:call system("pbcopy", getreg("\""))<CR>
+" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>
+
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
 
 " ============================================================================
 " Python IDE Setup
