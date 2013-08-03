@@ -190,3 +190,6 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 ""set foldmethod=syntax
 set foldmethod=indent
 set foldlevel=99
+
+" pydiction
+let g:pydiction_location = '~/src/dotfiles/vim/bundle/pydiction/complete-dict'
