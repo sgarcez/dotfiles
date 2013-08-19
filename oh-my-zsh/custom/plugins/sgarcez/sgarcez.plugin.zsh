@@ -6,7 +6,7 @@ bindkey '^[[1;9C' forward-word
 bindkey '^[[1;9D' backward-word
 
 #venvwrapper
-export WORKON_HOME=/var/www//python-virtualenvs
+export WORKON_HOME=/var/www/python-virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
