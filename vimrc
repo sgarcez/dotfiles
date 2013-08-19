@@ -87,7 +87,7 @@ color solarized
 "" set font
 set anti
 if has('gui_running')
-    set guifont=Source\ Code\ Pro:h13
+    set guifont=Source\ Code\ Pro:h14
     set transparency=3
 ""    set t_Co=8 t_md=
 endif
