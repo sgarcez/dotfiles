@@ -6,24 +6,16 @@ Plug 'haorenW1025/diagnostic-nvim'
 Plug 'haorenW1025/completion-nvim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'itchyny/lightline.vim'
-" Text Object plugins
-Plug 'wellle/targets.vim'
 Plug 'tpope/vim-surround'
-" Show leader key bindings
-" Toggle terminal
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'kassio/neoterm'
-" Inline git blame
 Plug 'APZelos/blamer.nvim'
 Plug 'airblade/vim-gitgutter'
-" distraction free
 Plug 'junegunn/goyo.vim'
-" Plug 'scrooloose/nerdtree'	
 Plug 'tpope/vim-vinegar'
-" Syntax highlighting support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'wsdjeg/vim-lua'

@@ -9,6 +9,7 @@ cnoremap jk <C-C>
 
 " Save
 nnoremap <Leader>w <Esc>:w<CR>
+
 " Search and Replace
 nnoremap sr :%s//g<Left><Left>
 nnoremap <Leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -58,13 +59,8 @@ nnoremap <silent> <leader>td <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " 'hrsh7th/vim-vsnip'
-" imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-" imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-" smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-" imap <expr> <S-Tab> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-" smap <expr> <S-Tab> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " 'haorenW1025/diagnostic-nvim'
 " nnoremap <silent> <leader>d[ :PrevDiagnosticCycle<CR>
@@ -136,13 +132,3 @@ nnoremap <Leader>c  :Commands<CR>
 
 " 'kassio/neoterm'
 au TermOpen * tnoremap <Esc> <C-\><C-n>
-
-" 'scrooloose/nerdtree'	
-" map <F1> :call NERDTreeToggleAndFind()<cr>	
-" function! NERDTreeToggleAndFind()	
-"   if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)	
-"     execute ':NERDTreeClose'	
-"   else	
-"     execute ':NERDTreeFind'	
-"   endif	
-" endfunction

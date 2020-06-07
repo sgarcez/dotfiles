@@ -90,17 +90,6 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 "'junegunn/goyo.vim'
 let g:goyo_width=150
-"'scrooloose/nerdtree'	
-" let g:NERDTreeIgnore = ['\.pyc$', '\DS_Store$', '__pycache__$']	
-" let g:NERDTreeMinimalUI = 3	
-" let g:NERDTreeHijackNetrw = 1	
-" let g:NERDTreeWinSize = 31	
-" let g:NERDTreeChDirMode = 2	
-" let g:NERDTreeAutoDeleteBuffer = 1	
-" let g:NERDTreeShowBookmarks = 1	
-" let g:NERDTreeCascadeOpenSingleChildDir = 1	
-" let g:NERDTreeHighlightCursorline = 1
-" let NERDTreeShowHidden=1
 
 " Neovim LSP Diagnostics
 let g:diagnostic_enable_virtual_text = 1
