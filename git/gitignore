@@ -1,0 +1,10 @@
+.DS_Store
+.svn
+*~
+*.pyc
+*.egg-info/
+.ropeproject/
+.vscode
+.mypy*
+.local*
+.python-version

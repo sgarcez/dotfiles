@@ -1,0 +1,33 @@
+[user]
+    name = Sergio Garcez
+	signingkey = 81FFEE3F39E752BF121D52BC9695D21956E13429
+[include]
+    path = .gitconfig-personal
+[includeIf "gitdir:beat/"]
+    path = .gitconfig-beat
+[color]
+	ui = true
+[core]
+    editor = vim
+    ; whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    excludesfile = ~/.gitignore
+[push]
+	default = simple
+[branch]
+	autosetupmerge = always
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[pager]
+	branch = false
+[commit]
+	gpgsign = false
+[gpg]
+	program = gpg
+[url "git@github.com:"]
+	insteadOf = https://github.com/
