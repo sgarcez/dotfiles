@@ -24,12 +24,9 @@ export EDITOR='vim'
 #------------------------------------------------------
 # colours
 #------------------------------------------------------
-export TERM=xterm-256color
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-ocean.sh"
-echo
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# export TERM=xterm-256color
+export TERM=screen-256color
+source $HOME/.theme.sh
 
 #------------------------------------------------------
 # Aliases
@@ -37,4 +34,7 @@ echo
 
 alias vim=nvim
 
+# FZF
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs --glob '!{vendor,node_modules,.git}'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
