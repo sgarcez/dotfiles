@@ -31,3 +31,7 @@
 	program = gpg
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[tig "color"] 
+    cursor = black white bold
+	title-blur	= white default
+	title-focus	= white default bold

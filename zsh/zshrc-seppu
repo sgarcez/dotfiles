@@ -5,7 +5,6 @@ ZSH=$HOME/.oh-my-zsh
 TERM="xterm-256color"
 DEFAULT_USER='sgarcez'
 ZSH_THEME="agnoster"
-
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(git zsh-autosuggestions)
@@ -42,6 +41,8 @@ alias ts='tig status'
 alias vim=nvim.appimage
 alias watchdocker='while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Networks}}\t{{.Image}}");clear; echo $out;sleep 1; done'
 
+# alias k9s='docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/derailed/k9s'
+
 #------------------------------------------------------
 # Ensure ssh key forwarding works with existing tmux sessions
 #------------------------------------------------------
@@ -49,13 +50,22 @@ alias watchdocker='while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names
 SOCK="/tmp/ssh-agent-$USER-screen"
 if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
 then
-    rm -f /tmp/ssh-agent-$USER-screen
-    ln -sf $SSH_AUTH_SOCK $SOCK
-    export SSH_AUTH_SOCK=$SOCK
+rm -f /tmp/ssh-agent-$USER-screen
+ln -sf $SSH_AUTH_SOCK $SOCK
+export SSH_AUTH_SOCK=$SOCK
 fi
 
 # FZF
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs --glob '!{vendor,node_modules,.git}'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
+--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source <(navi widget zsh)
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"

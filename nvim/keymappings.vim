@@ -1,4 +1,4 @@
-" Disable search highlighting
+
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
 
 " Remap escape keys to something usable on home row
@@ -31,6 +31,10 @@ nnoremap ]b :bnext<CR>
 nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
 
+" gitgutter
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+
 " Move around splits with ctrl + direction
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -57,6 +61,7 @@ nnoremap <silent> <leader>h  <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>i  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>td <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " 'hrsh7th/vim-vsnip'
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
@@ -64,8 +69,11 @@ smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l
 
 " 'haorenW1025/diagnostic-nvim'
 " nnoremap <silent> <leader>d[ :PrevDiagnosticCycle<CR>
-nnoremap <silent> <leader>d :NextDiagnosticCycle<CR>
-nnoremap <silent> <leader>D :OpenDiagnostic<CR>
+nnoremap <silent> ]d :NextDiagnostic<CR>
+nnoremap <silent> [d :PrevDiagnostic<CR>
+nnoremap <silent> <leader>do :OpenDiagnostic<CR>
+" nnoremap <leader>dl <cmd>lua require'diagnostic.util'.show_line_diagnostics()<CR>
+nnoremap <leader>dl <cmd> lua vim.lsp.util.show_line_diagnostics()<CR>
 
 " 'haorenW1025/completion-nvim'
 imap <c-j> <cmd>lua require'source'.prevCompletion()<CR> "use <c-j> to switch to previous completion
@@ -104,15 +112,14 @@ au FileType go nmap <leader>m :GoMetaLinter<CR>
 " Exit fzf list
 au FileType fzf tunmap <Esc>
 nnoremap <leader>; :Files<CR>
-nnoremap <Leader>gd   :GFiles?<CR>
-nnoremap <leader>a :Buffers<CR>
-nnoremap <leader>l :BLines<CR>
-nnoremap <Leader>r :Rg <C-R><C-W><CR>
-xnoremap <Leader>r y:Rg <C-R>"<CR>
-nnoremap <Leader>f/  :Rg<CR>
-nnoremap <Leader>gc  :BCommits<CR>
-nnoremap <Leader>c  :Commands<CR>
+nnoremap <Leader>fr :Rg <C-R><C-W><CR>
+xnoremap <Leader>fr y:Rg <C-R>"<CR>
+nnoremap <Leader>fc  :BCommits<CR>
+nnoremap <Leader>fb   :Buffers<CR>
 
+" nnoremap <Leader>gd   :GFiles?<CR>
+" nnoremap <Leader>f/  :Rg<CR>
+" nnoremap <Leader>c  :Commands<CR>
 " nnoremap <Leader>b   :Buffers<CR>
 " nnoremap <Leader>gf   :GFiles?<CR>
 " nnoremap <Leader>ff  :GFiles<CR>
