@@ -1,0 +1,16 @@
+
+Xft.dpi:    218
+Xft.autohint:  0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting:   1
+Xft.antialias: 1
+Xft.rgba:      rgb
+
+XTerm*renderFont: true
+XTerm*faceName: InputMono
+XTerm*faceSize: 8
+
+UXTerm*renderFont: true
+UXTerm*faceName: InputMono
+UXTerm*faceSize: 8

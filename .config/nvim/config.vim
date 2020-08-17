@@ -13,7 +13,7 @@ set showcmd               " Show (partial) command in status line.
 set ruler                 " Show the line and column numbers of the cursor.
 set mouse=a
 set showmatch             " Highlight matching braces
-set scrolloff=999         " Keep the cursor centered in the screen
+" set scrolloff=999         " Keep the cursor centered in the screen
 set clipboard=unnamed,unnamedplus
 set updatetime=100
 set encoding=utf-8
@@ -151,19 +151,19 @@ let g:completion_trigger_character = ['.', '::']
 let g:completion_auto_change_source = 1
 let g:completion_enable_snippet = 'vim-vsnip'
 
-let s:lsp_chain_config = [
-  \   {'complete_items': ['lsp', 'snippet']},
-  \   {'mode': '<c-p>'},
-  \   {'mode': '<c-n>'},
-  \   {'mode': 'file'},
-  \ ]
-let g:completion_chain_complete_list = {
-  \ 'go' : s:lsp_chain_config,
-  \ 'rust' : s:lsp_chain_config,
-  \ 'default' : [
-  \     {'mode': '<c-p>'},
-  \     {'mode': '<c-n>'},
-  \     {'mode': 'file'},
-  \ ]
-  \ }
+" let s:lsp_chain_config = [
+"   \   {'complete_items': ['lsp', 'snippet']},
+"   \   {'mode': '<c-p>'},
+"   \   {'mode': '<c-n>'},
+"   \   {'mode': 'file'},
+"   \ ]
+" let g:completion_chain_complete_list = {
+"   \ 'go' : s:lsp_chain_config,
+"   \ 'rust' : s:lsp_chain_config,
+"   \ 'default' : [
+"   \     {'mode': '<c-p>'},
+"   \     {'mode': '<c-n>'},
+"   \     {'mode': 'file'},
+"   \ ]
+"   \ }
 

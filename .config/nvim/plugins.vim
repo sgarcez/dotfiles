@@ -11,10 +11,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'rhysd/clever-f.vim'
 Plug 'wellle/targets.vim'
 Plug 'rhysd/clever-f.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-" Plug 'lotabout/skim.vim'
 Plug 'tpope/vim-commentary'
 Plug 'kassio/neoterm'
 Plug 'tpope/vim-fugitive'

@@ -76,8 +76,8 @@ nnoremap <silent> <leader>do :OpenDiagnostic<CR>
 nnoremap <leader>dl <cmd> lua vim.lsp.util.show_line_diagnostics()<CR>
 
 " 'haorenW1025/completion-nvim'
-imap <c-j> <cmd>lua require'source'.prevCompletion()<CR> "use <c-j> to switch to previous completion
-imap <c-k> <cmd>lua require'source'.nextCompletion()<CR> "use <c-k> to switch to next completion
+" imap <c-j> <cmd>lua require'source'.prevCompletion()<CR> "use <c-j> to switch to previous completion
+" imap <c-k> <cmd>lua require'source'.nextCompletion()<CR> "use <c-k> to switch to next completion
 
 function! s:check_back_space() abort
     let col = col('.') - 1

@@ -13,6 +13,8 @@
     excludesfile = ~/.gitignore
 [push]
 	default = simple
+[pull]
+	rebase = true
 [branch]
 	autosetupmerge = always
 [filter "hawser"]
