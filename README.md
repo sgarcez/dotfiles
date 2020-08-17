@@ -1,2 +1,2 @@
 ## Dotfiles
-Config for `zsh`, `tmux`, `nvim` and `git`
+Config for `fish`, `tmux`, `nvim`, `alacritty`, etc.
