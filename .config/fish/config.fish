@@ -7,7 +7,7 @@ source ~/.config/fish/aliases.fish
 # Load all saved ssh keys
 # /usr/bin/ssh-add -A ^/dev/null
 
-bash ~/theme.sh
+bash ~/.theme.sh
 
 # Fish syntax highlighting
 set -g fish_color_autosuggestion '555'  'brblack'
