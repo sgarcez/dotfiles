@@ -2,6 +2,15 @@ if not status is-interactive
     exit
 end
 
+set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
+set -gx GO_PATH /home/sergio/go/
+set -gx STARSHIP_CONFIG "/home/sergio/.config/starship/starship.toml"
+set -gx EDITOR vim
+set -gx TERM xterm-256color
+set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --exclude vendor --color=always'
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_DEFAULT_OPTS "--ansi"
+
 source ~/.config/fish/aliases.fish
 
 # Load all saved ssh keys
@@ -33,3 +42,10 @@ set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
 
 starship init fish | source
+
+
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx -- -keeptty
+    end
+end

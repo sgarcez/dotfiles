@@ -1,9 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export EDITOR:vim
-SETUVAR --export --path GO_PATH:/home/sergio/go/
-SETUVAR --export STARSHIP_CONFIG:/home/sergio/\x2econfig/starship/starship\x2etoml
-SETUVAR --export TERM:xterm\x2d256color
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_g:git
 SETUVAR _fish_abbr_ga:git\x20add

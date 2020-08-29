@@ -5,6 +5,8 @@
     path = .gitconfig-personal
 [includeIf "gitdir:beat/"]
     path = .gitconfig-beat
+[include]
+  path = .gitalias
 [color]
 	ui = true
 [core]
@@ -31,8 +33,6 @@
 	gpgsign = false
 [gpg]
 	program = gpg
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [tig "color"] 
     cursor = black white bold
 	title-blur	= white default

@@ -102,6 +102,7 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
 " let g:lightline = {'colorscheme': 'solarized', 'component': { 'filename': '%F'}}
 let g:lightline = {'colorscheme': 'one', 'component': { 'filename': '%F'}}
 let g:lightline.tabline = {'left': [['tabs']], 'right': []}
+
 "'junegunn/fzf.vim'
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 " let g:fzf_colors =

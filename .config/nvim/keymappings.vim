@@ -111,11 +111,11 @@ au FileType go nmap <leader>m :GoMetaLinter<CR>
 " 'junegunn/fzf.vim'
 " Exit fzf list
 au FileType fzf tunmap <Esc>
-nnoremap <leader>; :Files<CR>
-nnoremap <Leader>fr :Rg <C-R><C-W><CR>
-xnoremap <Leader>fr y:Rg <C-R>"<CR>
-nnoremap <Leader>fc  :BCommits<CR>
-nnoremap <Leader>fb   :Buffers<CR>
+nnoremap <Leader>a :Buffers<CR>
+nnoremap <Leader>; :Files<CR>
+nnoremap <Leader>r :Rg <C-R><C-W><CR>
+xnoremap <Leader>r y:Rg <C-R>"<CR>
+nnoremap <Leader>c :BCommits<CR>
 
 " nnoremap <Leader>gd   :GFiles?<CR>
 " nnoremap <Leader>f/  :Rg<CR>
