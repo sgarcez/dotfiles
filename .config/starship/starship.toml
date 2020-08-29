@@ -5,11 +5,11 @@ add_newline = false
 [character]      # The name of the module we are configuring is "character"
 # symbol = "🠦"     # The "symbol" segment is being set to "➜"
 symbol = "➜"     # The "symbol" segment is being set to "➜"
+# symbol = "〰️"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 
 [golang]
-# symbol = "〰️ "
 symbol = "go "
