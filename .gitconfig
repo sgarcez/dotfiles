@@ -1,6 +1,5 @@
 [user]
     name = Sergio Garcez
-	signingkey = 81FFEE3F39E752BF121D52BC9695D21956E13429
 [include]
     path = .gitconfig-personal
 [includeIf "gitdir:beat/"]
@@ -11,7 +10,6 @@
 	ui = true
 [core]
     editor = vim
-    ; whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.gitignore
 [push]
 	default = simple
@@ -30,10 +28,12 @@
 [pager]
 	branch = false
 [commit]
-	gpgsign = false
+	gpgsign = true
 [gpg]
 	program = gpg
 [tig "color"] 
     cursor = black white bold
 	title-blur	= white default
 	title-focus	= white default bold
+[url "git@github.com:"]
+	insteadOf = https://github.com/

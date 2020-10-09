@@ -71,17 +71,15 @@ let g:loaded_zipPlugin        = 1
 " 'fatih/vim-go'
 let g:go_gopls_enabled = 0
 let g:go_def_mapping_enabled = 0
-let g:go_fmt_autosave = 1
-let g:go_fmt_command = "gofumports"
+let g:go_fmt_autosave = 0
+" let g:go_fmt_command = "gofumports"
 let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
 let g:go_metalinter_autosave = 0
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_deadline = '5s'
 let g:go_metalinter_command = "golangci-lint"
 " let g:go_list_type = 'locationlist'
 let g:go_jump_to_error = 0
 " let g:go_auto_type_info = 1
-" let g:go_auto_sameids = 1
 
 "'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
@@ -130,7 +128,7 @@ let g:gitgutter_use_location_list = 0
 let g:goyo_width=150
 
 " Neovim LSP Diagnostics
-let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_show_sign = 1
 let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_insert_delay = 1

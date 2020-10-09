@@ -2,6 +2,8 @@ if not status is-interactive
     exit
 end
 
+set -x GPG_TTY (tty)
+
 set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
 set -gx GO_PATH /home/sergio/go/
 set -gx STARSHIP_CONFIG "/home/sergio/.config/starship/starship.toml"

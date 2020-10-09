@@ -1,7 +1,7 @@
 # i3 config file (v4)
 
 # Reduce tearing
-exec --no-startup-id picom -b
+# exec --no-startup-id picom -b
 
 workspace_layout tabbed
 
@@ -133,5 +133,5 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 title_align center
 
 exec --no-startup-id hsetroot -solid "#333333"
-# exec --no-startup-id hsetroot -solid "#2b303b"
+exec --no-startup-id redshift-gtk -l 51.50853:-0.12574
 

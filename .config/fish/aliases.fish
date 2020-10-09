@@ -29,7 +29,7 @@ alias lt='lsd --tree'
 alias cat='bat'
 # alias fd='fdfind'
 
-alias watchdocker='bash -c \'while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Networks}}\t{{.Image}}");clear; echo $out;sleep 1; done\''
+alias watchdocker='bash -c \'while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Networks}}\t{{.Image}}");clear; echo "$out";sleep 1; done\''
 
 alias markdownd='docker run -it -v $PWD:/opt -p 8888:8080 aerth/markdownd -http=:8080 -index=README.md /opt'
 

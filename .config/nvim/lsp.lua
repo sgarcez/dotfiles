@@ -1,4 +1,5 @@
 local nvim_lsp = require'nvim_lsp'
+local util = require 'nvim_lsp/util'
 
 vim.api.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 vim.api.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]
@@ -19,9 +20,10 @@ nvim_lsp.gopls.setup{
         linkTarget = "pkg.go.dev",
         completionDocumentation = true,
         deepCompletion = true,
-        fuzzyMatching = true,
+        matcher = "fuzzy",
         staticcheck = true,
         hoverKind = "SynopsisDocumentation",
+        gofumpt = true,
     },
     capabilities = {
         textDocument = {
@@ -48,4 +50,19 @@ nvim_lsp.rust_analyzer.setup{
 
 nvim_lsp.pyls.setup{}
 
-require'nvim_lsp'.intelephense.setup{}
+nvim_lsp.intelephense.setup{}
+
+-- Synchronously organise (Go) imports.
+function go_organize_imports_sync(timeout_ms)
+  local context = { source = { organizeImports = true } }
+  vim.validate { context = { context, 't', true } }
+  local params = vim.lsp.util.make_range_params()
+  params.context = context
+
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+  if not result then return end
+  result = result[1].result
+  if not result then return end
+  edit = result[1].edit
+  vim.lsp.util.apply_workspace_edit(edit)
+end
