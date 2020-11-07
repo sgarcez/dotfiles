@@ -77,7 +77,7 @@ let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'sta
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_deadline = '5s'
 let g:go_metalinter_command = "golangci-lint"
-" let g:go_list_type = 'locationlist'
+let g:go_list_type = 'locationlist'
 let g:go_jump_to_error = 0
 " let g:go_auto_type_info = 1
 
@@ -126,6 +126,12 @@ let g:gitgutter_use_location_list = 0
 
 "'junegunn/goyo.vim'
 let g:goyo_width=150
+
+
+"'github.com/wfxr/minimap.vim'
+let g:minimap_auto_start=1
+hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B
+let g:minimap_highlight = 'MinimapCurrentLine'
 
 " Neovim LSP Diagnostics
 let g:diagnostic_enable_virtual_text = 0

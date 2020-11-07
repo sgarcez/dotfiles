@@ -27,4 +27,5 @@ Plug 'itchyny/lightline.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'rhysd/clever-f.vim'
 Plug 'wellle/targets.vim'
+Plug 'wfxr/minimap.vim'
 call plug#end()
