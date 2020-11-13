@@ -129,7 +129,7 @@ let g:goyo_width=150
 
 
 "'github.com/wfxr/minimap.vim'
-let g:minimap_auto_start=1
+let g:minimap_auto_start=0
 hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B
 let g:minimap_highlight = 'MinimapCurrentLine'
 
