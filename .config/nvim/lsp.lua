@@ -1,5 +1,5 @@
-local nvim_lsp = require'nvim_lsp'
-local util = require 'nvim_lsp/util'
+local nvim_lsp = require'lspconfig'
+local util = require 'lspconfig/util'
 
 vim.api.nvim_command [[autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 vim.api.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.util.show_line_diagnostics()]]
