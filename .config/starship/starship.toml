@@ -8,7 +8,8 @@ add_newline = false
 # symbol = "〰️"
 # symbol = "❧"
 # symbol = "→"
-symbol = "◊"
+success_symbol = "[◊](bold green)" 
+error_symbol = "[◊](bold red)"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
