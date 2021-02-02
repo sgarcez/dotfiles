@@ -8,9 +8,9 @@ function newsession
     end
 
     if test -n "$TMUX"
-        tmux new-session -d -t $argv[1] -c $targetdir
+        tmux new-session -d -s $argv[1] -c $targetdir
         tmux switch-client -t $argv[1]
     else
-        tmux new-session -t $argv[1] -c $targetdir
+        tmux new-session -s $argv[1] -c $targetdir
     end
 end

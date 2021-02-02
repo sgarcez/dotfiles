@@ -36,4 +36,4 @@
 	title-blur	= white default
 	title-focus	= white default bold
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/

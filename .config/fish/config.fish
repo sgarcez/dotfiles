@@ -5,6 +5,7 @@ end
 set -x GPG_TTY (tty)
 
 set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
+set -gx PATH ~/pear/share/pear ~/pear/bin $PATH
 set -gx GO_PATH $HOME/go/
 set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
 set -gx EDITOR vim
@@ -14,9 +15,6 @@ set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS "--ansi"
 
 source ~/.config/fish/aliases.fish
-
-# Load all saved ssh keys
-# /usr/bin/ssh-add -A ^/dev/null
 
 bash ~/.theme.sh
 
@@ -44,7 +42,6 @@ set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
 
 starship init fish | source
-
 
 if status is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
