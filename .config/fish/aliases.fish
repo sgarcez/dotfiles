@@ -9,7 +9,7 @@ abbr -a gb  git branch
 abbr -a gcm git commit -m
 abbr -a gca git commit --amend
 abbr -a gco git checkout
-abbr -a gp  git push
+abbr -a gp  git push -u origin HEAD
 abbr -a gl git pull
 abbr -a gd  git diff
 abbr -a gds git diff --staged
