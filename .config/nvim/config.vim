@@ -95,3 +95,8 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+hi clear SpellBad                                                
+hi clear SpellRare                                               
+hi clear SpellCap                                                
+hi clear SpellLocal
