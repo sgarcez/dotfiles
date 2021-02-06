@@ -1,5 +1,32 @@
 local config = require'lspconfig'
 
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    vsnip = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    spell = true;
+    tags = true;
+    snippets_nvim = true;
+    treesitter = true;
+  };
+}
+
 require('lspfuzzy').setup {
   methods = 'all',         -- either 'all' or a list of LSP methods (see below)
   fzf_options = {},        -- options passed to FZF
@@ -20,15 +47,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
-local custom_on_attach = function()
-    require'completion'.on_attach({
-        sorter = 'alphabet',
-        matcher = {'exact', 'fuzzy'}
-    })
-end
-
 config.gopls.setup{
-    on_attach = custom_on_attach,
     init_options = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
         usePlaceholders = true,

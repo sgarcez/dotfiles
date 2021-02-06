@@ -6,16 +6,6 @@ nnoremap <Leader>w <Esc>:w<CR>
 nnoremap <Leader>q <Esc>:q<CR>
 nnoremap <silent>Q <Esc>:q<CR>
 
-" nnoremap <silent><Leader>q :call CloseSplitOrDeleteBuffer()<CR>
-" nnoremap <silent>Q :call CloseSplitOrDeleteBuffer()<CR>
-" function! CloseSplitOrDeleteBuffer()
-"   if winnr('$') > 1
-"     wincmd c
-"   else
-"     execute 'bdelete'
-"   endif
-" endfunction
-
 nnoremap <Leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 nnoremap [b :bprevious<CR>
@@ -24,6 +14,10 @@ nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
 nnoremap ]c :GitGutterNextHunk<CR>
 nnoremap [c :GitGutterPrevHunk<CR>
+
+nnoremap ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>dl <cmd> lua vim.lsp.diagnostic.set_loclist()<CR>
 
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -53,26 +47,14 @@ nnoremap <silent> <leader>i  <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>re <cmd>lua vim.lsp.buf.rename()<CR>
 
-nnoremap <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <leader>do <cmd> lua vim.lsp.diagnostic.set_loclist()<CR>
-
 imap <expr> <C-l>  vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>  vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ completion#trigger_completion()
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:lexima_no_default_rules = v:true
+call lexima#set_default_rules()
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 
 au FileType go nmap <leader>t  <Plug>(go-test)
 

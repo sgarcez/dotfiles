@@ -2,7 +2,7 @@ let g:mapleader = ";"
 
 set autoread              " Reload files that have not been modified
 set number
-set relativenumber
+set norelativenumber
 set so=999
 set noswapfile            " Disable creation of *.swp files
 set nobackup              " no backup files
@@ -16,23 +16,21 @@ set showmatch             " Highlight matching braces
 set clipboard=unnamed,unnamedplus
 set updatetime=100
 set encoding=utf-8
-set autoindent          " Copy indent from current line when starting a new line
-set noerrorbells        " No beeps
+set autoindent
+set noerrorbells
 set signcolumn=auto:2
-
-" Indentation
-set expandtab     " replace <Tab> with spaces
-set tabstop=4     " number of spaces that a <Tab> in the file counts for
-set softtabstop=4 " remove <Tab> symbols as spaces
-set shiftwidth=4  " indent size for << and >>
-set shiftround    " round indent to multiple of 'shiftwidth' (for << and >>)
+set expandtab             " replace <Tab> with spaces
+set tabstop=4             " number of spaces that a <Tab> in the file counts for
+set softtabstop=4         " remove <Tab> symbols as spaces
+set shiftwidth=4          " indent size for << and >>
+set shiftround            " round indent to multiple of 'shiftwidth' (for << and >>)
 
 " Search
-set hlsearch   " Highlight results
-set ignorecase " Ignore casing of searches
-set incsearch  " Start showing results as you type
+set hlsearch              " Highlight results
+set ignorecase            " Ignore casing of searches
+set smartcase             " Override the 'ignorecase' when there is uppercase letters
+set incsearch             " Start showing results as you type
 set inccommand=nosplit
-set smartcase  " Override the 'ignorecase' when there is uppercase letters
 
 " Colours
 set termguicolors
@@ -43,44 +41,22 @@ colorscheme base16-ocean
 set wildmenu
 set wildignore+=*.a,*.o,*.pyc,*~,*.swp,*.tmp
 set wildmode=list:longest,full
-set completeopt=menuone,noinsert,noselect " Completion
+set completeopt=menu,menuone,noselect
 
-" Disable some providers
-let g:loaded_python3_provider = 0
-let g:loaded_python_provider = 0
-let g:loaded_ruby_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_node_provider = 0
-
-" Disable some in built plugins completely
-" let g:loaded_netrw            = 1
-" let g:loaded_netrwPlugin      = 1
-let g:loaded_matchparen       = 1
-let g:loaded_matchit          = 1
-let g:loaded_2html_plugin     = 1
-let g:loaded_getscriptPlugin  = 1
-let g:loaded_gzip             = 1
-let g:loaded_logipat          = 1
-let g:loaded_rrhelper         = 1
-let g:loaded_spellfile_plugin = 1
-let g:loaded_tarPlugin        = 1
-let g:loaded_vimballPlugin    = 1
-let g:loaded_zipPlugin        = 1
+setlocal spell spelllang=en_gb
 
 " PLUGINS
-"
+
 " 'fatih/vim-go'
 let g:go_gopls_enabled = 0
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_autosave = 0
-" let g:go_fmt_command = "gofumports"
 let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_deadline = '5s'
 let g:go_metalinter_command = "golangci-lint"
 let g:go_list_type = 'locationlist'
 let g:go_jump_to_error = 0
-" let g:go_auto_type_info = 1
 
 "'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
@@ -97,38 +73,11 @@ let g:lightline.tabline = {'left': [['tabs']], 'right': []}
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
 "'airblade/vim-gitgutter'
-"let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_max_signs=1000
 let g:gitgutter_map_keys = 0
 let g:gitgutter_highlight_linenrs = 1
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_use_location_list = 0
-
-" 'haorenW1025/completion-nvim'
-let g:completion_enable_auto_popup = 1
-" let g:completion_enable_auto_paren = 1
-let g:completion_auto_change_source = 1
-let g:completion_matching_ignore_case = 1
-let g:completion_trigger_character = ['.', '::']
-let g:completion_auto_change_source = 1
-let g:completion_enable_snippet = 'vim-vsnip'
-
-let s:lsp_chain_config = [
-  \   {'complete_items': ['lsp', 'snippet']},
-  \   {'mode': '<c-p>'},
-  \   {'mode': '<c-n>'},
-  \   {'mode': 'file'},
-  \ ]
-
-let g:completion_chain_complete_list = {
-  \ 'go' : s:lsp_chain_config,
-  \ 'rust' : s:lsp_chain_config,
-  \ 'default' : [
-  \     {'mode': '<c-p>'},
-  \     {'mode': '<c-n>'},
-  \     {'mode': 'file'},
-  \ ]
-  \ }
 
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
