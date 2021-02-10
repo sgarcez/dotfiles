@@ -10,8 +10,14 @@ prepopulate-query-feeds yes
 
 # -- display -------------------------------------------------------------------
 
+articlelist-title-format ""
+feedlist-title-format ""
+itemview-title-format ""
+feed-sort-order unreadarticlecount
+show-read-articles yes
 show-read-feeds yes
-feed-sort-order unreadarticlecount-asc
+show-keymap-hint no
+display-article-progress yes
 text-width 80
 include "~/.config/newsboat/colors"
 
