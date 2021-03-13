@@ -13,9 +13,6 @@ prepopulate-query-feeds yes
 articlelist-title-format ""
 feedlist-title-format ""
 itemview-title-format ""
-feed-sort-order unreadarticlecount
-show-read-articles yes
-show-read-feeds yes
 show-keymap-hint no
 display-article-progress yes
 text-width 80
