@@ -1,6 +1,19 @@
 local go = {}
 local utils = require'utils'
 
+ -- 'fatih/vim-go'
+vim.cmd([[
+let g:go_gopls_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_fmt_autosave = 0
+let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
+let g:go_metalinter_autosave = 0
+let g:go_metalinter_deadline = '5s'
+let g:go_metalinter_command = "golangci-lint"
+let g:go_list_type = 'locationlist'
+let g:go_jump_to_error = 0
+]])
+
 vim.cmd [[augroup vimrc_go]]
   vim.cmd [[autocmd!]]
   vim.cmd [[autocmd FileType go lua sg.go.setup()]]
@@ -13,6 +26,8 @@ function go.setup()
   vim.bo.softtabstop = 4
   vim.bo.shiftwidth = 4
   utils.buf_keymap(0, 'n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = false })
+  utils.buf_keymap(0, 'n', '<leader>t', '<cmd>GoTest<CR>', { noremap = false })
+
 end
 
 function go.format()

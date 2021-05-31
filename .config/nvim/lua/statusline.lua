@@ -1,12 +1,11 @@
 local gl = require('galaxyline')
-local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
 
 
 local colors = {
-  bg = "NONE",
-  -- bg = "#2E3440",
+  -- bg = "NONE",
+  bg = "#2E3440",
   -- fg = "#81A1C1",
   fg = "#65737e",
   line_bg = "NONE",
@@ -26,6 +25,53 @@ local colors = {
   red = "#BF616A"
 }
 
+
+local mode_color = function()
+  local mode_colors = {
+    n = colors.cyan,
+    i = colors.green,
+    c = colors.orange,
+    V = colors.magenta,
+    [''] = colors.magenta,
+    v = colors.magenta,
+    R = colors.red,
+  }
+
+  local color = mode_colors[vim.fn.mode()]
+
+  if color == nil then
+    color = colors.red
+  end
+
+  return color
+end
+
+gls.left[2] = {
+  ViMode = {
+    provider = function()
+      local alias = {
+        n = 'NORMAL',
+        i = 'INSERT',
+        c = 'COMMAND',
+        V = 'VISUAL',
+        [''] = 'VISUAL',
+        v = 'VISUAL',
+        R = 'REPLACE',
+        t = 'TERMINAL',
+      }
+      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color())
+      local alias_mode = alias[vim.fn.mode()]
+      if alias_mode == nil then
+        alias_mode = vim.fn.mode()
+      end
+      return alias_mode..' '
+    end,
+    highlight = { colors.bg, colors.bg },
+    separator = "",
+    separator_highlight = {colors.bg, colors.section_bg},
+  },
+}
+
 gls.left[5] = {
   FileName = {
     provider = 'FileName',
@@ -38,22 +84,22 @@ gls.left[5] = {
 gls.left[6] = {
   LineInfo = {
     provider = 'LineColumn',
-    separator = ' ',
+    separator = '',
     separator_highlight = {'NONE',colors.bg},
     highlight = {colors.fg,colors.bg},
     -- highlight = {colors.gray,colors.bg,'bold'}
   },
 }
 
-gls.left[7] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = ' ',
-    separator_highlight = {'NONE',colors.bg},
-    highlight = {colors.fg,colors.bg,'bold'},
-    -- highlight = {colors.gray,colors.bg,'bold'}
-  }
-}
+-- gls.left[7] = {
+--   PerCent = {
+--     provider = 'LinePercent',
+--     separator = '',
+--     separator_highlight = {'NONE',colors.bg},
+--     highlight = {colors.fg,colors.bg,'bold'},
+--     -- highlight = {colors.gray,colors.bg,'bold'}
+--   }
+-- }
 
 gls.left[8] = {
   DiagnosticError = {
@@ -170,6 +216,7 @@ gls.right[4] = {
 gls.right[8] = {
   ShowLspClient = {
     provider = 'GetLspClient',
+    separator = ' ',
     condition = function ()
       local tbl = {['dashboard'] = true,['']=true}
       if tbl[vim.bo.filetype] then

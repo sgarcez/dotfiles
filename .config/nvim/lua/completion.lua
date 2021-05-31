@@ -16,14 +16,14 @@ require'compe'.setup({
   max_kind_width = 100;
   max_menu_width = 100;
   source = {
-    path = true;
+    path = false;
     buffer = true;
-    calc = true;
+    calc = false;
     vsnip = true;
     nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = true;
+    nvim_lua = false;
+    spell = false;
+    tags = false;
     snippets_nvim = false;
     treesitter = true;
   }
@@ -54,25 +54,15 @@ function completion.tab_completion()
   return vim.fn['compe#complete']()
 end
 
+utils.keymap('i', '<C-l>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
+utils.keymap('s', '<C-l>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', {expr = true, noremap = false})
+
 utils.keymap('i', '<TAB>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
+utils.keymap('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', {expr = true, noremap = false})
 
-utils.keymap('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', {
-  expr = true,
-  noremap = false
-})
+utils.keymap('s', '<TAB>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', {expr = true, noremap = false})
+utils.keymap('s', '<S-TAB>', 'vsnip#available(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', { expr = true, noremap = false })
 
-utils.keymap('s', '<TAB>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', {
-  expr = true,
-  noremap = false
-})
-
-utils.keymap('s', '<S-TAB>', 'vsnip#available(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', {
-  expr = true,
-  noremap = false
-})
-
--- utils.keymap("i", "<C-l>", "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'", { noremap = true, silent = true, expr = true })
--- utils.keymap("s", "<C-l>", "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'", { noremap = true, silent = true, expr = true })
 
 utils.keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
 utils.keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })

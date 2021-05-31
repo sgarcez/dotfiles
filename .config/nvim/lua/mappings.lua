@@ -1,40 +1,51 @@
 local utils = require'utils'
 
-utils.keymap("n", "<Esc><Esc>", ':nohlsearch<CR><Esc>')
+utils.keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
 
-utils.keymap("n", "<Leader>w", "<Esc>:w<CR>")
-utils.keymap("n", "<Leader>q", "<Esc>:q<CR>")
-utils.keymap("n", "Q", "<Esc>:q<CR>")
+utils.keymap('n', '<Leader>w', '<Esc>:w<CR>')
+utils.keymap('n', '<Leader>q', '<Esc>:q<CR>')
+utils.keymap('n', 'Q', '<Esc>:q<CR>')
 
-utils.keymap("n", "<Leader>sr", ":%s/<C-r><C-w>//g<Left><Left>")
+utils.keymap('n', '<Leader>sr', ':%s/<C-r><C-w>//g<Left><Left>')
 
-utils.keymap("n", "[b", ":bprevious<CR>")
-utils.keymap("n", "]b", ":bnext<CR>")
-utils.keymap("n", "[t", ":tabprevious<CR>")
-utils.keymap("n", "]t", ":tabnext<CR>")
-utils.keymap("n", "]c", ":GitGutterNextHunk<CR>")
-utils.keymap("n", "[c", ":GitGutterPrevHunk<CR>")
+utils.keymap('n', '[b', ':bprevious<CR>')
+utils.keymap('n', ']b', ':bnext<CR>')
+utils.keymap('n', '[t', ':tabprevious<CR>')
+utils.keymap('n', ']t', ':tabnext<CR>')
 
-utils.keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
-utils.keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
+utils.keymap('n', ']c', ':GitGutterNextHunk<CR>')
+utils.keymap('n', '[c', ':GitGutterPrevHunk<CR>')
 
-utils.keymap("n", "<c-j>", "<c-w>j")
-utils.keymap("n", "<c-k>", "<c-w>k")
-utils.keymap("n", "<c-l>", "<c-w>l")
-utils.keymap("n", "<c-h>", "<c-w>h")
+utils.keymap('n', '<c-j>', '<c-w>j')
+utils.keymap('n', '<c-k>', '<c-w>k')
+utils.keymap('n', '<c-l>', '<c-w>l')
+utils.keymap('n', '<c-h>', '<c-w>h')
 
-utils.keymap("n", "<Leader>hh", ":leftabove vsplit<CR>")
-utils.keymap("n", "<Leader>ll", ":rightbelow vsplit<CR>")
-utils.keymap("n", "<Leader>kk", ":leftabove split<CR>")
-utils.keymap("n", "<Leader>jj", ":rightbelow split<CR>")
-utils.keymap("n", "<Leader>tt", ":tab split<CR>")
+utils.keymap('n', '<Leader>hh', ':leftabove vsplit<CR>')
+utils.keymap('n', '<Leader>ll', ':rightbelow vsplit<CR>')
+utils.keymap('n', '<Leader>kk', ':leftabove split<CR>')
+utils.keymap('n', '<Leader>jj', ':rightbelow split<CR>')
+utils.keymap('n', '<Leader>tt', ':tab split<CR>')
 
-utils.keymap("n", "<Leader>h<Enter>", ":leftabove  vnew<CR>:terminal<CR>:startinsert<CR>")
-utils.keymap("n", "<Leader>l<Enter>", ":rightbelow vnew<CR>:terminal<CR>:startinsert<CR>")
-utils.keymap("n", "<Leader>k<Enter>", ":leftabove  new<CR>:terminal<CR>:startinsert<CR>")
-utils.keymap("n", "<Leader>j<Enter>", ":rightbelow new<CR>:terminal<CR>:startinsert<CR>")
+utils.keymap('n', '<Leader>h<Enter>', ':leftabove  vnew<CR>:terminal<CR>:startinsert<CR>')
+utils.keymap('n', '<Leader>l<Enter>', ':rightbelow vnew<CR>:terminal<CR>:startinsert<CR>')
+utils.keymap('n', '<Leader>k<Enter>', ':leftabove  new<CR>:terminal<CR>:startinsert<CR>')
+utils.keymap('n', '<Leader>j<Enter>', ':rightbelow new<CR>:terminal<CR>:startinsert<CR>')
 
-vim.api.nvim_exec([[
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-au FileType go nmap <leader>t  <Plug>(go-test)
-]], "")
+utils.keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+utils.keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+utils.keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = false })
+utils.keymap('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = false })
+utils.keymap('n', '<leader>lc', '<cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = false })
+utils.keymap('n', '<leader>lg', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = false })
+utils.keymap('n', '<leader>lh',  '<cmd>lua vim.lsp.buf.hover()<CR>')
+utils.keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', { noremap = false })
+utils.keymap('v', '<leader>lf', ':<C-u>call v:lua.vim.lsp.buf.range_formatting()<CR>', { noremap = false })
+utils.keymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', { noremap = false })
+utils.keymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', { noremap = false })
+utils.keymap('n', '<Leader>e', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', { noremap = false })
+
+vim.cmd [[
+  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au! FileType fzf tunmap <buffer> <Esc>
+]]

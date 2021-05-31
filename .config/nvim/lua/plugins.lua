@@ -14,11 +14,9 @@ require("packer").startup(
         use {'hrsh7th/vim-vsnip-integ'}
         use {'hrsh7th/nvim-compe'}
         use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-        use {'kassio/neoterm'}
         use {'tpope/vim-surround'}
         use {'tpope/vim-commentary'}
         use {'tpope/vim-vinegar'}
-        use {'tpope/vim-fugitive'}
 	use {'airblade/vim-gitgutter'}
         use {'rhysd/git-messenger.vim'}
         use {'rhysd/conflict-marker.vim'}
