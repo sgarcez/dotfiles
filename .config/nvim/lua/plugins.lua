@@ -9,7 +9,6 @@ require("packer").startup(
         use {'neovim/nvim-lspconfig'}
         use {'neovim/nvim-lsp'}
         use {'ojroques/nvim-lspfuzzy'}
-	use {'folke/lsp-colors.nvim'}
         use {'hrsh7th/vim-vsnip'}
         use {'hrsh7th/vim-vsnip-integ'}
         use {'hrsh7th/nvim-compe'}
@@ -17,7 +16,7 @@ require("packer").startup(
         use {'tpope/vim-surround'}
         use {'tpope/vim-commentary'}
         use {'tpope/vim-vinegar'}
-	use {'airblade/vim-gitgutter'}
+        use {'airblade/vim-gitgutter'}
         use {'rhysd/git-messenger.vim'}
         use {'rhysd/conflict-marker.vim'}
         use {'rhysd/clever-f.vim'}
@@ -25,12 +24,8 @@ require("packer").startup(
         use {'junegunn/vim-peekaboo'}
         use {'fatih/vim-go', run = ':GoUpdateBinaries'}
         use {'rust-lang/rust.vim'}
-        use {
-            'glepnir/galaxyline.nvim',
-            branch = 'main',
-            requires = {'kyazdani42/nvim-web-devicons'}
-        }
+        use {'glepnir/galaxyline.nvim'}
     end
 )
 
-require('lspfuzzy').setup{}
+-- require('lspfuzzy').setup{}

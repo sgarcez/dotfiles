@@ -1,5 +1,7 @@
-local nvim_lsp = require'lspconfig'
-local utils = require'utils'
+local nvim_lsp = require('lspconfig')
+local utils = require('utils')
+
+require('lspfuzzy').setup{}
 
 nvim_lsp.pyls.setup{}
 

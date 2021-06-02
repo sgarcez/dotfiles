@@ -2,8 +2,7 @@ _G.sg = {}
 
 vim.g.mapleader = ';'
 
-require'settings'
-require'colorscheme'
+require'options'
 require'plugins'
 require'treesitter'
 require'lsp'

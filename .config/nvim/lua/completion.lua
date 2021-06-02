@@ -1,7 +1,5 @@
 local completion = {}
 local utils = require'utils'
-utils.opt('o', 'pumheight' , 15)
-vim.cmd('set completeopt=menuone,noselect')
 
 require'compe'.setup({
   enabled = true;
@@ -53,33 +51,5 @@ function completion.tab_completion()
 
   return vim.fn['compe#complete']()
 end
-
-utils.keymap('i', '<C-l>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
-utils.keymap('s', '<C-l>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', {expr = true, noremap = false})
-
-utils.keymap('i', '<TAB>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
-utils.keymap('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', {expr = true, noremap = false})
-
-utils.keymap('s', '<TAB>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', {expr = true, noremap = false})
-utils.keymap('s', '<S-TAB>', 'vsnip#available(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-TAB>"', { expr = true, noremap = false })
-
-
-utils.keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-utils.keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
-
-local ignores = {
-  '*.o',
-  '*.obj,*~',
-  '*.git*',
-  '*vim/backups*',
-  '*mypy_cache*',
-  '*__pycache__*',
-  '*cache*',
-  '*logs*',
-  'log/**',
-  'tmp/**',
-}
-
-utils.opt('o', 'wildignore', table.concat(ignores, ','))
 
 _G.sg.completion = completion

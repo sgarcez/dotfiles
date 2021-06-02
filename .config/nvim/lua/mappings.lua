@@ -1,4 +1,4 @@
-local utils = require'utils'
+local utils = require('utils')
 
 utils.keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
 
@@ -45,7 +45,14 @@ utils.keymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', { n
 utils.keymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', { noremap = false })
 utils.keymap('n', '<Leader>e', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', { noremap = false })
 
-vim.cmd [[
-  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-  au! FileType fzf tunmap <buffer> <Esc>
-]]
+-- completion
+utils.keymap('i', '<C-l>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
+utils.keymap('s', '<C-l>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', { expr = true, noremap = false })
+utils.keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
+utils.keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
+
+-- fzf
+utils.keymap("n", "<Leader><Leader>", "<cmd>:Files<CR>")
+utils.keymap("n", "<Leader>a", "<cmd>:Buffers<CR>")
+utils.keymap("n", "<Leader>r", ":Rg <C-R><C-W><CR>")
+utils.keymap("n", "<Leader>c", ":BCommits<CR>")
