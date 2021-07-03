@@ -1,4 +1,17 @@
 require'nvim-treesitter.configs'.setup {
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+    },
+    lsp_interop = {
+      enable = true,
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+    },
+  },
   highlight = {
     enable = true,
   },

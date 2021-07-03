@@ -47,6 +47,7 @@ utils.keymap('v', '<leader>lf', ':<C-u>call v:lua.vim.lsp.buf.range_formatting()
 utils.keymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
 utils.keymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
 utils.keymap('n', '<Leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
+utils.keymap('n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 -- completion
 utils.keymap('i', '<C-l>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })

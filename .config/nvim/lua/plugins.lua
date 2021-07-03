@@ -9,11 +9,12 @@ require("packer").startup(
         use {'neovim/nvim-lspconfig'}
         use {'neovim/nvim-lsp'}
         use {'ojroques/nvim-lspfuzzy'}
+        use {'kosayoda/nvim-lightbulb'}
         use {'hrsh7th/vim-vsnip'}
         use {'hrsh7th/vim-vsnip-integ'}
         use {'hrsh7th/nvim-compe'}
         use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-        use {'tpope/vim-surround'}
+        use {'nvim-treesitter/nvim-treesitter-textobjects'}
         use {'tpope/vim-commentary'}
         use {'tpope/vim-vinegar'}
         use {'airblade/vim-gitgutter'}
