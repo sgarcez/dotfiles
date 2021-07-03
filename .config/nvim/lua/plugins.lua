@@ -27,5 +27,3 @@ require("packer").startup(
         use {'glepnir/galaxyline.nvim'}
     end
 )
-
--- require('lspfuzzy').setup{}

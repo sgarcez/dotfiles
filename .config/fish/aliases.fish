@@ -18,7 +18,7 @@ abbr -a gf  git fetch
 abbr -a gfc git findcommit
 abbr -a gfm git findmessage
 
-abbr -a srcenv `export (grep "^[^#]" .env |xargs -L 1)`
+abbr -a srcenv 'export (grep "^[^#]" .env |xargs -L 1)'
 abbr -a tma tmux attach -t 
 
 # utilities

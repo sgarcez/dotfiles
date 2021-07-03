@@ -26,8 +26,8 @@ function go.setup()
   vim.bo.softtabstop = 4
   vim.bo.shiftwidth = 4
   utils.buf_keymap(0, 'n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = false })
-  utils.buf_keymap(0, 'n', '<leader>t', '<cmd>GoTest<CR>', { noremap = false })
-
+  utils.buf_keymap(0, 'n', '<leader>gt', '<cmd>GoTest<CR>', { noremap = false })
+  utils.buf_keymap(0, 'n', '<leader>gb', '<cmd>GoBuild<CR>', { noremap = false })
 end
 
 function go.format()

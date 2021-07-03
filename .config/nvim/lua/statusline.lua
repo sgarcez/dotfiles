@@ -83,7 +83,6 @@ gls.left[5] = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
     highlight = {colors.fg,colors.bg,'bold'}
-    -- highlight = {colors.gray,colors.bg,'bold'}
   }
 }
 
@@ -93,7 +92,6 @@ gls.left[6] = {
     separator = '',
     separator_highlight = {'NONE',colors.bg},
     highlight = {colors.fg,colors.bg},
-    -- highlight = {colors.gray,colors.bg,'bold'}
   },
 }
 
@@ -140,8 +138,6 @@ gls.right[8] = {
       return true
     end,
     separator = ' ',
-    -- icon = ' LSP:',
-    -- highlight = {colors.cyan,colors.bg,'bold'}
     highlight = {colors.fg,colors.bg,'bold'}
   }
 }
@@ -151,7 +147,6 @@ gls.short_line_left[1] = {
     provider = 'FileTypeName',
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
-    -- highlight = {colors.blue,colors.bg,'bold'}
     highlight = {colors.fg,colors.bg,'bold'}
   }
 }

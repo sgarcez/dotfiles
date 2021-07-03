@@ -20,7 +20,7 @@ opt.relativenumber = false
 
 opt.backspace = { 'indent', 'eol', 'start' } -- backspace behaviors
 opt.list = false -- hide whitespace chars
-opt.ignorecase = false -- search with no ignore case
+opt.ignorecase = true -- search with ignore case
 opt.smartcase = false
 opt.hlsearch = true -- highlight search
 opt.incsearch = false -- no incremental search
