@@ -8,13 +8,12 @@ utils.keymap('n', 'Q', '<Esc>:q<CR>')
 
 utils.keymap('n', '<Leader>sr', ':%s/<C-r><C-w>//g<Left><Left>')
 
+utils.keymap("n", "<Leader>n", ":set number! number?<CR>")
+
 utils.keymap('n', '[b', ':bprevious<CR>')
 utils.keymap('n', ']b', ':bnext<CR>')
 utils.keymap('n', '[t', ':tabprevious<CR>')
 utils.keymap('n', ']t', ':tabnext<CR>')
-
-utils.keymap('n', ']c', ':GitGutterNextHunk<CR>')
-utils.keymap('n', '[c', ':GitGutterPrevHunk<CR>')
 
 utils.keymap('n', '<c-j>', '<c-w>j')
 utils.keymap('n', '<c-k>', '<c-w>k')
