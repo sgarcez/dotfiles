@@ -1,55 +1,61 @@
-local completion = {}
-local utils = require'utils'
+-- local completion = {}
+local cmp = require'cmp'
 
-require'compe'.setup({
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  source = {
-    path = false;
-    buffer = true;
-    calc = false;
-    vsnip = true;
-    nvim_lsp = true;
-    nvim_lua = false;
-    spell = false;
-    tags = false;
-    snippets_nvim = false;
-    treesitter = true;
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+  },
+  mapping = {
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.onfig.disable` if you want to remove the default `<C-y>` mapping.
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
   }
 })
 
-local function check_back_space()
-  local col = vim.fn.col('.') - 1
-  return col <= 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-end
-
-function completion.tab_completion()
-  if vim.fn['vsnip#jumpable'](1) > 0 then
-    return utils.esc('<Plug>(vsnip-jump-next)')
-  end
-
-  if vim.fn.pumvisible() > 0 then
-    return utils.esc('<C-n>')
-  end
-
-  if check_back_space() then
-    return utils.esc('<TAB>')
-  end
-
-  if vim.fn['vsnip#expandable']() > 0 then
-    return utils.esc('<Plug>(vsnip-expand)')
-  end
-
-  return vim.fn['compe#complete']()
-end
-
-_G.sg.completion = completion
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})

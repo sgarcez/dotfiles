@@ -2,3 +2,4 @@
 .config/nvim/plugged
 .config/fish/fish_variables
 .config/nvim/old
+.config/nvim/plugin/packer_compiled.lua

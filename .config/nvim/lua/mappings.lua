@@ -49,10 +49,7 @@ utils.keymap('n', '<Leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
 utils.keymap('n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 -- completion
-utils.keymap('i', '<C-l>', 'v:lua.sg.completion.tab_completion()', { expr = true, noremap = false })
-utils.keymap('s', '<C-l>', 'vsnip#available(1)  ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', { expr = true, noremap = false })
-utils.keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-utils.keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
+utils.keymap('i', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', { expr = true, noremap = false })
 
 -- fzf
 utils.keymap("n", "<Leader><Leader>", "<cmd>:Files<CR>")

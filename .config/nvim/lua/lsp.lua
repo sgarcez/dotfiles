@@ -1,9 +1,12 @@
 local nvim_lsp = require('lspconfig')
 local utils = require('utils')
+local completion = require('completion')
 
 require('lspfuzzy').setup{}
 
-nvim_lsp.pyls.setup{}
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 nvim_lsp.gopls.setup{
     init_options = {
@@ -19,19 +22,12 @@ nvim_lsp.gopls.setup{
         gofumpt = true,
         buildFlags = {"-tags=component,integration"},
     },
-    capabilities = {
-        textDocument = {
-            completion = {
-                completionItem = {
-                    snippetSupport = true
-                }
-            }
-        }
-    }
+    capabilities = capabilities,
 }
 
 nvim_lsp.rust_analyzer.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         ["rust-analyzer"] = {
             completion = {
