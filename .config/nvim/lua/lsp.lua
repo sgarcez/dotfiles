@@ -4,6 +4,11 @@ local completion = require('completion')
 
 require('lspfuzzy').setup{}
 
+vim.cmd('highlight! link LspCodeLens WarningMsg')
+vim.cmd('highlight! link LspCodeLensText WarningMsg')
+vim.cmd('highlight! link LspCodeLensTextSign LspCodeLensText')
+vim.cmd('highlight! link LspCodeLensTextSeparator Boolean')
+
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -21,6 +26,10 @@ nvim_lsp.gopls.setup{
         hoverKind = "FullDocumentation",
         gofumpt = true,
         buildFlags = {"-tags=component,integration"},
+        codelenses = {
+            generate = false,
+            gc_details = true,
+        },
     },
     capabilities = capabilities,
 }
