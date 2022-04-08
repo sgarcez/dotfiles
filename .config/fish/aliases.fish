@@ -21,6 +21,11 @@ abbr -a gfm git findmessage
 abbr -a srcenv 'export (grep "^[^#]" .env |xargs -L 1)'
 abbr -a tma tmux attach -t 
 
+# mage
+abbr -a mta mage test:all
+abbr -a mtu mage test:unit
+abbr -a mtc mage test:cleanup
+
 # utilities
 alias ts='tig status'
 alias l='lsd -la'
@@ -34,8 +39,8 @@ alias watchdocker='bash -c \'while :; do out=$(docker ps --format "table {{.ID}}
 alias markdownd='docker run -it -v $PWD:/opt -p 8888:8080 aerth/markdownd -http=:8080 -index=README.md /opt'
 
 # taskwarrior
-alias t='task'
-alias ta='task add'
+abbr -a t task
+abbr -a ta task add
 
 # misc
 alias reload='exec fish'

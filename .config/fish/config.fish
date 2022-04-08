@@ -6,9 +6,10 @@ set -x GPG_TTY (tty)
 
 set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
 set -gx GO_PATH $HOME/go/
+set -gx GOPRIVATE github.com/taxibeat
 set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
 set -gx EDITOR vim
-set -gx TERM xterm-256color
+#set -gx TERM xterm-256color
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --exclude vendor --color=always'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS "--ansi"

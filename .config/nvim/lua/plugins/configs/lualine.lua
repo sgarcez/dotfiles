@@ -1,7 +1,8 @@
 require'lualine'.setup {
   options = {
     icons_enabled = false,
-    theme = 'OceanicNext',
+    -- theme = 'OceanicNext',
+    theme = 'ayu_mirage',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}

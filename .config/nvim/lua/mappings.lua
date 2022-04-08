@@ -33,6 +33,7 @@ utils.keymap('n', '<Leader>l<Enter>', ':rightbelow vnew<CR>:terminal<CR>:startin
 utils.keymap('n', '<Leader>k<Enter>', ':leftabove  new<CR>:terminal<CR>:startinsert<CR>')
 utils.keymap('n', '<Leader>j<Enter>', ':rightbelow new<CR>:terminal<CR>:startinsert<CR>')
 
+utils.keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = false })
 utils.keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 utils.keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 utils.keymap('n', '<Leader>e', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', { noremap = false })
@@ -51,7 +52,14 @@ utils.keymap('n', '<Leader>lce', '<cmd>lua vim.lsp.codelens.refresh()<CR>')
 utils.keymap('n', '<Leader>lcr', '<cmd>lua vim.lsp.codelens.run()<CR>')
 
 -- completion
-utils.keymap('i', '<C-l>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<TAB>"', { expr = true, noremap = false })
+utils.keymap('i', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
+utils.keymap('s', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
+utils.keymap('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"', { expr = true, noremap = false })
+utils.keymap('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"', { expr = true, noremap = false })
+utils.keymap('i', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
+utils.keymap('s', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
+utils.keymap('i', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
+utils.keymap('s', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
 
 -- fzf
 utils.keymap("n", "<Leader><Leader>", "<cmd>:Files<CR>")

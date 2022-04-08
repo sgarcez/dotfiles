@@ -17,4 +17,4 @@ include /usr/share/doc/task/rc/solarized-dark-256.theme
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
 
-uda.taskwarrior-tui.task-report.show-info=true
+uda.taskwarrior-tui.task-report.show-info=true */
