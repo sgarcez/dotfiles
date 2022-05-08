@@ -41,6 +41,8 @@ set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
 set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
 
+zoxide init fish | source
+
 starship init fish | source
 
 if status is-login

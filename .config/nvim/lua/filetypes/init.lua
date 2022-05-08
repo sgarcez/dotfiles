@@ -1,1 +1,1 @@
-require'filetypes/go'
+require 'filetypes/go'

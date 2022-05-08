@@ -1,6 +1,6 @@
 local nvim_lsp = require('lspconfig')
 
-require('lspfuzzy').setup{}
+require('lspfuzzy').setup {}
 
 vim.cmd('highlight! link LspCodeLens WarningMsg')
 vim.cmd('highlight! link LspCodeLensText WarningMsg')
@@ -11,7 +11,7 @@ vim.cmd('highlight! link LspCodeLensTextSeparator Boolean')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-nvim_lsp.gopls.setup{
+nvim_lsp.gopls.setup {
     init_options = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
         usePlaceholders = true,
@@ -23,7 +23,7 @@ nvim_lsp.gopls.setup{
         staticcheck = true,
         hoverKind = "FullDocumentation",
         gofumpt = true,
-        buildFlags = {"-tags=component,integration"},
+        buildFlags = { "-tags=component,integration" },
         codelenses = {
             generate = false,
             gc_details = true,
@@ -32,7 +32,7 @@ nvim_lsp.gopls.setup{
     capabilities = capabilities,
 }
 
-nvim_lsp.rust_analyzer.setup{
+nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -45,8 +45,8 @@ nvim_lsp.rust_analyzer.setup{
     }
 }
 
-require'lspconfig'.sumneko_lua.setup {
-    cmd = {"lua-language-server", "-E", "/usr/lib/lua-language-server/main.lua"},
+require 'lspconfig'.sumneko_lua.setup {
+    cmd = { "lua-language-server", "-E", "/usr/lib/lua-language-server/main.lua" },
     settings = {
         Lua = {
             runtime = {
@@ -56,11 +56,11 @@ require'lspconfig'.sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
+                globals = { 'vim' }
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true }
             }
         }
     }

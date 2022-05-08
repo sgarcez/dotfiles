@@ -55,22 +55,22 @@ cmd('set nofoldenable')
 -- colorscheme
 opt.termguicolors = true
 opt.background = 'dark'
-opt.synmaxcol =  300
+opt.synmaxcol = 300
 cmd('filetype plugin indent on')
 cmd('syntax on')
 cmd('colorscheme base16-ocean')
 
 -- completion
 local ignores = {
-  '*.o',
-  '*.obj,*~',
-  '*.git*',
-  '*vim/backups*',
-  '*mypy_cache*',
-  '*__pycache__*',
-  '*cache*',
-  '*logs*',
-  'log/**',
-  'tmp/**',
+    '*.o',
+    '*.obj,*~',
+    '*.git*',
+    '*vim/backups*',
+    '*mypy_cache*',
+    '*__pycache__*',
+    '*cache*',
+    '*logs*',
+    'log/**',
+    'tmp/**',
 }
-vim.opt.wildignore =  table.concat(ignores, ',')
+vim.opt.wildignore = table.concat(ignores, ',')
