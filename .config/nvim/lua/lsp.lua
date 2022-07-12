@@ -25,7 +25,7 @@ nvim_lsp.gopls.setup {
         gofumpt = true,
         buildFlags = { "-tags=component,integration" },
         codelenses = {
-            generate = false,
+            generate = true,
             gc_details = true,
         },
     },
@@ -70,7 +70,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = true,
         signs = true,
-        update_in_insert = true,
+        update_in_insert = false,
     }
 )
 

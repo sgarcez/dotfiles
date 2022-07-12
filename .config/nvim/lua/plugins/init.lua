@@ -14,7 +14,11 @@ packer.startup(function()
     use { 'rhysd/conflict-marker.vim' }
     use { 'kosayoda/nvim-lightbulb' }
 
+    use { 'nvim-lua/plenary.nvim' }
+    use { 'jose-elias-alvarez/null-ls.nvim' }
+
     use { 'fatih/vim-go', run = ':GoUpdateBinaries' }
+
     use { 'rust-lang/rust.vim' }
 
     use { 'hrsh7th/vim-vsnip' }
@@ -32,6 +36,5 @@ packer.startup(function()
     use { 'ggandor/lightspeed.nvim' }
 
     use { 'lewis6991/gitsigns.nvim', config = function() require("plugins.configs.gitsigns").setup() end }
-    use { 'hoob3rt/lualine.nvim', config = function() require("plugins.configs.lualine").setup() end }
-    use { 'karb94/neoscroll.nvim', config = function() require("plugins.configs.neoscroll").setup() end }
+    use { 'nvim-lualine/lualine.nvim', config = function() require("plugins.configs.lualine").setup() end }
 end)

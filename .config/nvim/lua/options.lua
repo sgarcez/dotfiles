@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local opt = vim.opt
+local wo = vim.wo
 
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
@@ -48,9 +49,13 @@ opt.scrolloff = 999
 
 cmd('set clipboard=unnamed') -- sets the default copy register to be *
 cmd('set clipboard=unnamedplus') --  sets the default copy register to be +
-cmd('set foldmethod=expr')
-cmd('set foldexpr=nvim_treesitter#foldexpr()')
-cmd('set nofoldenable')
+-- cmd('set foldmethod=expr')
+-- cmd('set foldexpr=nvim_treesitter#foldexpr()')
+-- cmd('set nofoldenable')
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldenable = false
 
 -- colorscheme
 opt.termguicolors = true

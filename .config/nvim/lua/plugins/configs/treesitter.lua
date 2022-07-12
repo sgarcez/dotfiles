@@ -30,7 +30,7 @@ M.setup = function()
                 node_decremental = ",",
             }
         },
-        ensure_installed = { "go", "python", "lua", "rust" }
+        ensure_installed = { "go", "python", "lua", "rust", "json"}
     }
 end
 

@@ -28,6 +28,7 @@ abbr -a mtc mage test:cleanup
 
 # utilities
 alias ts='tig status'
+alias gui='gitui'
 alias l='lsd -la'
 alias lt='lsd --tree'
 alias cat='bat'

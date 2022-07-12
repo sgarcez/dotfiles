@@ -16,7 +16,9 @@ itemview-title-format ""
 show-keymap-hint no
 display-article-progress yes
 text-width 80
-include "~/.config/newsboat/colors"
+# include "~/.config/newsboat/colors"
+include /usr/share/doc/newsboat/contrib/colorschemes/greenscreen
+# include /usr/share/doc/newsboat/contrib/colorschemes/nord
 
 
 # -- navigation ----------------------------------------------------------------

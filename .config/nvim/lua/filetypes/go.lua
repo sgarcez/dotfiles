@@ -6,6 +6,7 @@ vim.cmd [[autocmd!]]
 vim.cmd [[autocmd FileType go lua require("filetypes.go").setup()]]
 vim.cmd [[autocmd BufWritePre *.go :silent! lua require("filetypes.go").vim.lsp.buf.format(async=true)]]
 vim.cmd [[autocmd BufWritePre *.go :silent! lua require("filetypes.go").org_imports(2000)]]
+vim.cmd [[autocmd BufWritePre *.go :silent! GoBuild]]
 vim.cmd [[augroup END]]
 
 function M.setup()
@@ -16,10 +17,28 @@ function M.setup()
       let g:go_doc_keywordprg_enabled = 0
       let g:go_textobj_enabled = 0
       let g:go_fmt_autosave = 0
-      let g:gho_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
+      let g:go_metalinter_enabled = [
+        \ 'govet',
+        \ 'revive',
+        \ 'gofumpt',
+        \ 'gosec',
+        \ 'unparam',
+        \ 'goconst',
+        \ 'prealloc',
+        \ 'stylecheck',
+        \ 'unconvert',
+        \ 'errcheck',
+        \ 'deadcode',
+        \ 'ineffassign',
+        \ 'structcheck',
+        \ 'tparallel',
+        \ 'whitespace',
+        \ 'staticcheck',
+        \ 'gosimple',
+        \ 'gocritic']
       let g:go_metalinter_autosave = 0
       let g:go_metalinter_deadline = '5s'
-      let g:go_metalinter_command = "golangci-lint"
+      let g:go_metalinter_command = 'golangci-lint'
       let g:go_list_type = 'locationlist'
       let g:go_jump_to_error = 0
   ]] )

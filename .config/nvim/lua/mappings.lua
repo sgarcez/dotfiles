@@ -1,6 +1,6 @@
 local utils = require('utils')
 
-utils.keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
+-- utils.keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
 utils.keymap('n', '<BS>', '<c-^>')
 
 utils.keymap('n', '<Leader>w', '<Esc>:w<CR>')
@@ -66,7 +66,11 @@ utils.keymap('s', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-
 utils.keymap('i', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
 utils.keymap('s', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
 
--- fzf
+-- Finding things
+-- utils.keymap("n", "<Leader>c", "<cmd>:Clap<CR>")
+utils.keymap("n", "<Leader>f", "<cmd>:Clap files ++finder=fd --type file --follow --hidden --exclude /.git --exclude /vendor<CR>")
+utils.keymap("n", "<Leader>r", "<cmd>:Clap grep ++query=<cword><CR>")
+-- clap
 utils.keymap("n", "<Leader><Leader>", "<cmd>:Files<CR>")
 utils.keymap("n", "<Leader>b", "<cmd>:Buffers<CR>")
 utils.keymap("n", "<Leader>r", ":Rg <C-R><C-W><CR>")

@@ -5,3 +5,5 @@
 .config/nvim/plugin/packer_compiled.lua
 *.code-workspace
 .config/fish/completions/
+.local
+.vscode
