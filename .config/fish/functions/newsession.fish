@@ -1,4 +1,3 @@
-
 function newsession
     set targetdir ~/projects/beat/$argv[1]
     if not test -d $targetdir
@@ -13,4 +12,5 @@ function newsession
     else
         tmux new-session -s $argv[1] -c $targetdir
     end
+    source ~/projects/beat/gh_token.sh
 end

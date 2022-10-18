@@ -1,6 +1,5 @@
 local cmd = vim.cmd
 local opt = vim.opt
-local wo = vim.wo
 
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'

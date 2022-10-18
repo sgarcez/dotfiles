@@ -6,6 +6,7 @@ M.setup = function()
             icons_enabled = false,
             -- theme = 'OceanicNext',
             theme = 'ayu_mirage',
+            globalstatus = true,
             component_separators = { '', '' },
             section_separators = { '', '' },
             disabled_filetypes = {}

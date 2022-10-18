@@ -286,6 +286,9 @@ call <sid>hi("SpellLocal",   "", "", "", "", "undercurl", s:gui0C)
 call <sid>hi("SpellCap",     "", "", "", "", "undercurl", s:gui0D)
 call <sid>hi("SpellRare",    "", "", "", "", "undercurl", s:gui0E)
 
+" Telescope
+call <sid>hi("TelescopeBorder",  s:gui0A, "", "", "", "", "")
+
 " Remove functions
 delf <sid>hi
 

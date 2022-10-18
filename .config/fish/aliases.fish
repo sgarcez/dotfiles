@@ -18,6 +18,8 @@ abbr -a gf  git fetch
 abbr -a gfc git findcommit
 abbr -a gfm git findmessage
 
+# 
+abbr -a ns newsession
 abbr -a srcenv 'export (grep "^[^#]" .env |xargs -L 1)'
 abbr -a tma tmux attach -t 
 
@@ -34,6 +36,9 @@ alias lt='lsd --tree'
 alias cat='bat'
 alias v='vim (fzf)'
 alias vim=nvim
+
+abbr -a yays 'yay -Slq | fzf -q "$1" -m --preview \'yay -Si {1}\'| xargs -ro yay -S'
+abbr -a yayr 'yay -Qq | fzf -q "$1" -m --preview \'yay -Qi {1}\' | xargs -ro yay -Rns'
 
 alias watchdocker='bash -c \'while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Networks}}\t{{.Image}}");clear; echo "$out";sleep 1; done\''
 
