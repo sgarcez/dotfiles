@@ -14,6 +14,17 @@ packer.startup(function()
     use { 'nvim-treesitter/nvim-treesitter-textobjects' }
     use { 'neovim/nvim-lsp' }
     use { 'neovim/nvim-lspconfig' }
+    use {
+        'williamboman/mason.nvim',
+        config = function()
+            require("mason").setup()
+        end,
+    }
+    use { 'williamboman/mason-lspconfig.nvim',
+        config = function()
+            require("mason-lspconfig").setup()
+        end,
+    }
     use { 'ojroques/nvim-lspfuzzy',
         config = function()
             require('lspfuzzy').setup {}
@@ -57,17 +68,43 @@ packer.startup(function()
             require("plugins.configs.go")
         end,
     }
-    use { 'rust-lang/rust.vim' }
+    use {
+        'simrat39/rust-tools.nvim',
+        config = function()
+            require("plugins.configs.go")
+        end,
+
+    }
+    use { 'folke/lsp-colors.nvim' }
     use {
         "folke/trouble.nvim",
         config = function()
             require("plugins.configs.trouble")
         end,
     }
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup {}
+        end,
+        event = "BufWinEnter",
+    }
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
     use { 'tpope/vim-vinegar' }
-    use { 'tpope/vim-commentary' }
+    use { 'tpope/vim-surround' }
     use { 'junegunn/vim-peekaboo' }
-    use { 'ggandor/lightspeed.nvim' }
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v2',
+        config = function()
+            require("plugins.configs.hop")
+        end
+    }
     use { 'nvim-lualine/lualine.nvim',
         config = function()
             require("plugins.configs.lualine").setup()
@@ -96,16 +133,12 @@ packer.startup(function()
         requires = { "nvim-telescope/telescope.nvim" },
     }
     use {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {}
-        end,
-        event = "BufWinEnter",
-    }
-    use {
         "ellisonleao/glow.nvim",
         config = function()
             require("plugins.configs.glow")
         end,
+    }
+    use {
+        'wfxr/minimap.vim',
     }
 end)

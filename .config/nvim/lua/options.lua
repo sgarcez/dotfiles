@@ -48,9 +48,6 @@ opt.scrolloff = 999
 
 cmd('set clipboard=unnamed') -- sets the default copy register to be *
 cmd('set clipboard=unnamedplus') --  sets the default copy register to be +
--- cmd('set foldmethod=expr')
--- cmd('set foldexpr=nvim_treesitter#foldexpr()')
--- cmd('set nofoldenable')
 
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'

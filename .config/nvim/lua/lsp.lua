@@ -7,18 +7,6 @@ vim.cmd('highlight! link LspCodeLensTextSeparator Boolean')
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---     properties = {
---         "documentation",
---         "detail",
---         "additionalTextEdits",
---     },
--- }
-
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
 -- -- currently using go.nvim setup instead of this
 -- nvim_lsp.gopls.setup {
 --     init_options = {
@@ -41,20 +29,35 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 --     capabilities = capabilities,
 -- }
 
-nvim_lsp.rust_analyzer.setup {
-    on_attach = on_attach,
-    -- capabilities = capabilities,
-    settings = {
-        ["rust-analyzer"] = {
-            completion = {
-                addCallArgumentSnippets = false,
-                addCallParenthesis = false,
-            }
-        }
-    }
-}
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- nvim_lsp.rust_analyzer.setup({
+--     capabilities = capabilities,
+--     settings = {
+--         ["rust-analyzer"] = {
+--             completion = {
+--                 addCallArgumentSnippets = true,
+--                 addCallParenthesis = true,
+--             },
+--             imports = {
+--                 granularity = {
+--                     group = "module",
+--                 },
+--                 prefix = "self",
+--             },
+--             cargo = {
+--                 buildScripts = {
+--                     enable = true,
+--                 },
+--             },
+--             procMacro = {
+--                 enable = true
+--             },
+--         }
+--     }
+-- })
 
 require 'lspconfig'.sumneko_lua.setup {
+    capabilities = capabilities,
     cmd = { "lua-language-server", "-E", "/usr/lib/lua-language-server/main.lua" },
     settings = {
         Lua = {
@@ -80,8 +83,40 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     virtual_text = false,
     signs = true,
     update_in_insert = false,
-}
-)
+})
+
+-- LSP Diagnostics Options Setup
+-- local sign = function(opts)
+--   vim.fn.sign_define(opts.name, {
+--     texthl = opts.name,
+--     text = opts.text,
+--     numhl = ''
+--   })
+-- end
+
+-- sign({name = 'DiagnosticSignError', text = ''})
+-- sign({name = 'DiagnosticSignWarn', text = ''})
+-- sign({name = 'DiagnosticSignHint', text = ''})
+-- sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+-- vim.cmd([[
+-- set signcolumn=yes
+-- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+-- ]])
 
 local utils = require('utils')
 utils.keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = false })

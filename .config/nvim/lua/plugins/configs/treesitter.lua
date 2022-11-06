@@ -17,6 +17,7 @@ M.setup = function()
         },
         highlight = {
             enable = true,
+            additional_vim_regex_highlighting = false,
         },
         indent = {
             enable = true
@@ -30,7 +31,8 @@ M.setup = function()
                 node_decremental = ",",
             }
         },
-        ensure_installed = { "go", "python", "lua", "rust", "json" }
+        ensure_installed = { "go", "python", "lua", "rust", "json" },
+        autoinstall = true,
     }
 
     require 'nvim-treesitter.configs'.setup {

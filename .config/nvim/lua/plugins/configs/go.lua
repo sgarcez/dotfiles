@@ -23,10 +23,11 @@ local capabilities = {
     },
 }
 
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require 'go'.setup({
-    goimport = 'goimports', -- if set to 'gopls' will use golsp format
-    -- goimport = 'gopls', -- if set to 'gopls' will use golsp format
-    -- gofmt = 'gopls', -- if set to gopls will use golsp format
+    goimport = 'gopls', -- if set to 'gopls' will use golsp format
+    gofmt = 'gopls', -- if set to gopls will use golsp format
     max_line_len = 120,
     tag_transform = false,
     test_dir = '',
@@ -35,19 +36,17 @@ require 'go'.setup({
     dap_debug_keymap = false,
     icons = false,
     textobjects = false,
-
-    lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+    lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = true, -- use on_attach from go.nvim
-    -- lsp_on_attach = false, -- use on_attach from go.nvim
     lsp_keymaps = false,
     lsp_diag_virtual_text = false,
-    -- lsp_cfg = false, -- false: use your own lspconfig
-    -- lsp_cfg = true, -- false: use your own lspconfig
+    lsp_codelens = true,
     lsp_cfg = {
         capabilities = capabilities,
         settings = {
             gopls = {
                 buildFlags = { "-tags=component,integration" },
+                ['local'] = "", -- sadly disable separate local import group.
                 analyses = {
                     ST1003 = false,
                     fieldalignment = false,
