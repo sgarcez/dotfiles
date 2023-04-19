@@ -8,3 +8,9 @@ error_symbol = "[◊](bold red)"
 # Remove gopher because I'm not a child.
 [golang]
 symbol = "go "
+
+[aws]
+disabled = true
+
+[docker_context]
+symbol = "docker-context "

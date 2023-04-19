@@ -1,7 +1,8 @@
 local rt = require("rust-tools")
 
 local opts = {
-    tools = { -- rust-tools options
+    tools = {
+        -- rust-tools options
         inlay_hints = {
             show_parameter_hints = false,
             -- only_current_line = true,

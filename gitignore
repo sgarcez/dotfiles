@@ -8,3 +8,4 @@
 .mypy*
 .local*
 .python-version
+cover.cov

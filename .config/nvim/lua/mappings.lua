@@ -1,45 +1,40 @@
-local utils = require('utils')
+vim.keymap.set('n', '<CR>', ':noh<CR><CR>')
+vim.keymap.set('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
 
--- utils.keymap('n', '<CR>', ':noh<CR><CR>')
--- utils.keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>')
+vim.keymap.set('t', '<leader><Esc>', '<C-\\><C-n>')
 
-utils.keymap('t', '<leader><Esc>', '<C-\\><C-n>')
+vim.keymap.set('n', '<BS>', '<c-^>')
 
-utils.keymap('n', '<BS>', '<c-^>')
+vim.keymap.set('n', '<Leader>w', '<Esc>:w<CR>')
+vim.keymap.set('n', '<Leader>q', '<Esc>:q<CR>')
+vim.keymap.set('n', 'Q', '<Esc>:qa<CR>')
 
-utils.keymap('n', '<Leader>w', '<Esc>:w<CR>')
-utils.keymap('n', '<Leader>q', '<Esc>:q<CR>')
-utils.keymap('n', 'Q', '<Esc>:qa<CR>')
-
-utils.keymap("n", "<Leader>n", ":set number! number?<CR>")
+vim.keymap.set("n", "<Leader>n", ":set number! number?<CR>")
 
 -- Replace word under cursor
-utils.keymap('n', '<Leader>sr', ':%s/<C-r><C-w>//g<Left><Left>')
+vim.keymap.set('n', '<Leader>sr', ':%s/<C-r><C-w>//g<Left><Left>')
 
 -- buffer and tabs
-utils.keymap('n', '[b', ':bprevious<CR>')
-utils.keymap('n', ']b', ':bnext<CR>')
-utils.keymap('n', '[t', ':tabprevious<CR>')
-utils.keymap('n', ']t', ':tabnext<CR>')
+vim.keymap.set('n', '[b', ':bprevious<CR>')
+vim.keymap.set('n', ']b', ':bnext<CR>')
+vim.keymap.set('n', '[t', ':tabprevious<CR>')
+vim.keymap.set('n', ']t', ':tabnext<CR>')
 
 -- window movement
-utils.keymap('n', '<c-j>', '<c-w>j')
-utils.keymap('n', '<c-k>', '<c-w>k')
-utils.keymap('n', '<c-l>', '<c-w>l')
-utils.keymap('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
+vim.keymap.set('n', '<c-h>', '<c-w>h')
 
 -- splits
-utils.keymap('n', '<Leader>hh', ':leftabove vsplit<CR>')
-utils.keymap('n', '<Leader>ll', ':rightbelow vsplit<CR>')
-utils.keymap('n', '<Leader>kk', ':leftabove split<CR>')
-utils.keymap('n', '<Leader>jj', ':rightbelow split<CR>')
-utils.keymap('n', '<Leader>tt', ':tab split<CR>')
+vim.keymap.set('n', '<Leader>hh', ':leftabove vsplit<CR>')
+vim.keymap.set('n', '<Leader>ll', ':rightbelow vsplit<CR>')
+vim.keymap.set('n', '<Leader>kk', ':leftabove split<CR>')
+vim.keymap.set('n', '<Leader>jj', ':rightbelow split<CR>')
+vim.keymap.set('n', '<Leader>tt', ':tab split<CR>')
 
 -- terminal
-utils.keymap('n', '<Leader>h<Enter>', ':leftabove  vnew<CR>:terminal<CR>:startinsert<CR>')
-utils.keymap('n', '<Leader>l<Enter>', ':rightbelow vnew<CR>:terminal<CR>:startinsert<CR>')
-utils.keymap('n', '<Leader>k<Enter>', ':leftabove  new<CR>:terminal<CR>:startinsert<CR>')
-utils.keymap('n', '<Leader>j<Enter>', ':rightbelow new<CR>:terminal<CR>:startinsert<CR>')
-
-
-utils.keymap('n', '<Leader>a', ':NvimTreeFindFileToggle<CR>')
+vim.keymap.set('n', '<Leader>h<Enter>', ':leftabove  vnew<CR>:terminal<CR>:startinsert<CR>')
+vim.keymap.set('n', '<Leader>l<Enter>', ':rightbelow vnew<CR>:terminal<CR>:startinsert<CR>')
+vim.keymap.set('n', '<Leader>k<Enter>', ':leftabove  new<CR>:terminal<CR>:startinsert<CR>')
+vim.keymap.set('n', '<Leader>j<Enter>', ':rightbelow new<CR>:terminal<CR>:startinsert<CR>')

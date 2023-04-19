@@ -51,3 +51,6 @@ abbr -a ta task add
 # misc
 alias reload='exec fish'
 
+alias k="kubectl"
+alias d="docker"
+alias kn="kubens"

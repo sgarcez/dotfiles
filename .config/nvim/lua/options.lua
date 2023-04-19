@@ -1,6 +1,8 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
+vim.g.mapleader = ';'
+
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 opt.fileencodings = { 'utf-8' }
@@ -18,8 +20,8 @@ opt.shiftwidth = 4 -- auto indent shift width
 opt.number = false
 opt.relativenumber = false
 
-opt.backspace = { 'indent', 'eol', 'start' } -- backspace behaviors
-opt.list = false -- hide whitespace chars
+opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+-- opt.list = false -- hide whitespace chars
 opt.ignorecase = true -- search with ignore case
 opt.smartcase = false
 opt.hlsearch = true -- highlight search
@@ -31,24 +33,29 @@ opt.hidden = true
 opt.cursorline = false -- show cursor line
 opt.ruler = true -- show ruler line
 opt.signcolumn = 'yes:1' -- show sign column (column of the line number)
-opt.mouse = 'nv' -- enable mouse under normal and visual mode
-cmd('set mousehide') -- hide mouse when characters are typed
+-- opt.iskeyword:append("-") -- consider string-string as whole word
 opt.showmatch = true -- show bracket match
 opt.cmdheight = 1 -- height of :command line
 opt.wildmenu = true -- wildmenu, auto complete for commands
 opt.wildmode = { 'longest', 'full' }
 opt.shortmess:append('c') -- status line e.g. CTRL+G
 
+-- mouse
+opt.mouse = 'nv' -- enable mouse under normal and visual mode
+cmd('set mousehide') -- hide mouse when characters are typed
+
+-- scroll
 opt.startofline = false
 opt.timeoutlen = 1000
 opt.ttimeoutlen = 0
-opt.lazyredraw = true
 opt.grepprg = 'rg --smart-case --color=never --no-heading -H -n --column'
 opt.scrolloff = 999
 
+-- clipboard
 cmd('set clipboard=unnamed') -- sets the default copy register to be *
 cmd('set clipboard=unnamedplus') --  sets the default copy register to be +
 
+-- folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldenable = false

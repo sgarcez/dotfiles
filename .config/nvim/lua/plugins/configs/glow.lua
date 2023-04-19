@@ -1,4 +1,4 @@
 require('glow').setup({
-  style = "dark",
-  width = 160,
+    style = "dark",
+    width = 160,
 })

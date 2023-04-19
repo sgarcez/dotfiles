@@ -1,4 +1,3 @@
-local utils = require('utils')
 local telescope = require 'telescope'
 local trouble = require("trouble.providers.telescope")
 local fb_actions = require "telescope".extensions.file_browser.actions
@@ -70,18 +69,22 @@ telescope.setup {
     },
 }
 
-_ = telescope.load_extension "file_browser"
-_ = telescope.load_extension "fzf"
+telescope.load_extension 'file_browser'
+telescope.load_extension 'fzf'
+telescope.load_extension 'heading'
+telescope.load_extension 'noice'
+telescope.load_extension 'ui-select'
 
-utils.keymap("n", "<Leader><Leader>", ":Telescope find_files<CR>")
-utils.keymap("n", "<Leader>e", ":Telescope grep_string<CR>")
-utils.keymap("n", "<Leader>b", ":Telescope buffers<CR>")
-utils.keymap("n", "<Leader>r", ":Telescope live_grep<CR>")
-utils.keymap("n", "<Leader>z", ":Telescope file_browser path=%:p:h<CR>")
-utils.keymap("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
-utils.keymap("n", "<Leader>lr", ":Telescope lsp_references<CR>")
-utils.keymap("n", "<Leader>li", ":Telescope lsp_incoming_calls<CR>")
-utils.keymap("n", "<Leader>lo", ":Telescope lsp_outgoing_calls<CR>")
-utils.keymap("n", "<Leader>lm", ":Telescope lsp_implementations<CR>")
-utils.keymap("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>")
-utils.keymap("n", "<Leader>d", ":Telescope diagnostics bufnr=0 <CR>")
+vim.keymap.set("n", "<Leader><Leader>", ":Telescope find_files<CR>")
+vim.keymap.set("n", "<Leader>e", ":Telescope grep_string<CR>")
+vim.keymap.set("n", "<Leader>b", ":Telescope buffers<CR>")
+vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
+vim.keymap.set("n", "<Leader>z", ":Telescope file_browser path=%:p:h<CR>")
+vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
+vim.keymap.set("n", "<Leader>lr", ":Telescope lsp_references<CR>")
+vim.keymap.set("n", "<Leader>li", ":Telescope lsp_incoming_calls<CR>")
+vim.keymap.set("n", "<Leader>lo", ":Telescope lsp_outgoing_calls<CR>")
+vim.keymap.set("n", "<Leader>lm", ":Telescope lsp_implementations<CR>")
+vim.keymap.set("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>")
+vim.keymap.set("n", "<Leader>d", ":Telescope diagnostics bufnr=0 <CR>")
+vim.keymap.set("n", "<Leader>gs", ":Telescope git_status <CR>")
