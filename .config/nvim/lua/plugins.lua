@@ -1,6 +1,15 @@
 return {
-    { 'chaoren/vim-wordmotion', event = 'VeryLazy' },
+
+    -- moving
     {
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup {}
+        end,
+        event = "BufWinEnter",
+    },
+    {
+        -- type 2 first chars + label char
         'ggandor/leap.nvim',
         event = 'VeryLazy',
         dependencies = 'tpope/vim-repeat',
@@ -21,89 +30,78 @@ return {
         end,
     },
     {
+        -- single key search, overrides f, t, F, T
         'ggandor/flit.nvim',
         opts = { labeled_modes = 'nv' },
     },
     {
-        'kevinhwang91/nvim-bqf',
-        ft = 'qf',
+        -- auto enabled and disable search highlighting
+        'romainl/vim-cool',
+        event = 'VeryLazy'
     },
+    -- { 'chaoren/vim-wordmotion', event = 'VeryLazy' },
+    -- {
+    --     -- textobjects that expand on e.g. di'
+    --     'wellle/targets.vim',
+    --     event = 'VeryLazy'
+    -- },
+
+
+    -- navigating
+    { 'tpope/vim-vinegar' },
     {
-        'echasnovski/mini.surround',
+        'nvim-telescope/telescope.nvim',
+        dependencies = {
+            'nvim-lua/popup.nvim',
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-fzf-native.nvim',
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-ui-select.nvim',
+            'crispgm/telescope-heading.nvim',
+        },
         config = function()
-            require('mini.surround').setup {}
+            require 'plugins.configs.telescope'
         end,
-        event = 'VeryLazy',
+        cmd = 'Telescope',
     },
-    { 'romainl/vim-cool',       event = 'VeryLazy' },
-    { 'wellle/targets.vim',     event = 'VeryLazy' },
+
+    -- treesitter
     {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
+            'nvim-treesitter/nvim-treesitter-textobjects',
             'RRethy/nvim-treesitter-textsubjects',
             'RRethy/nvim-treesitter-endwise',
         },
         build = ':TSUpdate',
-        event = 'VeryLazy',
+        -- event = 'VeryLazy',
         config = function()
             require("plugins.configs.treesitter")
         end,
     },
+
+    -- snippets
     { 'L3MON4D3/LuaSnip' },
     { 'rafamadriz/friendly-snippets', lazy = false },
-    {
-        'lewis6991/hover.nvim',
-        event = 'BufReadPost',
-        config = function()
-            require('hover').setup {
-                init = function()
-                    require 'hover.providers.lsp'
-                end,
-            }
-            vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
-            vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
-        end,
-    },
-    {
-        'DNLHC/glance.nvim',
-        cmd = 'Glance',
-        config = function()
-            require('glance').setup {
-                detached = true,
-                border = { enable = true, top_char = '─', bottom_char = '─' },
-                theme = { mode = 'brighten' },
-                indent_lines = { icon = '│' },
-                winbar = { enable = true },
-            }
-        end,
-    },
+
+    -- LSP / Diagnostics
     { 'neovim/nvim-lsp' },
     { 'neovim/nvim-lspconfig' },
+    { 'folke/lsp-colors.nvim' },
     {
         'williamboman/mason.nvim',
         dependencies = {
             'williamboman/mason-lspconfig.nvim',
             'jayp0521/mason-null-ls.nvim',
-
         },
         config = function()
             require("plugins.configs.mason")
         end,
     },
-    -- {
-    --     'ojroques/nvim-lspfuzzy',
-    --     config = function()
-    --         require('lspfuzzy').setup {}
-    --     end,
-    -- },
     { 'kosayoda/nvim-lightbulb' },
     {
         'hrsh7th/nvim-cmp',
         dependencies = {
-            -- 'hrsh7th/vim-vsnip',
-            -- 'hrsh7th/vim-vsnip-integ',
-            -- 'hrsh7th/cmp-vsnip',
             "hrsh7th/cmp-nvim-lsp",
             'hrsh7th/cmp-nvim-lua',
             "hrsh7th/cmp-buffer",
@@ -130,12 +128,6 @@ return {
     },
     {
         'mfussenegger/nvim-dap',
-        -- init = function()
-        --     require 'config.dap_setup'
-        -- end,
-        -- config = function()
-        --     require 'config.dap'
-        -- end,
         dependencies = 'jbyuki/one-small-step-for-vimkind',
         cmd = { 'BreakpointToggle', 'Debug', 'DapREPL' },
     },
@@ -144,6 +136,19 @@ return {
         dependencies = 'nvim-dap',
         opts = {},
     },
+    {
+        "folke/trouble.nvim",
+        config = function()
+            require("plugins.configs.trouble")
+        end,
+    },
+    {
+        -- better quickfix with previews
+        'kevinhwang91/nvim-bqf',
+        ft = 'qf',
+    },
+
+    -- langs
     {
         'ray-x/go.nvim',
         dependencies = {
@@ -159,11 +164,15 @@ return {
         ft = { "go", 'gomod' },
     },
     {
-        'beauwilliams/focus.nvim',
-        opts = { excluded_filetypes = { 'toggleterm', 'TelescopePrompt' }, signcolumn = false },
-        event = 'VeryLazy',
+        'simrat39/rust-tools.nvim',
+        config = function()
+            require("plugins.configs.rusttools")
+        end,
     },
+
+    -- UI
     {
+        -- hover UI for messages, cmdline and the popupmenu
         'folke/noice.nvim',
         opts = {
             views = { mini = { lang = 'markdown' } },
@@ -205,50 +214,31 @@ return {
             },
         },
         dependencies = { 'MunifTanjim/nui.nvim' },
-        event = 'VeryLazy',
     },
     {
-        'simrat39/rust-tools.nvim',
-        config = function()
-            require("plugins.configs.rusttools")
-        end,
+        "rcarriga/nvim-notify",
+        dependencies = { "nvim-telescope/telescope.nvim" },
     },
-    { 'folke/lsp-colors.nvim' },
-    {
-        "folke/trouble.nvim",
-        config = function()
-            require("plugins.configs.trouble")
-        end,
-    },
-    {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {}
-        end,
-        event = "BufWinEnter",
-    },
+
+
+    -- comments
     {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
     },
-    { 'tpope/vim-vinegar' },
-    { 'tpope/vim-surround' },
+
+    -- registers
     { 'junegunn/vim-peekaboo' },
-    -- {
-    --     'phaazon/hop.nvim',
-    --     branch = 'v2',
-    --     config = function()
-    --         require("plugins.configs.hop")
-    --     end
-    -- },
     {
         'nvim-lualine/lualine.nvim',
         config = function()
             require("plugins.configs.lualine")
         end,
     },
+
+    -- git
     {
         'lewis6991/gitsigns.nvim',
         dependencies = 'nvim-lua/plenary.nvim',
@@ -258,37 +248,26 @@ return {
         end,
     },
     { 'rhysd/conflict-marker.vim' },
+
+
+    -- markdown previews
     {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-    },
-    {
-        'nvim-telescope/telescope.nvim',
-        dependencies = {
-            'nvim-lua/popup.nvim',
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-fzf-native.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-            'nvim-telescope/telescope-ui-select.nvim',
-            'crispgm/telescope-heading.nvim',
-        },
-        -- init = function()
-        -- require 'config.telescope_setup'
-        -- end,
-        config = function()
-            require 'plugins.configs.telescope'
-        end,
-        cmd = 'Telescope',
-    },
-    {
-        "rcarriga/nvim-notify",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-    },
-    {
-        "ellisonleao/glow.nvim",
+        'ellisonleao/glow.nvim',
         config = function()
             require("plugins.configs.glow")
         end,
     },
+
+    -- pairs
+    {
+        -- add/replace surrounding pair e.g sr'", sa(
+        'echasnovski/mini.surround',
+        config = function()
+            require('mini.surround').setup {}
+        end,
+        event = 'VeryLazy',
+    },
+
     { 'github/copilot.vim' },
+
 }

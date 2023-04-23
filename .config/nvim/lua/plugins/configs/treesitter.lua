@@ -1,64 +1,5 @@
 local treesitter = require('nvim-treesitter.configs')
 
--- require 'nvim-treesitter.configs'.setup {
---     textobjects = {
---         select = {
---             enable = true,
---             lookahead = true,
---         },
---         lsp_interop = {
---             enable = true,
---         },
---         move = {
---             enable = true,
---             set_jumps = true,
---         },
---     },
---     highlight = {
---         enable = true,
---         additional_vim_regex_highlighting = false,
---     },
---     indent = {
---         enable = true
---     },
---     incremental_selection = {
---         enable = true,
---         keymaps = {
---             init_selection = 'gnn',
---             node_incremental = ".",
---             scope_incremental = "grc",
---             node_decremental = ",",
---         }
---     },
---     ensure_installed = { "go", "python", "lua", "rust", "json" },
---     autoinstall = true,
--- }
-
--- require 'nvim-treesitter.configs'.setup {
---     textobjects = {
---         move = {
---             enable = true,
---             set_jumps = true,     -- whether to set jumps in the jumplist
---             goto_next_start = {
---                 ["]m"] = "@function.outer",
---                 ["]]"] = "@class.outer",
---             },
---             goto_next_end = {
---                 ["]M"] = "@function.outer",
---                 ["]["] = "@class.outer",
---             },
---             goto_previous_start = {
---                 ["[m"] = "@function.outer",
---                 ["[["] = "@class.outer",
---             },
---             goto_previous_end = {
---                 ["[M"] = "@function.outer",
---                 ["[]"] = "@class.outer",
---             },
---         },
---     },
--- }
-
 -- configure treesitter
 treesitter.setup({
     -- enable syntax highlighting
@@ -90,3 +31,73 @@ treesitter.setup({
     -- auto install above language parsers
     auto_install = true,
 })
+
+require('nvim-treesitter.configs').setup {
+    auto_install = true,
+    highlight = { enable = true },
+    indent = { enable = false },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = '<cr>',
+            node_incremental = '<tab>',
+            scope_incremental = '<cr>',
+            scope_decremental = '<s-cr>',
+            node_decremental = '<s-tab>',
+        },
+    },
+    refactor = {
+        smart_rename = { enable = true, keymaps = { smart_rename = 'grr' } },
+        highlight_definitions = { enable = true },
+    },
+    textobjects = {
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+                ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[]"] = "@class.outer",
+            },
+        },
+    },
+    textsubjects = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+        },
+    },
+    endwise = { enable = true },
+    matchup = { enable = true },
+    ensure_installed = {
+        "go",
+        "rust",
+        "python",
+        "json",
+        "yaml",
+        "html",
+        "css",
+        "markdown",
+        "markdown_inline",
+        "bash",
+        "lua",
+        "vim",
+        "dockerfile",
+        "gitignore",
+        "regex",
+    },
+}
