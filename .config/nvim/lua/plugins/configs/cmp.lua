@@ -9,6 +9,9 @@ local has_words_before = function()
 end
 
 cmp.setup({
+    completion = {
+      completeopt = "menu,menuone,noinsert",
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -24,7 +27,7 @@ cmp.setup({
             c = cmp.mapping.close(),
         },
         ['<cr>'] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Replace },
-        ['<tab>'] = cmp.mapping(function(fallback)
+        ['<c-n>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
@@ -35,7 +38,7 @@ cmp.setup({
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<s-tab>'] = cmp.mapping(function(fallback)
+        ['<c-p>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -68,47 +71,39 @@ cmp.setup({
     },
     formatting = {
         fields = { 'menu', 'abbr', 'kind' },
-        format = function(entry, item)
-            local menu_icon = {
-                nvim_lsp = 'λ',
-                vsnip = '⋗',
-                buffer = 'Ω',
-                -- path = '🖫',
-            }
-            item.menu = menu_icon[entry.source.name]
-            return item
-        end,
+        -- format = function(entry, item)
+        --     local menu_icon = {
+        --         nvim_lsp = 'λ',
+        --         vsnip = '⋗',
+        --         buffer = 'Ω',
+        --         -- path = '🖫',
+        --     }
+        --     item.menu = menu_icon[entry.source.name]
+        --     return item
+        -- end,
     },
 })
 
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = { { name = 'nvim_lsp_document_symbol' }, { name = 'buffer' } },
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    })
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }),
 })
 
-vim.keymap.set('i', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
-vim.keymap.set('s', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
-vim.keymap.set('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"',
-    { expr = true, noremap = false })
-vim.keymap.set('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"',
-    { expr = true, noremap = false })
-vim.keymap.set('i', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
-vim.keymap.set('s', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
-vim.keymap.set('i', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
-vim.keymap.set('s', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
+-- vim.keymap.set('i', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
+-- vim.keymap.set('s', '<C-j>', 'vsnip#expandable() ? "<Plug>(vsnip-expand)" : "<C-j>"', { expr = true, noremap = false })
+-- vim.keymap.set('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"',
+--     { expr = true, noremap = false })
+-- vim.keymap.set('i', '<C-h>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-h>"',
+--     { expr = true, noremap = false })
+-- vim.keymap.set('i', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
+-- vim.keymap.set('s', '<C-l>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<C-l>"', { expr = true, noremap = false })
+-- vim.keymap.set('i', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
+-- vim.keymap.set('s', '<C-h>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-h>"', { expr = true, noremap = false })
 
 -- vim.keymap.set('i', '<C-">', '<Plug>(copilot-next)', { noremap = true })
 -- vim.keymap.set('i', '<C-:>', '<Plug>(copilot-previous)', { noremap = true })
