@@ -1,5 +1,5 @@
 data.location=~/.task
 
-include /usr/share/doc/task/rc/solarized-dark-256.theme
+include solarized-dark-256.theme
 
 uda.taskwarrior-tui.task-report.show-info=true */

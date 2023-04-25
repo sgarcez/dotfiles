@@ -18,8 +18,7 @@ abbr -a gf  git fetch
 abbr -a gfc git findcommit
 abbr -a gfm git findmessage
 
-# 
-abbr -a ns newsession
+# abbr -a ns newsession
 abbr -a srcenv 'export (grep "^[^#]" .env |xargs -L 1)'
 abbr -a tma tmux attach -t 
 
@@ -42,18 +41,15 @@ abbr -a yayr 'yay -Qq | fzf -q "$1" -m --preview \'yay -Qi {1}\' | xargs -ro yay
 
 alias watchdocker='bash -c \'while :; do out=$(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Networks}}\t{{.Image}}");clear; echo "$out";sleep 1; done\''
 
-alias markdownd='docker run -it -v $PWD:/opt -p 8888:8080 aerth/markdownd -http=:8080 -index=README.md /opt'
-
 # taskwarrior
 abbr -a t task
 abbr -a ta task add
+abbr -a tui taskwarrior-tui
 
-# misc
 alias reload='exec fish'
 
 alias k="kubectl"
 alias d="docker"
 alias kn="kubens"
 
-# docker
 alias killcontainers='docker rm -f $(docker ps -a -q)'
