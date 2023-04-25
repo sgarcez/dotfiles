@@ -84,21 +84,7 @@ return {
     { 'L3MON4D3/LuaSnip' },
     { 'rafamadriz/friendly-snippets', lazy = false },
 
-    -- LSP / Diagnostics
-    { 'neovim/nvim-lsp' },
-    { 'neovim/nvim-lspconfig' },
-    { 'folke/lsp-colors.nvim' },
-    {
-        'williamboman/mason.nvim',
-        dependencies = {
-            'williamboman/mason-lspconfig.nvim',
-            'jayp0521/mason-null-ls.nvim',
-        },
-        config = function()
-            require("plugins.configs.mason")
-        end,
-    },
-    { 'kosayoda/nvim-lightbulb' },
+    -- completions
     {
         'hrsh7th/nvim-cmp',
         dependencies = {
@@ -120,32 +106,35 @@ return {
         event = 'InsertEnter',
     },
     { "jose-elias-alvarez/null-ls.nvim" },
+
+
+    -- LSP / Diagnostics
+    { 'neovim/nvim-lsp' },
+    { 'neovim/nvim-lspconfig' },
+    { 'folke/lsp-colors.nvim' },
     {
-        'nvim-tree/nvim-tree.lua',
+        'williamboman/mason.nvim',
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+            'jayp0521/mason-null-ls.nvim',
+        },
         config = function()
-            require("plugins.configs.nvimtree")
+            require("plugins.configs.mason")
         end,
     },
     {
-        'mfussenegger/nvim-dap',
-        dependencies = 'jbyuki/one-small-step-for-vimkind',
-        cmd = { 'BreakpointToggle', 'Debug', 'DapREPL' },
+        'j-hui/fidget.nvim',
+        config = function()
+            require('fidget').setup()
+        end
+
     },
-    {
-        'rcarriga/nvim-dap-ui',
-        dependencies = 'nvim-dap',
-        opts = {},
-    },
+    { 'kosayoda/nvim-lightbulb' },
     {
         "folke/trouble.nvim",
         config = function()
             require("plugins.configs.trouble")
         end,
-    },
-    {
-        -- better quickfix with previews
-        'kevinhwang91/nvim-bqf',
-        ft = 'qf',
     },
 
     -- langs
@@ -218,6 +207,27 @@ return {
     {
         "rcarriga/nvim-notify",
         dependencies = { "nvim-telescope/telescope.nvim" },
+    },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            require("plugins.configs.nvimtree")
+        end,
+    },
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = 'jbyuki/one-small-step-for-vimkind',
+        cmd = { 'BreakpointToggle', 'Debug', 'DapREPL' },
+    },
+    {
+        'rcarriga/nvim-dap-ui',
+        dependencies = 'nvim-dap',
+        opts = {},
+    },
+    {
+        -- better quickfix with previews
+        'kevinhwang91/nvim-bqf',
+        ft = 'qf',
     },
 
 

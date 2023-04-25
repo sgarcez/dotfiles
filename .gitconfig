@@ -1,9 +1,7 @@
 [user]
     name = Sergio Garcez
-[include]
-    path = .gitconfig-personal
-[includeIf "gitdir:beat/"]
-    path = .gitconfig-beat
+    email = garcez.sergio@gmail.com
+	signingkey = 23D847C82E79205C
 [include]
   path = .gitalias
 [color]
@@ -23,16 +21,16 @@
 	smudge = git hawser smudge %f
 	required = true
 [filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git-lfs smudge --skip -- %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
-	process = git-lfs filter-process --skip
+	process = git-lfs filter-process
 [pager]
 	branch = false
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+	program = /opt/homebrew/bin/gpg
 [tig "color"] 
     cursor = black white bold
 	title-blur	= white default

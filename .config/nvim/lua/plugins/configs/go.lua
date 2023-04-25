@@ -6,7 +6,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 
 require('go').setup({
     -- goimport = 'gopls', -- if set to 'gopls' will use golsp format
-    -- gofmt = 'gopls', -- if set to gopls will use golsp format
+    gofmt = 'gopls', -- if set to gopls will use golsp format
     max_line_len = 120,
     tag_transform = false,
     test_dir = '',
@@ -58,6 +58,7 @@ vim.api.nvim_create_autocmd(
         callback = function()
             vim.keymap.set("n", "<Leader>gc", ":GoCoverage -f<CR>")
             vim.keymap.set("n", "<Leader>gt", ":GoTest -f<CR>")
+            vim.keymap.set("n", "<Leader>gb", ":GoBuild<CR>")
             vim.keymap.set("n", "<Leader>gl", ":GoLint<CR>")
         end,
     }

@@ -54,3 +54,6 @@ alias reload='exec fish'
 alias k="kubectl"
 alias d="docker"
 alias kn="kubens"
+
+# docker
+alias killcontainers='docker rm -f $(docker ps -a -q)'
