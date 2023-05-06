@@ -76,10 +76,10 @@ telescope.load_extension 'noice'
 telescope.load_extension 'ui-select'
 
 vim.keymap.set("n", "<Leader><Leader>", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<Leader>e", ":Telescope grep_string<CR>")
 vim.keymap.set("n", "<Leader>b", ":Telescope buffers<CR>")
-vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
 vim.keymap.set("n", "<Leader>z", ":Telescope file_browser path=%:p:h<CR>")
+vim.keymap.set("n", "<Leader>g", ":Telescope grep_string<CR>")
+vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
 vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
 vim.keymap.set("n", "<Leader>lr", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<Leader>li", ":Telescope lsp_incoming_calls<CR>")

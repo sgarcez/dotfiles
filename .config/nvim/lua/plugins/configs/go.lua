@@ -1,9 +1,6 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- TODO: load onattach from lsp config
--- local lspconf = require('../../lsp')
-
 require('go').setup({
     -- goimport = 'gopls', -- if set to 'gopls' will use golsp format
     gofmt = 'gopls', -- if set to gopls will use golsp format

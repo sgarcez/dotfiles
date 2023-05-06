@@ -48,8 +48,9 @@ abbr -a tui taskwarrior-tui
 
 alias reload='exec fish'
 
-alias k="kubectl"
-alias d="docker"
-alias kn="kubens"
+abbr -a k kubectl
+abbr -a d docker
+abbr -a kn kubens
 
 alias killcontainers='docker rm -f $(docker ps -a -q)'
+alias a='export AWS_PROFILE=$(aws configure list-profiles | fzf)'

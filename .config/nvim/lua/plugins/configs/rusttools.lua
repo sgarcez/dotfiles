@@ -10,15 +10,19 @@ local opts = {
             other_hints_prefix = "",
         },
     },
-    server = {
-        settings = {
-            ["rust-analyzer"] = {
-                cargo = {
-                    allFeatures = true
-                },
-            }
-        }
-    },
+    -- server = {
+    --     settings = {
+    --         ["rust-analyzer"] = {
+    --             cargo = {
+    --                 allFeatures = true
+    --             },
+    --             checkOnSave = {
+    --                 command = 'clippy',
+    --                 extraArgs = { '--no-deps' },
+    --             },
+    --         }
+    --     }
+    -- },
 }
 
 rt.setup(opts)

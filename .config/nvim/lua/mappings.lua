@@ -21,10 +21,10 @@ vim.keymap.set('n', '[t', ':tabprevious<CR>')
 vim.keymap.set('n', ']t', ':tabnext<CR>')
 
 -- window movement
-vim.keymap.set('n', '<c-j>', '<c-w>j')
-vim.keymap.set('n', '<c-k>', '<c-w>k')
-vim.keymap.set('n', '<c-l>', '<c-w>l')
-vim.keymap.set('n', '<c-h>', '<c-w>h')
+-- vim.keymap.set('n', '<c-j>', '<c-w>j')
+-- vim.keymap.set('n', '<c-k>', '<c-w>k')
+-- vim.keymap.set('n', '<c-l>', '<c-w>l')
+-- vim.keymap.set('n', '<c-h>', '<c-w>h')
 
 -- splits
 vim.keymap.set('n', '<Leader>hh', ':leftabove vsplit<CR>')

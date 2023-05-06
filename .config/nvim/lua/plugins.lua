@@ -14,6 +14,7 @@ return {
         event = 'VeryLazy',
         dependencies = 'tpope/vim-repeat',
         config = function()
+            -- require('leap').add_default_mappings()
             local map = vim.api.nvim_set_keymap
             -- 2-character Sneak (default)
             local opts = { noremap = false }
@@ -74,7 +75,6 @@ return {
             'RRethy/nvim-treesitter-endwise',
         },
         build = ':TSUpdate',
-        -- event = 'VeryLazy',
         config = function()
             require("plugins.configs.treesitter")
         end,
@@ -143,6 +143,7 @@ return {
         dependencies = {
             'ray-x/guihua.lua',
             'mfussenegger/nvim-dap',
+            'theHamsta/nvim-dap-virtual-text',
             'neovim/nvim-lspconfig',
             'nvim-treesitter/nvim-treesitter',
         },
@@ -268,16 +269,7 @@ return {
         end,
     },
 
-    -- pairs
-    {
-        -- add/replace surrounding pair e.g sr'", sa(
-        'echasnovski/mini.surround',
-        config = function()
-            require('mini.surround').setup {}
-        end,
-        event = 'VeryLazy',
-    },
-
     { 'github/copilot.vim' },
+    { 'christoomey/vim-tmux-navigator' },
 
 }

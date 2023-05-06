@@ -2,8 +2,6 @@ local lspconfig = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
 
--- TODO fix in go plugin and re-enable
--- enable keybinds only for when lsp server available
 -- local on_attach = function(client, bufnr)
 -- local opts = { noremap = true, silent = true, buffer = bufnr }
 local opts = { noremap = true, silent = true }
@@ -27,6 +25,18 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 lspconfig["html"].setup({
     capabilities = capabilities,
     -- on_attach = on_attach,
+})
+
+lspconfig["rust-analyzer"].setup({
+    capabilities = capabilities,
+    -- on_attach = on_attach,
+    cargo = {
+        allFeatures = true
+    },
+    checkOnSave = {
+        command = 'clippy',
+        extraArgs = { '--no-deps' },
+    },
 })
 
 -- configure lua server
@@ -57,6 +67,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         virtual_text = false,
         signs = true,
         update_in_insert = false,
+        underline = true,
     })
 
 vim.diagnostic.config({
@@ -65,6 +76,7 @@ vim.diagnostic.config({
     update_in_insert = true,
     underline = true,
     severity_sort = false,
+    virtual_lines = { only_current_line = true },
     float = {
         border = 'rounded',
         source = 'always',
@@ -73,13 +85,8 @@ vim.diagnostic.config({
     },
 })
 
+
 -- UI
-
--- vim.cmd([[
--- set signcolumn=yes
--- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
--- ]])
-
 vim.cmd('highlight! link LspCodeLens WarningMsg')
 vim.cmd('highlight! link LspCodeLensText WarningMsg')
 vim.cmd('highlight! link LspCodeLensTextSign LspCodeLensText')
