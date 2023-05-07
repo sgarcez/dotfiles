@@ -4,112 +4,66 @@
 " by Chris Kempson (http://chriskempson.com)
 " Ocean scheme by Chris Kempson (http://chriskempson.com)
 
-" This enables the coresponding base16-shell script to run so that
-" :colorscheme works in terminals supported by base16-shell scripts
-" User must set this variable in .vimrc
-
 " GUI color definitions
+" darkest grey
 let s:gui00        = "2b303b"
-let g:base16_gui00 = "2b303b"
+" very dark grey
 let s:gui01        = "343d46"
-let g:base16_gui01 = "343d46"
+" dark blueish grey
 let s:gui02        = "4f5b66"
-let g:base16_gui02 = "4f5b66"
+" dark grey
 let s:gui03        = "65737e"
-let g:base16_gui03 = "65737e"
+" mid grey
 let s:gui04        = "a7adba"
-let g:base16_gui04 = "a7adba"
+" light grey
 let s:gui05        = "c0c5ce"
-let g:base16_gui05 = "c0c5ce"
+" lighter grey
 let s:gui06        = "dfe1e8"
-let g:base16_gui06 = "dfe1e8"
+" lightest grey
 let s:gui07        = "eff1f5"
-let g:base16_gui07 = "eff1f5"
+" red
 let s:gui08        = "bf616a"
-let g:base16_gui08 = "bf616a"
+" orange
 let s:gui09        = "d08770"
-let g:base16_gui09 = "d08770"
+" yellow
 let s:gui0A        = "ebcb8b"
-let g:base16_gui0A = "ebcb8b"
+" light olive green
 let s:gui0B        = "a3be8c"
-let g:base16_gui0B = "a3be8c"
+" light blue
 let s:gui0C        = "96b5b4"
-let g:base16_gui0C = "96b5b4"
+" light blue grey
 let s:gui0D        = "8fa1b3"
-let g:base16_gui0D = "8fa1b3"
+" light pink violet
 let s:gui0E        = "b48ead"
-let g:base16_gui0E = "b48ead"
+" light red brown / brick
 let s:gui0F        = "ab7967"
-let g:base16_gui0F = "ab7967"
 
 " Terminal color definitions
 let s:cterm00        = "00"
-let g:base16_cterm00 = "00"
 let s:cterm03        = "08"
-let g:base16_cterm03 = "08"
 let s:cterm05        = "07"
-let g:base16_cterm05 = "07"
 let s:cterm07        = "15"
-let g:base16_cterm07 = "15"
 let s:cterm08        = "01"
-let g:base16_cterm08 = "01"
 let s:cterm0A        = "03"
-let g:base16_cterm0A = "03"
 let s:cterm0B        = "02"
-let g:base16_cterm0B = "02"
 let s:cterm0C        = "06"
-let g:base16_cterm0C = "06"
 let s:cterm0D        = "04"
-let g:base16_cterm0D = "04"
 let s:cterm0E        = "05"
-let g:base16_cterm0E = "05"
 if exists("base16colorspace") && base16colorspace == "256"
   let s:cterm01        = "18"
-  let g:base16_cterm01 = "18"
   let s:cterm02        = "19"
-  let g:base16_cterm02 = "19"
   let s:cterm04        = "20"
-  let g:base16_cterm04 = "20"
   let s:cterm06        = "21"
-  let g:base16_cterm06 = "21"
   let s:cterm09        = "16"
-  let g:base16_cterm09 = "16"
   let s:cterm0F        = "17"
-  let g:base16_cterm0F = "17"
 else
   let s:cterm01        = "10"
-  let g:base16_cterm01 = "10"
   let s:cterm02        = "11"
-  let g:base16_cterm02 = "11"
   let s:cterm04        = "12"
-  let g:base16_cterm04 = "12"
   let s:cterm06        = "13"
-  let g:base16_cterm06 = "13"
   let s:cterm09        = "09"
-  let g:base16_cterm09 = "09"
   let s:cterm0F        = "14"
-  let g:base16_cterm0F = "14"
 endif
-
-" Neovim terminal colours
-let g:terminal_color_0 =  "#2b303b"
-let g:terminal_color_1 =  "#bf616a"
-let g:terminal_color_2 =  "#a3be8c"
-let g:terminal_color_3 =  "#ebcb8b"
-let g:terminal_color_4 =  "#8fa1b3"
-let g:terminal_color_5 =  "#b48ead"
-let g:terminal_color_6 =  "#96b5b4"
-let g:terminal_color_7 =  "#c0c5ce"
-let g:terminal_color_8 =  "#65737e"
-let g:terminal_color_9 =  "#bf616a"
-let g:terminal_color_10 = "#a3be8c"
-let g:terminal_color_11 = "#ebcb8b"
-let g:terminal_color_12 = "#8fa1b3"
-let g:terminal_color_13 = "#b48ead"
-let g:terminal_color_14 = "#96b5b4"
-let g:terminal_color_15 = "#eff1f5"
-let g:terminal_color_background = g:terminal_color_0
-let g:terminal_color_foreground = g:terminal_color_5
 
 " Theme setup
 hi clear
