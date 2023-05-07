@@ -1,6 +1,11 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+
 vim.g.mapleader = ';'
 
 opt.undofile = true -- use undo file
@@ -57,5 +62,5 @@ opt.background = 'dark'
 opt.synmaxcol = 300
 cmd('filetype plugin indent on')
 cmd('syntax on')
-cmd('colorscheme base16-ocean')
+cmd('colorscheme sg')
 

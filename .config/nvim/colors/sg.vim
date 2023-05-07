@@ -21,8 +21,9 @@ let s:gui05        = "c0c5ce"
 let s:gui06        = "dfe1e8"
 " lightest grey
 let s:gui07        = "eff1f5"
-" red
-let s:gui08        = "bf616a"
+" orange / grey
+" let s:gui08        = "D7907B"
+let s:gui08        = "a7adba"
 " orange
 let s:gui09        = "d08770"
 " yellow
@@ -205,6 +206,7 @@ call <sid>hi("NormalFloat",    s:gui03, "", s:gui00, "", "", "")
 
 " Telescope
 call <sid>hi("TelescopeBorder",  s:gui0A, "", "", "", "", "")
+call <sid>hi("TelescopeNormal",  s:gui08, "", "", "", "", "")
 
 " Remove functions
 delf <sid>hi

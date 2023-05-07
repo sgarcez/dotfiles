@@ -1,4 +1,5 @@
 local telescope = require 'telescope'
+local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 local fb_actions = require "telescope".extensions.file_browser.actions
 
@@ -44,7 +45,11 @@ telescope.setup {
             "-g", "!*vendor",
         },
         mappings = {
-            i = { ["<c-t>"] = trouble.open_with_trouble },
+            -- i = { ["<c-t>"] = trouble.open_with_trouble },
+            i = {
+                ["<c-t>"] = trouble.open_with_trouble,
+                ["<esc>"] = actions.close,
+            },
             n = { ["<c-t>"] = trouble.open_with_trouble },
         },
     },

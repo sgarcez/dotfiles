@@ -20,6 +20,7 @@ vim.keymap.set('n', ']b', ':bnext<CR>')
 vim.keymap.set('n', '[t', ':tabprevious<CR>')
 vim.keymap.set('n', ']t', ':tabnext<CR>')
 
+-- replaced by vim-tmux-navigator
 -- window movement
 -- vim.keymap.set('n', '<c-j>', '<c-w>j')
 -- vim.keymap.set('n', '<c-k>', '<c-w>k')

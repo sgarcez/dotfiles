@@ -10,18 +10,17 @@ require('go').setup({
     comment_placeholder = '',
     dap_debug = true,
     dap_debug_keymap = false,
-    icons = false,
+    icons = true,
     textobjects = false,
     lsp_gofumpt = true,   -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = true, -- use on_attach from go.nvim
     lsp_keymaps = false,
-    lsp_diag_virtual_text = false,
+    lsp_diag_virtual_text = true,
     lsp_codelens = true,
     lsp_cfg = {
-        capabilities = capabilities,
+        capabilities = cmp_nvim_lsp.default_capabilities(),
         settings = {
             gopls = {
-                -- buildFlags = { "-tags=component,integration" },
                 buildFlags = { "-tags=integration,dbintegration" },
                 ['local'] = "", -- sadly disable separate local import group.
                 analyses = {
