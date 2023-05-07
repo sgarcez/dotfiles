@@ -40,6 +40,7 @@ set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
 
 starship init fish | source
+zoxide init fish | source
 
 # No greeting when starting an interactive shell.
 function fish_greeting
