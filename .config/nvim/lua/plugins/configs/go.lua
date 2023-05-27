@@ -1,5 +1,4 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local capabilities = cmp_nvim_lsp.default_capabilities()
 
 require('go').setup({
     -- goimport = 'gopls', -- if set to 'gopls' will use golsp format
@@ -10,7 +9,7 @@ require('go').setup({
     comment_placeholder = '',
     dap_debug = true,
     dap_debug_keymap = false,
-    icons = true,
+    icons = false,
     textobjects = false,
     lsp_gofumpt = true,   -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = true, -- use on_attach from go.nvim

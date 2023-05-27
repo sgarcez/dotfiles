@@ -50,6 +50,7 @@ alias reload='exec fish'
 
 abbr -a k kubectl
 abbr -a d docker
+abbr -a db docker buildx
 abbr -a kn kubens
 
 alias killcontainers='docker rm -f $(docker ps -a -q)'

@@ -36,16 +36,6 @@ require('nvim-treesitter.configs').setup {
     auto_install = true,
     highlight = { enable = true },
     indent = { enable = false },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = '<cr>',
-            node_incremental = '<tab>',
-            scope_incremental = '<cr>',
-            scope_decremental = '<s-cr>',
-            node_decremental = '<s-tab>',
-        },
-    },
     refactor = {
         smart_rename = { enable = true, keymaps = { smart_rename = 'grr' } },
         highlight_definitions = { enable = true },
@@ -56,25 +46,16 @@ require('nvim-treesitter.configs').setup {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
                 ["]m"] = "@function.outer",
-                ["]]"] = "@class.outer",
-            },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-                ["]["] = "@class.outer",
             },
             goto_previous_start = {
                 ["[m"] = "@function.outer",
-                ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-                ["[]"] = "@class.outer",
             },
         },
     },
     textsubjects = {
         enable = true,
         lookahead = true,
+        prev_selection = ',',
         keymaps = {
             ['.'] = 'textsubjects-smart',
             [';'] = 'textsubjects-container-outer',
