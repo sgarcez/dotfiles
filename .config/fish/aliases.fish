@@ -52,6 +52,7 @@ abbr -a k kubectl
 abbr -a d docker
 abbr -a db docker buildx
 abbr -a kn kubens
+abbr -a tf terraform
 
 alias killcontainers='docker rm -f $(docker ps -a -q)'
 alias a='export AWS_PROFILE=$(aws configure list-profiles | fzf)'

@@ -13,40 +13,55 @@ return {
 		end,
 	},
 	{
-		-- type 2 first chars + label char
-		"ggandor/leap.nvim",
+		"folke/flash.nvim",
+		opts = {
+			modes = {
+				char = {
+					keys = { "f", "F", "t", "T" },
+				},
+				search = {
+					enabled = false,
+				},
+			},
+		},
+		enabled = true,
 		event = "VeryLazy",
-		dependencies = "tpope/vim-repeat",
-		config = function()
-			require("leap").opts.highlight_unlabeled_phase_one_targets = true
-			require("leap").add_default_mappings()
-			-- local map = vim.api.nvim_set_keymap
-			-- -- 2-character Sneak (default)
-			-- local opts = { noremap = false }
-			-- map('n', 'z', '<Plug>(leap-forward-x)', opts)
-			-- map('n', 'Z', '<Plug>(leap-backward-x)', opts)
-			--
-			-- -- visual-mode
-			-- map('x', 'z', '<Plug>(leap-forward-x)', opts)
-			-- map('x', 'Z', '<Plug>(leap-backward-x)', opts)
-			--
-			-- -- operator-pending-mode
-			-- map('o', 'z', '<Plug>(leap-forward-x)', opts)
-			-- map('o', 'Z', '<Plug>(leap-backward-x)', opts)
-		end,
+		keys = {
+			{
+				"m",
+				mode = { "o", "x" },
+				function()
+					return require("flash.plugins.treesitter").jump()
+				end,
+			},
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					return require("flash").jump()
+				end,
+			},
+			{
+				"gl",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump({
+						search = { mode = "search" },
+						highlight = { label = { after = { 0, 0 } } },
+						pattern = "^",
+					})
+				end,
+			},
+		},
 	},
 	{
-		-- single key search, overrides f, t, F, T
-		"ggandor/flit.nvim",
-		opts = { labeled_modes = "nv" },
-	},
-	{
-		-- auto enabled and disable search highlighting
+		-- auto enable and disable search highlighting
 		"romainl/vim-cool",
 		event = "VeryLazy",
 	},
 
-	-- navigating
+	-- navigation
+	{ "christoomey/vim-tmux-navigator" },
 	{ "tpope/vim-vinegar" },
 	{
 		"nvim-telescope/telescope.nvim",
@@ -70,7 +85,6 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"RRethy/nvim-treesitter-textsubjects",
-			"RRethy/nvim-treesitter-endwise",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -125,7 +139,7 @@ return {
 			require("fidget").setup()
 		end,
 	},
-	{ "kosayoda/nvim-lightbulb" },
+	-- { "kosayoda/nvim-lightbulb" },
 	{
 		"folke/trouble.nvim",
 		config = function()
@@ -186,28 +200,6 @@ return {
 		"folke/noice.nvim",
 		opts = {
 			views = { mini = { lang = "markdown" } },
-			routes = {
-				{
-					filter = {
-						event = "msg_show",
-						kind = "",
-						find = "written",
-					},
-					opts = { skip = true },
-				},
-				{
-					filter = {
-						event = "lsp",
-						kind = "progress",
-						find = "null-l",
-					},
-					opts = { skip = true, stop = true },
-				},
-				-- {
-				--     view = 'notify',
-				--     filter = { event = 'msg_showmode' },
-				-- },
-			},
 			lsp = {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -250,6 +242,14 @@ return {
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
 	},
+	-- winbar
+	{
+		"b0o/incline.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("incline").setup()
+		end,
+	},
 
 	-- comments
 	{
@@ -279,14 +279,5 @@ return {
 	},
 	{ "rhysd/conflict-marker.vim" },
 
-	-- markdown previews
-	{
-		"ellisonleao/glow.nvim",
-		config = function()
-			require("plugins.configs.glow")
-		end,
-	},
-
 	{ "github/copilot.vim" },
-	{ "christoomey/vim-tmux-navigator" },
 }

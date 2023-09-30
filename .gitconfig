@@ -30,7 +30,7 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
+  format = ssh
 [tig "color"] 
     cursor = black white bold
 	title-blur	= white default

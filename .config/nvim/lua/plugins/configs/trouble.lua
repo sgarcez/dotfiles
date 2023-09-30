@@ -1,5 +1,5 @@
-require("trouble").setup {
-    icons = false,
-}
+require("trouble").setup({
+	icons = false,
+})
 
-vim.keymap.set('n', '<Leader>lt', '<cmd>TroubleToggle<CR>')
+vim.keymap.set("n", "<Leader>lt", "<cmd>TroubleToggle<CR>")

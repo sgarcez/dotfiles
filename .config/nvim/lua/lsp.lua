@@ -16,40 +16,50 @@ vim.keymap.set("n", "<Leader>lcr", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
+-- lspconfig["marksman"].setup{}
+
 -- configure html server
 lspconfig["html"].setup({
-    capabilities = capabilities,
+	capabilities = capabilities,
 })
 
-lspconfig["rust-analyzer"].setup({
-    capabilities = capabilities,
-    cargo = {
-        allFeatures = true,
-    },
-    checkOnSave = {
-        command = "clippy",
-        extraArgs = { "--no-deps" },
-    },
-})
+-- lspconfig["rust-analyzer"].setup({
+-- 	capabilities = capabilities,
+-- 	cargo = {
+-- 		allFeatures = true,
+-- 	},
+-- 	checkOnSave = {
+-- 		command = "clippy",
+-- 		extraArgs = { "--no-deps" },
+-- 	},
+-- })
 
 lspconfig["lua_ls"].setup({
-    capabilities = capabilities,
-    settings = {
-        -- custom settings for lua
-        Lua = {
-            -- make the language server recognize "vim" global
-            diagnostics = {
-                globals = { "vim" },
-            },
-            workspace = {
-                -- make language server aware of runtime files
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.stdpath("config") .. "/lua"] = true,
-                },
-            },
-        },
-    },
+	capabilities = capabilities,
+	settings = {
+		-- custom settings for lua
+		Lua = {
+			-- make the language server recognize "vim" global
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				-- make language server aware of runtime files
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+				},
+			},
+		},
+	},
+})
+
+require("lspconfig").terraformls.setup({})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.tf", "*.tfvars" },
+	callback = function()
+		vim.lsp.buf.format()
+	end,
 })
 
 -- null-ls setup
@@ -59,19 +69,19 @@ local null_diag = null_ls.builtins.diagnostics
 -- local null_act = null_ls.builtins.code_actions
 
 null_ls.setup({
-    update_in_insert = true,
-    sources = {
-        null_diag.shellcheck,
-        -- null_diag.write_good,
-        null_diag.markdownlint,
-        null_fmt.clang_format,
-        null_fmt.isort,
-        null_fmt.rustfmt,
-        null_fmt.shfmt,
-        null_fmt.stylua,
-        -- null_act.gomodifytags,
-    },
-    -- on_attach = setup_keymaps,
+	update_in_insert = true,
+	sources = {
+		null_diag.shellcheck,
+		-- null_diag.write_good,
+		null_diag.markdownlint,
+		null_fmt.clang_format,
+		null_fmt.isort,
+		null_fmt.rustfmt,
+		null_fmt.shfmt,
+		null_fmt.stylua,
+		-- null_act.gomodifytags,
+	},
+	-- on_attach = setup_keymaps,
 })
 
 -- diagnostics
@@ -83,44 +93,44 @@ sign_define("DiagnosticSignInfo", { text = "", numhl = "WhiteSign" })
 sign_define("DiagnosticSignHint", { text = "", numhl = "BlueSign" })
 
 vim.diagnostic.config({
-    signs = true,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    virtual_lines = { only_current_line = true },
-    virtual_text = {
-        spacing = 4,
-        source = "always",
-        prefix = "∎",
-    },
-    float = {
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-        scope = "cursor",
-        wrap = true,
-        max_width = 80,
-    },
+	signs = true,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = true,
+	virtual_lines = { only_current_line = true },
+	virtual_text = {
+		spacing = 4,
+		source = "always",
+		prefix = "∎",
+	},
+	float = {
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+		scope = "cursor",
+		wrap = true,
+		max_width = 80,
+	},
 })
 
 -- handlers
 
--- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
---   virtual_text = false,
---   signs = true,
---   update_in_insert = false,
---   underline = true,
--- })
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	virtual_text = false,
+	signs = true,
+	update_in_insert = false,
+	underline = true,
+})
 
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+-- vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with({
-    vim.lsp.handlers.signatureHelp,
-    { border = "rounded" },
+	vim.lsp.handlers.signatureHelp,
+	{ border = "rounded" },
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with({
-    vim.lsp.handlers.hover,
-    { border = "rounded" },
+	vim.lsp.handlers.hover,
+	{ border = "rounded" },
 })
