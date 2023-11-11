@@ -62,28 +62,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
--- null-ls setup
-local null_ls = require("null-ls")
-local null_fmt = null_ls.builtins.formatting
-local null_diag = null_ls.builtins.diagnostics
--- local null_act = null_ls.builtins.code_actions
-
-null_ls.setup({
-	update_in_insert = true,
-	sources = {
-		null_diag.shellcheck,
-		-- null_diag.write_good,
-		null_diag.markdownlint,
-		null_fmt.clang_format,
-		null_fmt.isort,
-		null_fmt.rustfmt,
-		null_fmt.shfmt,
-		null_fmt.stylua,
-		-- null_act.gomodifytags,
-	},
-	-- on_attach = setup_keymaps,
-})
-
 -- diagnostics
 
 local sign_define = vim.fn.sign_define
@@ -134,3 +112,27 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with({
 	vim.lsp.handlers.hover,
 	{ border = "rounded" },
 })
+
+-- null-ls setup
+
+local null_ls = require("null-ls")
+local null_fmt = null_ls.builtins.formatting
+local null_diag = null_ls.builtins.diagnostics
+-- local null_act = null_ls.builtins.code_actions
+
+null_ls.setup({
+	update_in_insert = true,
+	sources = {
+		null_diag.shellcheck,
+		-- null_diag.write_good,
+		null_diag.markdownlint,
+		null_fmt.clang_format,
+		null_fmt.isort,
+		null_fmt.rustfmt,
+		null_fmt.shfmt,
+		null_fmt.stylua,
+		-- null_act.gomodifytags,
+	},
+	-- on_attach = setup_keymaps,
+})
+

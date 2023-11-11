@@ -12,17 +12,19 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { "branch" },
+		-- lualine_b = { "branch" },
+		lualine_b = {},
 		lualine_c = {
 			{
 				"filename",
 				file_status = true,
-				path = 3,
+				path = 1, -- relative path
+				-- path = 3, -- absolute path
 				shorting_target = 40,
 			},
 		},
 		lualine_x = { "encoding" },
-		lualine_y = { "progress" },
+		lualine_y = {},
 		lualine_z = { "location" },
 	},
 	inactive_sections = {

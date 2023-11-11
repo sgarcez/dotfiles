@@ -15,9 +15,11 @@ require("go").setup({
 	lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
 	lsp_on_attach = true, -- use on_attach from go.nvim
 	lsp_keymaps = false,
-	lsp_diag_virtual_text = true,
 	lsp_codelens = true,
 	lsp_document_formatting = true,
+    diagnostic = {
+	    virtual_text = true,
+    },
 	-- https://github.com/ray-x/go.nvim/blob/8a0498ee48a26f928b1dc1c02fb3d84d648a1c63/lua/go/gopls.lua#L245
 	lsp_cfg = {
 		capabilities = cmp_nvim_lsp.default_capabilities(),
@@ -51,7 +53,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.keymap.set("n", "<Leader>gc", ":GoCoverage -f<CR>")
 		vim.keymap.set("n", "<Leader>gt", ":GoTest -f<CR>")
+		vim.keymap.set("n", "<Leader>gT", ":GoTestPkg -f<CR>")
 		vim.keymap.set("n", "<Leader>gb", ":GoBuild<CR>")
 		vim.keymap.set("n", "<Leader>gl", ":GoLint<CR>")
+		vim.keymap.set("n", "<Leader>gi", ":GoToggleInlay<CR>")
 	end,
 })
