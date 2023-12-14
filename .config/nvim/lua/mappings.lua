@@ -39,3 +39,46 @@ vim.keymap.set('n', '<Leader>h<Enter>', ':leftabove  vnew<CR>:terminal<CR>:start
 vim.keymap.set('n', '<Leader>l<Enter>', ':rightbelow vnew<CR>:terminal<CR>:startinsert<CR>')
 vim.keymap.set('n', '<Leader>k<Enter>', ':leftabove  new<CR>:terminal<CR>:startinsert<CR>')
 vim.keymap.set('n', '<Leader>j<Enter>', ':rightbelow new<CR>:terminal<CR>:startinsert<CR>')
+
+-- lsp
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+vim.keymap.set("n", "<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+vim.keymap.set("v", "<leader>lf", ":<C-u>call v:lua.vim.lsp.buf.range_formatting()<CR>", opts)
+vim.keymap.set("n", "<Leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+vim.keymap.set("n", "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+vim.keymap.set("n", "<Leader>lce", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
+vim.keymap.set("n", "<Leader>lcr", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
+
+-- telescope
+vim.keymap.set("n", "<Leader><Leader>", ":Telescope find_files<CR>")
+vim.keymap.set("n", "<Leader>b", ":Telescope buffers<CR>")
+-- vim.keymap.set("n", "<Leader>z", ":Telescope file_browser path=%:p:h<CR>")
+vim.keymap.set("n", "<Leader>f", ":Telescope grep_string<CR>")
+vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
+vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
+vim.keymap.set("n", "<Leader>lr", ":Telescope lsp_references<CR>")
+vim.keymap.set("n", "<Leader>li", ":Telescope lsp_incoming_calls<CR>")
+vim.keymap.set("n", "<Leader>lo", ":Telescope lsp_outgoing_calls<CR>")
+vim.keymap.set("n", "<Leader>lm", ":Telescope lsp_implementations<CR>")
+vim.keymap.set("n", "<Leader>ls", ":Telescope lsp_document_symbols ignore_symbols=variable,field<CR>")
+vim.keymap.set("n", "<Leader>d", ":Telescope diagnostics bufnr=0 <CR>")
+vim.keymap.set("n", "<Leader>is", ":Telescope git_status <CR>")
+
+local group = vim.api.nvim_create_augroup("vimgo", { clear = false })
+vim.api.nvim_create_autocmd("FileType", {
+	group = group,
+	pattern = { "go" },
+	callback = function()
+		vim.keymap.set("n", "<Leader>gc", ":GoCoverage -f<CR>")
+		vim.keymap.set("n", "<Leader>gt", ":GoTest -f<CR>")
+		vim.keymap.set("n", "<Leader>gT", ":GoTestPkg -f<CR>")
+		vim.keymap.set("n", "<Leader>gb", ":GoBuild<CR>")
+		vim.keymap.set("n", "<Leader>gl", ":GoLint<CR>")
+		vim.keymap.set("n", "<Leader>gi", ":GoToggleInlay<CR>")
+	end,
+})

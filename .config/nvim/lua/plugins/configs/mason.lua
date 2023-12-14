@@ -22,8 +22,7 @@ mason_null_ls.setup({
 		"stylua", -- lua formatter
 		"shfmt", -- shell formatter
 		"shellcheck", -- shell linter
-		-- "markdownlint", -- markdown linter
-        "terraform-ls", -- terraform formatter
+		"terraform-ls", -- terraform formatter
 	},
 	automatic_installation = true,
 })

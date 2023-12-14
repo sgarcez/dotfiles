@@ -1,4 +1,5 @@
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local capabilities = require("lsp").capabilities
+local on_attach = require("lsp").on_attach
 
 require("go").setup({
 	goimport = "gopls", -- if set to 'gopls' will use golsp format
@@ -8,23 +9,26 @@ require("go").setup({
 	test_dir = "",
 	comment_placeholder = "",
 	dap_debug = true,
-	dap_debug_keymap = false,
+	dap_debug_keymap = true,
 	icons = false,
 	textobjects = false,
 	-- disabling to avoid the octal normalisation
 	lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-	lsp_on_attach = true, -- use on_attach from go.nvim
+	lsp_on_attach = on_attach,-- true, -- use on_attach from go.nvim
 	lsp_keymaps = false,
 	lsp_codelens = true,
 	lsp_document_formatting = true,
-    diagnostic = {
-	    virtual_text = true,
-    },
+	diagnostic = {
+		virtual_text = true,
+	},
 	-- https://github.com/ray-x/go.nvim/blob/8a0498ee48a26f928b1dc1c02fb3d84d648a1c63/lua/go/gopls.lua#L245
+	-- lsp_cfg = false,
 	lsp_cfg = {
-		capabilities = cmp_nvim_lsp.default_capabilities(),
+		capabilities = capabilities,
 		settings = {
 			gopls = {
+				completeUnimported = true,
+				usePlaceholders = true,
 				buildFlags = { "-tags=integration,dbintegration" },
 				["local"] = "", -- sadly disable separate local import group.
 				analyses = {
@@ -36,26 +40,17 @@ require("go").setup({
 			},
 		},
 	},
+	lsp_inlay_hints = {
+		enable = true,
+		only_current_line = false,
+	},
 })
 
-local group = vim.api.nvim_create_augroup("vimgo", { clear = true })
+local group = vim.api.nvim_create_augroup("vimgo", { clear = false })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = group,
 	pattern = { "*.go" },
 	callback = function()
 		require("go.format").goimport()
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	group = group,
-	pattern = { "go" },
-	callback = function()
-		vim.keymap.set("n", "<Leader>gc", ":GoCoverage -f<CR>")
-		vim.keymap.set("n", "<Leader>gt", ":GoTest -f<CR>")
-		vim.keymap.set("n", "<Leader>gT", ":GoTestPkg -f<CR>")
-		vim.keymap.set("n", "<Leader>gb", ":GoBuild<CR>")
-		vim.keymap.set("n", "<Leader>gl", ":GoLint<CR>")
-		vim.keymap.set("n", "<Leader>gi", ":GoToggleInlay<CR>")
 	end,
 })

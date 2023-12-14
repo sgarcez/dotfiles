@@ -1,43 +1,62 @@
 local lspconfig = require("lspconfig")
+-- local util = require("lspconfig/util")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-vim.keymap.set("v", "<leader>lf", ":<C-u>call v:lua.vim.lsp.buf.range_formatting()<CR>", opts)
-vim.keymap.set("n", "<Leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-vim.keymap.set("n", "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-vim.keymap.set("n", "<Leader>lce", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
-vim.keymap.set("n", "<Leader>lcr", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
+local on_attach = function(_, bufnr)
+	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+end
 
+-- local capabilities = lspconfig.capabilities
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- lspconfig["marksman"].setup{}
-
--- configure html server
-lspconfig["html"].setup({
-	capabilities = capabilities,
-})
-
--- lspconfig["rust-analyzer"].setup({
+-- using go.nvim 
+-- lspconfig.gopls.setup({
+-- 	on_attach = on_attach,
 -- 	capabilities = capabilities,
--- 	cargo = {
--- 		allFeatures = true,
--- 	},
--- 	checkOnSave = {
--- 		command = "clippy",
--- 		extraArgs = { "--no-deps" },
+-- 	cmd = { "gopls" },
+-- 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+-- 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+-- 	settings = {
+-- 		gopls = {
+-- 			hints = {
+-- 				assignVariableTypes = false,
+-- 				compositeLiteralFields = false,
+-- 				compositeLiteralTypes = false,
+-- 				constantValues = false,
+-- 				functionTypeParameters = true,
+-- 				parameterNames = false,
+-- 				rangeVariableTypes = false,
+-- 			},
+-- 			completeUnimported = true,
+-- 			usePlaceholders = true,
+-- 			buildFlags = { "-tags=integration,dbintegration" },
+-- 			["local"] = "", -- sadly disable separate local import group.
+-- 			analyses = {
+-- 				ST1003 = false,
+-- 				fieldalignment = false,
+-- 				unusedparams = false,
+-- 				shadow = false,
+-- 			},
+-- 		},
 -- 	},
 -- })
 
-lspconfig["lua_ls"].setup({
+lspconfig["rust-analyzer"].setup({
 	capabilities = capabilities,
+	cargo = {
+		allFeatures = true,
+	},
+	checkOnSave = {
+		command = "clippy",
+		extraArgs = { "--no-deps" },
+	},
+})
+
+lspconfig.lua_ls.setup({
+	capabilities = capabilities,
+    on_attach = on_attach,
 	settings = {
-		-- custom settings for lua
 		Lua = {
 			-- make the language server recognize "vim" global
 			diagnostics = {
@@ -54,7 +73,9 @@ lspconfig["lua_ls"].setup({
 	},
 })
 
-require("lspconfig").terraformls.setup({})
+-- terraform
+lspconfig.terraformls.setup({})
+
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	pattern = { "*.tf", "*.tfvars" },
 	callback = function()
@@ -131,8 +152,12 @@ null_ls.setup({
 		null_fmt.rustfmt,
 		null_fmt.shfmt,
 		null_fmt.stylua,
-		-- null_act.gomodifytags,
 	},
 	-- on_attach = setup_keymaps,
 })
 
+
+return {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}

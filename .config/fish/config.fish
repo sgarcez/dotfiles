@@ -12,6 +12,8 @@ set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --e
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS "--ansi"
 
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+
 source ~/.config/fish/aliases.fish
 
 bash ~/.theme.sh
