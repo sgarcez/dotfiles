@@ -141,7 +141,8 @@ return {
 		"williamboman/mason.nvim",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
-			"jayp0521/mason-null-ls.nvim",
+			"jay-babu/mason-null-ls.nvim",
+			"nvimtools/none-ls.nvim",
 		},
 		config = function()
 			require("plugins.configs.mason")
@@ -153,18 +154,18 @@ return {
 			require("fidget").setup()
 		end,
 	},
-	{
-		"kosayoda/nvim-lightbulb",
-		config = function()
-			require("nvim-lightbulb").setup({
-				autocmd = { enabled = true },
-				sign = {
-					enabled = true,
-					text = "♢",
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"kosayoda/nvim-lightbulb",
+	-- 	config = function()
+	-- 		require("nvim-lightbulb").setup({
+	-- 			autocmd = { enabled = true },
+	-- 			sign = {
+	-- 				enabled = true,
+	-- 				text = "♢",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"folke/trouble.nvim",
 		config = function()
@@ -235,17 +236,6 @@ return {
 			},
 		},
 	},
-	-- markdown preview
-	{
-		"wallpants/github-preview.nvim",
-		cmd = { "GithubPreviewToggle" },
-		-- keys = { "<leader>mpt" },
-		opts = {},
-		config = function(_, opts)
-			local gpreview = require("github-preview")
-			gpreview.setup(opts)
-		end,
-	},
 
 	-- UI
 	{
@@ -307,7 +297,7 @@ return {
 				inc_rename = true, -- enables an input dialog for inc-rename.nvim
 				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
-            -- unicode icons
+			-- unicode icons
 			cmdline = {
 				format = {
 					-- cmdline = { icon = ">" },

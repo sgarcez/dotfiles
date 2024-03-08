@@ -19,6 +19,7 @@ mason_lspconfig.setup({
 
 mason_null_ls.setup({
 	ensure_installed = {
+        "hadolint", -- Dockerfile formatter
 		"stylua", -- lua formatter
 		"shfmt", -- shell formatter
 		"shellcheck", -- shell linter

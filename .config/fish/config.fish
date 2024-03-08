@@ -44,6 +44,9 @@ set -g fish_color_valid_path --underline
 starship init fish | source
 zoxide init fish | source
 
+# carapace --list | awk '{print $1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish # disable auto-loaded completions (#185)
+carapace _carapace | source
+
 # No greeting when starting an interactive shell.
 function fish_greeting
 end

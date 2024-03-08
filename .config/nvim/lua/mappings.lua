@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "go" },
 	callback = function()
 		vim.keymap.set("n", "<Leader>gc", ":GoCoverage -f<CR>")
-		vim.keymap.set("n", "<Leader>gt", ":GoTest -f<CR>")
+		vim.keymap.set("n", "<Leader>gt", ":GoTest -f <CR>")
 		vim.keymap.set("n", "<Leader>gT", ":GoTestPkg -f<CR>")
 		vim.keymap.set("n", "<Leader>gb", ":GoBuild<CR>")
 		vim.keymap.set("n", "<Leader>gl", ":GoLint<CR>")

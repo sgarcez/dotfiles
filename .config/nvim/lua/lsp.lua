@@ -10,7 +10,7 @@ end
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- using go.nvim 
+-- using go.nvim
 -- lspconfig.gopls.setup({
 -- 	on_attach = on_attach,
 -- 	capabilities = capabilities,
@@ -42,20 +42,20 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 -- 	},
 -- })
 
-lspconfig["rust-analyzer"].setup({
-	capabilities = capabilities,
-	cargo = {
-		allFeatures = true,
-	},
-	checkOnSave = {
-		command = "clippy",
-		extraArgs = { "--no-deps" },
-	},
-})
+-- lspconfig["rust-analyzer"].setup({
+-- 	capabilities = capabilities,
+-- 	cargo = {
+-- 		allFeatures = true,
+-- 	},
+-- 	checkOnSave = {
+-- 		command = "clippy",
+-- 		extraArgs = { "--no-deps" },
+-- 	},
+-- })
 
 lspconfig.lua_ls.setup({
 	capabilities = capabilities,
-    on_attach = on_attach,
+	on_attach = on_attach,
 	settings = {
 		Lua = {
 			-- make the language server recognize "vim" global
@@ -144,20 +144,19 @@ local null_diag = null_ls.builtins.diagnostics
 null_ls.setup({
 	update_in_insert = true,
 	sources = {
-		null_diag.shellcheck,
-		-- null_diag.write_good,
+		-- null_diag.shellcheck,
 		null_diag.markdownlint,
 		null_fmt.clang_format,
 		null_fmt.isort,
-		null_fmt.rustfmt,
+		-- null_fmt.rustfmt,
 		null_fmt.shfmt,
 		null_fmt.stylua,
+		null_diag.hadolint,
 	},
 	-- on_attach = setup_keymaps,
 })
 
-
 return {
-    capabilities = capabilities,
-    on_attach = on_attach,
+	capabilities = capabilities,
+	on_attach = on_attach,
 }
