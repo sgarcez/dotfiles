@@ -9,7 +9,7 @@
 [color]
 	ui = true
 [core]
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignore
 	autocrlf = false
 [push]
