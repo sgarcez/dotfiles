@@ -2,6 +2,8 @@ if not status is-interactive
     exit
 end
 
+devbox global shellenv --init-hook | source
+
 set -x GPG_TTY (tty)
 
 set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH

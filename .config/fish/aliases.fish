@@ -54,6 +54,8 @@ abbr -a db docker buildx
 abbr -a kn kubens
 abbr -a tf terraform
 
+abbr -a dg devbox global
+
 alias killcontainers='docker rm -f $(docker ps -a -q)'
 
 alias awsprofile='export AWS_PROFILE=$(aws configure list-profiles | fzf)'

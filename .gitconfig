@@ -1,7 +1,9 @@
 [user]
     name = Sergio Garcez
     email = garcez.sergio@gmail.com
-	signingkey = 23D847C82E79205C
+    signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZmXTGSClRYvh8ZlfUXfq+ytZDcxcOYM7qRypo+zWVWbm19JYf19V+S4CIcMsz5iSXpU636Y8/CH2/iM9Bfonw3wcbXJUCWtCL2b/FpFaLL13qWxheawA6mSTrC5Ih3zmE82For2mbmS1xE1qC4MYl9N0lmr90wVVzi8uzpvat+I35plNnedH5Hevx30IDAm6UJTpNkEEf5TdBwaVmWoXs/yYjbDv61i2YPmAcM2nGXzWLE9IDGrUJOm8RqW5klYjfpzG8VjgMSRYMlKd5JBjbwKCuB/dw7mQbLInxLtOXNpMs9K2uliayPv8N79PtkoaOW5zZjdeO+gjNzdMSUOBH
+[includeIf "gitdir:~/code/docker/"]
+    path = .gitconfig-docker
 [include]
   path = .gitalias
 [color]

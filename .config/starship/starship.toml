@@ -13,4 +13,8 @@ symbol = "go "
 disabled = true
 
 [docker_context]
+disabled = true
 symbol = "docker-context "
+
+[nix_shell]
+disabled = true
