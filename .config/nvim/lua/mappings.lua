@@ -20,13 +20,6 @@ vim.keymap.set("n", "]b", ":bnext<CR>")
 vim.keymap.set("n", "[t", ":tabprevious<CR>")
 vim.keymap.set("n", "]t", ":tabnext<CR>")
 
--- replaced by vim-tmux-navigator
--- window movement
--- vim.keymap.set('n', '<c-j>', '<c-w>j')
--- vim.keymap.set('n', '<c-k>', '<c-w>k')
--- vim.keymap.set('n', '<c-l>', '<c-w>l')
--- vim.keymap.set('n', '<c-h>', '<c-w>h')
-
 -- splits
 vim.keymap.set("n", "<Leader>hh", ":leftabove vsplit<CR>")
 vim.keymap.set("n", "<Leader>ll", ":rightbelow vsplit<CR>")
@@ -57,7 +50,6 @@ vim.keymap.set("n", "<Leader>lcr", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 -- telescope
 vim.keymap.set("n", "<Leader><Leader>", ":Telescope find_files<CR>")
 vim.keymap.set("n", "<Leader>b", ":Telescope buffers<CR>")
--- vim.keymap.set("n", "<Leader>z", ":Telescope file_browser path=%:p:h<CR>")
 vim.keymap.set("n", "<Leader>f", ":Telescope grep_string<CR>")
 vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
 vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")

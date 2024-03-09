@@ -12,6 +12,9 @@ symbol = "go "
 [aws]
 disabled = true
 
+[buf]
+disabled = true
+
 [docker_context]
 disabled = true
 symbol = "docker-context "

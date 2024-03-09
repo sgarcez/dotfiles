@@ -133,8 +133,16 @@ return {
 		end,
 		event = "InsertEnter",
 	},
-	-- { "jose-elias-alvarez/null-ls.nvim" },
-	{ "nvimtools/none-ls.nvim" },
+	{
+		"nvimtools/none-ls.nvim",
+		config = function()
+			require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
+			require("null-ls").register(require("none-ls-shellcheck.code_actions"))
+		end,
+		dependencies = {
+			"gbprod/none-ls-shellcheck.nvim",
+		},
+	},
 
 	-- LSP / Diagnostics
 	{ "neovim/nvim-lsp" },
@@ -244,26 +252,6 @@ return {
 	{
 		-- hover UI for messages, cmdline and the popupmenu
 		"folke/noice.nvim",
-
-		-- opts = {
-		-- 	views = { mini = { lang = "markdown" } },
-		-- 	lsp = {
-		-- 		override = {
-		-- 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-		-- 			["vim.lsp.util.stylize_markdown"] = true,
-		-- 			["cmp.entry.get_documentation"] = true,
-		-- 		},
-		-- 	},
-		-- 	presets = {
-		-- 		bottom_search = true,
-		-- 		command_palette = true,
-		-- 		long_message_to_split = true,
-		-- 		inc_rename = true,
-		-- 		lsp_doc_border = true,
-		-- 	},
-		-- },
-		-- dependencies = { "MunifTanjim/nui.nvim" },
-
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
@@ -303,33 +291,14 @@ return {
 			-- unicode icons
 			cmdline = {
 				format = {
-					-- cmdline = { icon = ">" },
+					cmdline = { icon = ">" },
 					search_down = { icon = "⌄" },
 					search_up = { icon = "⌃" },
-					-- filter = { icon = "$" },
-					-- lua = { icon = "☾" },
-					-- help = { icon = "?" },
+					filter = { icon = "$" },
+					lua = { icon = "☾" },
+					help = { icon = "?" },
 				},
 			},
-			-- format = {
-			-- 	level = {
-			-- 		icons = {
-			-- 			error = "✖",
-			-- 			warn = "▼",
-			-- 			info = "●",
-			-- 		},
-			-- 	},
-			-- },
-			-- popupmenu = {
-			-- 	kind_icons = false,
-			-- },
-			-- inc_rename = {
-			-- 	cmdline = {
-			-- 		format = {
-			-- 			IncRename = { icon = "⟳" },
-			-- 		},
-			-- 	},
-			-- },
 		},
 	},
 
@@ -345,11 +314,26 @@ return {
 		dependencies = { "nvim-telescope/telescope.nvim" },
 	},
 	{
+		-- better quickfix with previews
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
+	},
+
+	-- tree / vinegar
+	{
 		"nvim-tree/nvim-tree.lua",
 		config = function()
 			require("plugins.configs.nvimtree")
 		end,
 	},
+	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+	},
+
+	-- debugger
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = "jbyuki/one-small-step-for-vimkind",
@@ -360,11 +344,7 @@ return {
 		dependencies = "nvim-dap",
 		opts = {},
 	},
-	{
-		-- better quickfix with previews
-		"kevinhwang91/nvim-bqf",
-		ft = "qf",
-	},
+
 	-- winbar
 	{
 		"b0o/incline.nvim",

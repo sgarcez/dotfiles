@@ -1,5 +1,4 @@
 local lspconfig = require("lspconfig")
--- local util = require("lspconfig/util")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local on_attach = function(_, bufnr)
@@ -144,16 +143,14 @@ local null_diag = null_ls.builtins.diagnostics
 null_ls.setup({
 	update_in_insert = true,
 	sources = {
-		-- null_diag.shellcheck,
+		null_diag.shellcheck,
 		null_diag.markdownlint,
 		null_fmt.clang_format,
 		null_fmt.isort,
-		-- null_fmt.rustfmt,
 		null_fmt.shfmt,
 		null_fmt.stylua,
 		null_diag.hadolint,
 	},
-	-- on_attach = setup_keymaps,
 })
 
 return {
