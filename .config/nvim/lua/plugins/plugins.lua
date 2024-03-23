@@ -165,41 +165,12 @@ return {
 			require("fidget").setup()
 		end,
 	},
-	-- {
-	-- 	"kosayoda/nvim-lightbulb",
-	-- 	config = function()
-	-- 		require("nvim-lightbulb").setup({
-	-- 			autocmd = { enabled = true },
-	-- 			sign = {
-	-- 				enabled = true,
-	-- 				text = "♢",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
 	{
 		"folke/trouble.nvim",
 		config = function()
 			require("plugins.configs.trouble")
 		end,
 	},
-
-	-- debugger
-	-- {
-	-- 	"mfussenegger/nvim-dap",
-	-- 	init = function()
-	-- 		require("core.utils").load_mappings("dap")
-	-- 	end,
-	-- },
-	-- {
-	-- 	"leoluz/nvim-dap-go",
-	-- 	ft = "go",
-	-- 	dependencies = "mfussenegger/nvim-dap",
-	-- 	config = function(_, opts)
-	-- 		require("dap-go").setup(opts)
-	-- require("core.utils").load_mappings("dap_go")
-	-- 	end,
-	-- },
 
 	-- langs
 	{
@@ -222,31 +193,11 @@ return {
 		config = function()
 			require("plugins.configs.rusttools")
 		end,
-
-		opts = {
-			tools = {
-				inlay_hints = {
-					show_parameter_hints = false,
-					-- only_current_line = true,
-					parameter_hints_prefix = "",
-					other_hints_prefix = "",
-				},
-			},
-			server = {
-				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-						},
-						checkOnSave = {
-							command = "clippy",
-							extraArgs = { "--no-deps" },
-						},
-					},
-				},
-			},
-		},
 	},
+    {
+        'towolf/vim-helm',
+        ft = 'helm',
+    },
 
 	-- UI
 	{
@@ -341,7 +292,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = "nvim-dap",
+		dependencies = "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio",
 		opts = {},
 	},
 
@@ -418,8 +369,8 @@ return {
 				-- svn = false,
 				-- cvs = false,
 				-- ["."] = false,
-				go = true,
-				["*"] = false,
+				-- go = true,
+				["*"] = true,
 			},
 		},
 	},

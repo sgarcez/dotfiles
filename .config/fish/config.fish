@@ -12,11 +12,15 @@ set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
 set -gx EDITOR nvim
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --exclude vendor --color=always'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -gx FZF_DEFAULT_OPTS "--ansi"
+set -gx FZF_DEFAULT_OPTS '--ansi --color=bg:#2b303b,bg+:#2b303b,pointer:#ebcb8b'
+set -gx DOCKER_CLI_HINTS false
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
 source ~/.config/fish/aliases.fish
+if test -f ~/.config/fish/aliases-private.fish
+    source ~/.config/fish/aliases-private.fish
+end
 
 bash ~/.theme.sh
 
@@ -48,6 +52,12 @@ zoxide init fish | source
 
 # carapace --list | awk '{print $1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish # disable auto-loaded completions (#185)
 carapace _carapace | source
+
+if type -q op
+    op completion fish | source
+end
+
+direnv hook fish | source
 
 # No greeting when starting an interactive shell.
 function fish_greeting

@@ -9,3 +9,7 @@
 .local*
 .python-version
 cover.cov
+
+.envrc
+devbox.json
+devbox.lock
