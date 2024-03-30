@@ -19,13 +19,13 @@ mason_lspconfig.setup({
 
 mason_null_ls.setup({
     ensure_installed = {
-        "hadolint",             -- Dockerfile formatter
-        "stylua",               -- lua formatter
-        "shfmt",                -- shell formatter
-        "shellcheck",           -- shell linter
-        "terraform-ls",         -- terraform formatter
-        "helm-ls",              -- helm formatter
-        "yaml-language-server", -- yaml formatter
+        "hadolint",
+        "stylua",
+        "shfmt",
+        "shellcheck",
+        "terraform-ls",
+        "helm-ls",
+        "yaml-language-server",
     },
     automatic_installation = true,
 })

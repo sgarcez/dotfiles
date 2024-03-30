@@ -151,18 +151,20 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with({
 local null_ls = require("null-ls")
 local null_fmt = null_ls.builtins.formatting
 local null_diag = null_ls.builtins.diagnostics
--- local null_act = null_ls.builtins.code_actions
+local null_act = null_ls.builtins.code_actions
 
 null_ls.setup({
     update_in_insert = true,
     sources = {
-        null_diag.shellcheck,
         null_diag.markdownlint,
         null_fmt.clang_format,
         null_fmt.isort,
         null_fmt.shfmt,
         null_fmt.stylua,
         null_diag.hadolint,
+        null_act.gitsigns,
+        require("none-ls-shellcheck.diagnostics"),
+        require("none-ls-shellcheck.code_actions"),
     },
 })
 
