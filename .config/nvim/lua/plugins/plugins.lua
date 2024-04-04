@@ -14,45 +14,9 @@ return {
     },
     {
         "folke/flash.nvim",
-        opts = {
-            modes = {
-                char = {
-                    keys = { "f", "F", "t", "T" },
-                },
-                search = {
-                    enabled = false,
-                },
-            },
-        },
-        enabled = true,
         event = "VeryLazy",
-        keys = {
-            {
-                "m",
-                mode = { "o", "x" },
-                function()
-                    return require("flash.plugins.treesitter").jump()
-                end,
-            },
-            {
-                "s",
-                mode = { "n", "x", "o" },
-                function()
-                    return require("flash").jump()
-                end,
-            },
-            {
-                "gl",
-                mode = { "n", "x", "o" },
-                function()
-                    require("flash").jump({
-                        search = { mode = "search" },
-                        highlight = { label = { after = { 0, 0 } } },
-                        pattern = "^",
-                    })
-                end,
-            },
-        },
+        opts = require("plugins.configs.flash").opts,
+        keys = require("plugins.configs.flash").keys,
     },
     {
         -- auto enable and disable search highlighting
@@ -81,24 +45,13 @@ return {
         cmd = "Telescope",
     },
     {
-        "nvim-tree/nvim-tree.lua",
-        config = function()
-            require("plugins.configs.nvimtree")
-        end,
-    },
-    -- { "tpope/vim-vinegar" },
-    {
         "stevearc/oil.nvim",
-        config = function()
-            require("oil").setup({
-                view_options = {
-                    show_hidden = true,
-                }
-            })
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-        end,
+        opts = {
+            view_options = {
+                show_hidden = true,
+            },
+        },
     },
-
 
     -- treesitter
     {
@@ -117,13 +70,10 @@ return {
     {
         "Wansmer/treesj",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("treesj").setup({ --[[ your config ]]
-                use_default_keymaps = false,
-                max_join_length = 200,
-            })
-            vim.keymap.set("n", "<leader>m", require("treesj").toggle)
-        end,
+        opts = {
+            use_default_keymaps = false,
+            max_join_length = 200,
+        },
     },
 
     -- snippets
@@ -154,8 +104,7 @@ return {
     {
         "nvimtools/none-ls.nvim",
         config = function()
-            require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
-            require("null-ls").register(require("none-ls-shellcheck.code_actions"))
+            require("plugins.configs.none-ls")
         end,
         dependencies = {
             "gbprod/none-ls-shellcheck.nvim",
@@ -165,7 +114,6 @@ return {
     -- LSP / Diagnostics
     { "neovim/nvim-lsp" },
     { "neovim/nvim-lspconfig" },
-    { "folke/lsp-colors.nvim" },
     {
         "williamboman/mason.nvim",
         dependencies = {
@@ -179,42 +127,40 @@ return {
     },
     {
         "j-hui/fidget.nvim",
-        config = function()
-            require("fidget").setup()
-        end,
     },
     {
         "folke/trouble.nvim",
-        config = function()
-            require("plugins.configs.trouble")
-        end,
+        opts = {
+            mode = "document_diagnostics",
+            auto_open = false,
+            auto_close = true,
+            icons = false,
+        },
     },
 
     -- langs
     {
-        "ray-x/go.nvim",
+        "simrat39/rust-tools.nvim",
+        opts = require("plugins.configs.rusttools"),
+    },
+    {
+        "towolf/vim-helm",
+        ft = "helm",
+    },
+
+    -- Test runners
+    {
+        "nvim-neotest/neotest",
         dependencies = {
-            "ray-x/guihua.lua",
-            "mfussenegger/nvim-dap",
-            "theHamsta/nvim-dap-virtual-text",
-            "neovim/nvim-lspconfig",
+            "nvim-neotest/nvim-nio",
+            "nvim-lua/plenary.nvim",
+            "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
+            "nvim-neotest/neotest-go",
         },
         config = function()
-            require("plugins.configs.go")
+            require("plugins.configs.neotest")
         end,
-        event = { "CmdlineEnter" },
-        ft = { "go", "gomod" },
-    },
-    {
-        "simrat39/rust-tools.nvim",
-        config = function()
-            require("plugins.configs.rusttools")
-        end,
-    },
-    {
-        'towolf/vim-helm',
-        ft = 'helm',
     },
 
     -- UI
@@ -226,57 +172,10 @@ return {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
-        opts = {
-            lsp = {
-                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
-                },
-            },
-            routes = {
-                {
-                    filter = {
-                        event = "msg_show",
-                        any = {
-                            { find = "%d+L, %d+B" },
-                            { find = "; after #%d+" },
-                            { find = "; before #%d+" },
-                            { find = "fewer lines" },
-                        },
-                    },
-                    view = "mini",
-                },
-            },
-            -- you can enable a preset for easier configuration
-            presets = {
-                bottom_search = false, -- use a classic bottom cmdline for search
-                command_palette = true, -- position the cmdline and popupmenu togetherw
-                long_message_to_split = true, -- long messages will be sent to a split
-                inc_rename = true, -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = true, -- add a border to hover docs and signature help
-            },
-            -- unicode icons
-            cmdline = {
-                format = {
-                    cmdline = { icon = ">" },
-                    search_down = { icon = "⌄" },
-                    search_up = { icon = "⌃" },
-                    filter = { icon = "$" },
-                    lua = { icon = "☾" },
-                    help = { icon = "?" },
-                },
-            },
-        },
+        opts = require("plugins.configs.noice"),
     },
-
     {
         "folke/zen-mode.nvim",
-        opts = {},
-        config = function()
-            vim.keymap.set("n", "<Leader>z", ":ZenMode<CR>")
-        end,
     },
     {
         "rcarriga/nvim-notify",
@@ -291,23 +190,22 @@ return {
     -- debugger
     {
         "mfussenegger/nvim-dap",
-        dependencies = "jbyuki/one-small-step-for-vimkind",
+        dependencies = {
+            "jbyuki/one-small-step-for-vimkind",
+            "theHamsta/nvim-dap-virtual-text",
+            "nvim-neotest/nvim-nio",
+            "rcarriga/nvim-dap-ui",
+        },
         cmd = { "BreakpointToggle", "Debug", "DapREPL" },
-    },
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = "mfussenegger/nvim-dap",
-        "nvim-neotest/nvim-nio",
-        opts = {},
+        config = function()
+            require("plugins.configs.dap")
+        end,
     },
 
     -- winbar
     {
         "b0o/incline.nvim",
         event = "BufReadPre",
-        config = function()
-            require("incline").setup()
-        end,
     },
 
     -- comments
@@ -322,28 +220,19 @@ return {
     { "junegunn/vim-peekaboo" },
     {
         "nvim-lualine/lualine.nvim",
-        config = function()
-            require("plugins.configs.lualine")
-        end,
+        opts = require("plugins.configs.lualine"),
     },
 
     -- git
     {
         "kdheepak/lazygit.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        config = function()
-            vim.keymap.set("n", "<Leader>ii", ":LazyGit<CR>")
-        end,
+        dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
         "lewis6991/gitsigns.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
         event = "BufRead",
-        config = function()
-            require("plugins.configs.gitsigns")
-        end,
+        opts = require("plugins.configs.gitsigns"),
     },
     { "rhysd/conflict-marker.vim" },
 
@@ -351,22 +240,6 @@ return {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",
-        opts = {
-            suggestion = {
-                enabled = true,
-                auto_trigger = true,
-                keymap = {
-                    accept = "<S-Tab>",
-                    -- accept_line = "<M-l>",
-                    -- accept_word = "<M-k>",
-                    next = "<M-]>",
-                    prev = "<M-[>",
-                    dismiss = "<C-]>",
-                },
-            },
-            filetypes = {
-                ["*"] = true,
-            },
-        },
+        opts = require("plugins.configs.copilot"),
     },
 }

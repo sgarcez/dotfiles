@@ -1,6 +1,4 @@
-local rt = require("rust-tools")
-
-local opts = {
+return {
 	tools = {
 		inlay_hints = {
 			show_parameter_hints = false,
@@ -23,5 +21,3 @@ local opts = {
 		},
 	},
 }
-
-rt.setup(opts)

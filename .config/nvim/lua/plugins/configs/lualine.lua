@@ -1,6 +1,5 @@
-local lualine = require("lualine")
 
-lualine.setup({
+return {
 	options = {
 		icons_enabled = false,
 		-- theme = 'OceanicNext',
@@ -37,4 +36,4 @@ lualine.setup({
 	},
 	tabline = {},
 	extensions = {},
-})
+}

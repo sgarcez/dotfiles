@@ -6,7 +6,7 @@ devbox global shellenv --init-hook | source
 
 set -x GPG_TTY (tty)
 
-set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
+set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin ~/.local/share/nvim/mason/bin $PATH
 set -gx GO_PATH $HOME/go/
 set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
 set -gx EDITOR nvim

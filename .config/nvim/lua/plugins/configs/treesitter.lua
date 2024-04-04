@@ -1,42 +1,14 @@
-local treesitter = require("nvim-treesitter.configs")
-
--- configure treesitter
-treesitter.setup({
-    -- enable syntax highlighting
+require'nvim-treesitter.configs'.setup({
+    auto_install = true,
     highlight = {
         enable = true,
-        disable = { "dockerfile" },
+        additional_vim_regex_highlighting = false,
+        disable = {
+            "dockerfile",
+        },
     },
-    -- enable indentation
-    indent = { enable = true },
-    -- enable autotagging (w/ nvim-ts-autotag plugin)
-    autotag = { enable = true },
-    -- ensure these language parsers are installed
-    ensure_installed = {
-        "go",
-        "rust",
-        "python",
-        "json",
-        "yaml",
-        "html",
-        "css",
-        "markdown",
-        "markdown_inline",
-        "bash",
-        "lua",
-        "vim",
-        "dockerfile",
-        "gitignore",
-        "regex",
-    },
-    -- auto install above language parsers
-    auto_install = true,
-})
-
-require("nvim-treesitter.configs").setup({
-    auto_install = true,
-    highlight = { enable = true },
     indent = { enable = false },
+    autotag = { enable = true },
     refactor = {
         smart_rename = { enable = true, keymaps = { smart_rename = "grr" } },
         highlight_definitions = { enable = true },

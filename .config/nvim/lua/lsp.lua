@@ -1,56 +1,87 @@
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
     vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    if client.name == "gopls" then
+        local augroup = vim.api.nvim_create_augroup("LspOrganizeImports", {})
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                local params = vim.lsp.util.make_range_params()
+                params.context = { only = { "source.organizeImports" } }
+                local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+                for cid, res in pairs(result or {}) do
+                    for _, r in pairs(res.result or {}) do
+                        if r.edit then
+                            local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                            vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                        end
+                    end
+                end
+                vim.lsp.buf.format({ async = false })
+            end,
+        })
+    else
+        if client.supports_method("textDocument/formatting") then
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format()
+                end,
+            })
+        end
+    end
 end
 
 -- local capabilities = lspconfig.capabilities
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- using go.nvim
--- lspconfig.gopls.setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	cmd = { "gopls" },
--- 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
--- 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
--- 	settings = {
--- 		gopls = {
--- 			hints = {
--- 				assignVariableTypes = false,
--- 				compositeLiteralFields = false,
--- 				compositeLiteralTypes = false,
--- 				constantValues = false,
--- 				functionTypeParameters = true,
--- 				parameterNames = false,
--- 				rangeVariableTypes = false,
--- 			},
--- 			completeUnimported = true,
--- 			usePlaceholders = true,
--- 			buildFlags = { "-tags=integration,dbintegration" },
--- 			["local"] = "", -- sadly disable separate local import group.
--- 			analyses = {
--- 				ST1003 = false,
--- 				fieldalignment = false,
--- 				unusedparams = false,
--- 				shadow = false,
--- 			},
--- 		},
--- 	},
--- })
-
--- lspconfig["rust-analyzer"].setup({
--- 	capabilities = capabilities,
--- 	cargo = {
--- 		allFeatures = true,
--- 	},
--- 	checkOnSave = {
--- 		command = "clippy",
--- 		extraArgs = { "--no-deps" },
--- 	},
--- })
+lspconfig.gopls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    settings = {
+        gopls = {
+            hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            },
+            completeUnimported = true,
+            usePlaceholders = true,
+            buildFlags = { "-tags=integration,dbintegration" },
+            gofumpt = false,
+            ["local"] = "", -- sadly disable separate local import group.
+            analyses = {
+                ST1003 = false,
+                fieldalignment = false,
+                unusedparams = false,
+                shadow = false,
+            },
+            codelenses = {
+                gc_details = true,
+                generate = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+            },
+        },
+    },
+})
 
 lspconfig.lua_ls.setup({
     capabilities = capabilities,
@@ -76,16 +107,16 @@ lspconfig.helm_ls.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
-        ['helm-ls'] = {
+        ["helm-ls"] = {
             yamlls = {
                 path = "yaml-language-server",
-            }
-        }
-    }
+            },
+        },
+    },
 })
-lspconfig.yamlls.setup {}
 
--- terraform
+lspconfig.yamlls.setup({})
+
 lspconfig.terraformls.setup({})
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -128,7 +159,7 @@ vim.diagnostic.config({
 -- handlers
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     update_in_insert = false,
     underline = true,
@@ -144,28 +175,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with({
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with({
     vim.lsp.handlers.hover,
     { border = "rounded" },
-})
-
--- null-ls setup
-
-local null_ls = require("null-ls")
-local null_fmt = null_ls.builtins.formatting
-local null_diag = null_ls.builtins.diagnostics
-local null_act = null_ls.builtins.code_actions
-
-null_ls.setup({
-    update_in_insert = true,
-    sources = {
-        null_diag.markdownlint,
-        null_fmt.clang_format,
-        null_fmt.isort,
-        null_fmt.shfmt,
-        null_fmt.stylua,
-        null_diag.hadolint,
-        null_act.gitsigns,
-        require("none-ls-shellcheck.diagnostics"),
-        require("none-ls-shellcheck.code_actions"),
-    },
 })
 
 return {
