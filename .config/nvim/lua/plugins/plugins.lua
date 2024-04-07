@@ -83,6 +83,8 @@ return {
     -- completions
     {
         "hrsh7th/nvim-cmp",
+        event = { "InsertEnter", "CmdLineEnter" },
+        -- event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
@@ -99,7 +101,6 @@ return {
         config = function()
             require("plugins.configs.cmp")
         end,
-        event = "InsertEnter",
     },
     {
         "nvimtools/none-ls.nvim",
@@ -206,6 +207,9 @@ return {
     {
         "b0o/incline.nvim",
         event = "BufReadPre",
+        config = function()
+            require('incline').setup()
+        end,
     },
 
     -- comments

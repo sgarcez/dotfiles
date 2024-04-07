@@ -1,4 +1,3 @@
-
 return {
 	options = {
 		icons_enabled = false,

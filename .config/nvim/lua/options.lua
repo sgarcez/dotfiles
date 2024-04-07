@@ -61,6 +61,3 @@ opt.termguicolors = true
 opt.background = "dark"
 opt.synmaxcol = 300
 cmd("filetype plugin indent on")
-cmd("syntax reset")
--- cmd("syntax on")
-cmd("colorscheme sg")

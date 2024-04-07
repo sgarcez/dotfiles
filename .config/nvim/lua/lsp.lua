@@ -62,7 +62,7 @@ lspconfig.gopls.setup({
             },
             completeUnimported = true,
             usePlaceholders = true,
-            buildFlags = { "-tags=integration,dbintegration" },
+            buildFlags = { "-tags=integration,dbintegration,vpn_integration" },
             gofumpt = false,
             ["local"] = "", -- sadly disable separate local import group.
             analyses = {
@@ -159,7 +159,7 @@ vim.diagnostic.config({
 -- handlers
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
+    virtual_text = false,
     signs = true,
     update_in_insert = false,
     underline = true,

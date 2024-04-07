@@ -74,16 +74,6 @@ cmp.setup({
 
     formatting = {
         fields = { "menu", "abbr", "kind" },
-        -- format = function(entry, item)
-        --     local menu_icon = {
-        --         nvim_lsp = 'λ',
-        --         vsnip = '⋗',
-        --         buffer = 'Ω',
-        --         -- path = '🖫',
-        --     }
-        --     item.menu = menu_icon[entry.source.name]
-        --     return item
-        -- end,
     },
 })
 
@@ -92,7 +82,16 @@ cmp.setup.cmdline("/", {
     sources = { { name = "nvim_lsp_document_symbol" }, { name = "buffer" } },
 })
 
-cmp.setup.cmdline(":", {
+cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
+    })
 })
