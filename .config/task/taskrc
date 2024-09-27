@@ -1,0 +1,6 @@
+data.location=$XDG_DATA_HOME/task/
+hooks.location=$XDG_CONFIG_HOME/task/hooks/
+
+include solarized-dark-256.theme
+
+uda.taskwarrior-tui.task-report.show-info=true */

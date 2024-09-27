@@ -1,5 +1,1 @@
-data.location=~/.task
-
-include solarized-dark-256.theme
-
-uda.taskwarrior-tui.task-report.show-info=true */
+news.version=2.6.0
