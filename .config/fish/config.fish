@@ -2,6 +2,7 @@ if not status is-interactive
     exit
 end
 
+set -gx NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 devbox global shellenv --init-hook | source
 
 set -x GPG_TTY (tty)
