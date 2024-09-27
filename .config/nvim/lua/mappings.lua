@@ -5,7 +5,7 @@ vim.keymap.set("t", "<leader><Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<BS>", "<c-^>")
 
-vim.keymap.set("n", "<Leader>w", "<Esc>:w<CR>")
+vim.keymap.set("n", "<Leader>w", "<Esc>:w<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", "<Esc>:q<CR>")
 vim.keymap.set("n", "Q", "<Esc>:qa<CR>")
 
@@ -70,7 +70,7 @@ vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
 -- vim.keymap.set("n", "<Leader>ld", ":Telescope diagnostics bufnr=0 <CR>")
 
 -- trouble
-vim.keymap.set("n", "<Leader>lt", "<cmd>TroubleToggle<CR>")
+-- vim.keymap.set("n", "<Leader>lt", "<cmd>TroubleToggle<CR>")
 
 -- neotest
 vim.keymap.set("n", "<Leader>tr", ":lua require'neotest'.run.run()<CR>")

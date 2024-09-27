@@ -1,44 +1,68 @@
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-local on_attach = function(client, bufnr)
-    vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+local on_attach = nil
 
-    if client.name == "gopls" then
-        local augroup = vim.api.nvim_create_augroup("LspOrganizeImports", {})
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                local params = vim.lsp.util.make_range_params()
-                params.context = { only = { "source.organizeImports" } }
-                local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-                for cid, res in pairs(result or {}) do
-                    for _, r in pairs(res.result or {}) do
-                        if r.edit then
-                            local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-                            vim.lsp.util.apply_workspace_edit(r.edit, enc)
-                        end
-                    end
+-- local on_attach = function(client, bufnr)
+--     vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+--     if client.name == "gopls" then
+--         local augroup = vim.api.nvim_create_augroup("LspOrganizeImports", {})
+--         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+--         vim.api.nvim_create_autocmd("BufWritePre", {
+--             group = augroup,
+--             buffer = bufnr,
+--             callback = function()
+--                 local params = vim.lsp.util.make_range_params()
+--                 params.context = { only = { "source.organizeImports" } }
+--                 local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+--                 for cid, res in pairs(result or {}) do
+--                     for _, r in pairs(res.result or {}) do
+--                         if r.edit then
+--                             local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+--                             vim.lsp.util.apply_workspace_edit(r.edit, enc)
+--                         end
+--                     end
+--                 end
+--                 vim.lsp.buf.format({ async = false })
+--             end,
+--         })
+--     else
+--         if client.supports_method("textDocument/formatting") then
+--             local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+--             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+--             vim.api.nvim_create_autocmd("BufWritePre", {
+--                 group = augroup,
+--                 buffer = bufnr,
+--                 callback = function()
+--                     vim.lsp.buf.format()
+--                 end,
+--             })
+--         end
+--     end
+-- end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+        local params = vim.lsp.util.make_range_params()
+        params.context = { only = { "source.organizeImports" } }
+        -- buf_request_sync defaults to a 1000ms timeout. Depending on your
+        -- machine and codebase, you may want longer. Add an additional
+        -- argument after params if you find that you have to write the file
+        -- twice for changes to be saved.
+        -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+        local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+        for cid, res in pairs(result or {}) do
+            for _, r in pairs(res.result or {}) do
+                if r.edit then
+                    local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                    vim.lsp.util.apply_workspace_edit(r.edit, enc)
                 end
-                vim.lsp.buf.format({ async = false })
-            end,
-        })
-    else
-        if client.supports_method("textDocument/formatting") then
-            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    vim.lsp.buf.format()
-                end,
-            })
+            end
         end
-    end
-end
+        vim.lsp.buf.format({ async = false })
+    end,
+})
 
 -- local capabilities = lspconfig.capabilities
 -- used to enable autocompletion (assign to every lsp server config)
@@ -128,26 +152,21 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- diagnostics
 
-local sign_define = vim.fn.sign_define
-sign_define("DiagnosticSignError", { text = "", numhl = "RedSign" })
-sign_define("DiagnosticSignWarn", { text = "", numhl = "YellowSign" })
-sign_define("DiagnosticSignInfo", { text = "", numhl = "WhiteSign" })
-sign_define("DiagnosticSignHint", { text = "", numhl = "BlueSign" })
-
 vim.diagnostic.config({
     signs = true,
     update_in_insert = true,
     underline = true,
     severity_sort = true,
     virtual_lines = { only_current_line = true },
-    virtual_text = {
-        spacing = 4,
-        source = "always",
-        prefix = "∎",
-    },
+    virtual_text = false,
+    -- virtual_text = {
+    -- 	spacing = 4,
+    -- 	source = "always",
+    -- 	prefix = "∎",
+    -- },
     float = {
         border = "rounded",
-        source = "always",
+        source = true,
         header = "",
         prefix = "",
         scope = "cursor",
@@ -165,17 +184,19 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
     underline = true,
 })
 
--- vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with({
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signatureHelp,
-    { border = "rounded" },
-})
+    { border = "rounded" }
+)
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with({
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover,
-    { border = "rounded" },
-})
+    { border = "rounded" }
+)
+
+require("lspconfig.ui.windows").default_options = {
+    border = "rounded",
+}
 
 return {
     capabilities = capabilities,
