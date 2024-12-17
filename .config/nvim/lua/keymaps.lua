@@ -53,11 +53,15 @@ vim.keymap.set("n", "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts
 vim.keymap.set("n", "<Leader>lce", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
 vim.keymap.set("n", "<Leader>lcr", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
+-- toggle inlay hints
+-- vim.keymap.set("n", "<Leader>lh", "<cmd>lua vim.lsp.buf_inlay_hints()<CR>", opts)
+
 -- telescope
 vim.keymap.set("n", "<Leader><Leader>", ":Telescope find_files<CR>")
+vim.keymap.set("n", "<Leader>r", ":Telescope resume<CR>")
 vim.keymap.set("n", "<Leader>b", ":Telescope buffers<CR>")
-vim.keymap.set("n", "<Leader>f", ":Telescope grep_string<CR>")
-vim.keymap.set("n", "<Leader>r", ":Telescope live_grep<CR>")
+vim.keymap.set("n", "<Leader>sf", ":Telescope grep_string<CR>")
+vim.keymap.set("n", "<Leader>ss", ":Telescope live_grep<CR>")
 
 -- telescope lsp
 vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
@@ -74,10 +78,14 @@ vim.keymap.set("n", "<Leader>ld", ":Telescope lsp_definitions<CR>")
 
 -- neotest
 vim.keymap.set("n", "<Leader>tr", ":lua require'neotest'.run.run()<CR>")
-vim.keymap.set("n", "<Leader>tf", ":lua require'neotest.run.run(vim.fn.expand('%'))'<CR>")
-vim.keymap.set("n", "<Leader>ta", ":lua require'neotest.run.attach()'<CR>")
-vim.keymap.set("n", "<Leader>to", ":lua require'neotest.output.open()'<CR>")
-vim.keymap.set("n", "<Leader>ts", ":lua require'neotest.summary()'<CR>")
+vim.keymap.set("n", "<Leader>tf", ":lua require'neotest'.run.run(vim.fn.expand('%'))<CR>")
+vim.keymap.set("n", "<Leader>td", ":lua require'neotest'.run.run({vim.fn.expand('%'), strategy = 'dap'})<CR>")
+vim.keymap.set("n", "<Leader>ta", ":lua require'neotest'.run.attach()<CR>")
+vim.keymap.set("n", "<Leader>to", ":lua require'neotest'.output_panel.toggle()<CR>")
+-- converage
+vim.keymap.set("n", "<Leader>tcl", ":lua require'coverage'.load()<CR>")
+vim.keymap.set("n", "<Leader>tct", ":lua require'coverage'.toggle()<CR>")
+vim.keymap.set("n", "<Leader>tcs", ":lua require'coverage'.summary()<CR>")
 
 -- dap
 vim.keymap.set("n", "<Leader>dt", ":lua require'dap'.toggle_breakpoint()<CR>")

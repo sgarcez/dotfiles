@@ -115,8 +115,13 @@ return {
     },
 
     -- LSP / Diagnostics
-    { "neovim/nvim-lsp" },
-    { "neovim/nvim-lspconfig" },
+    {
+        "neovim/nvim-lspconfig",
+        event = "VimEnter",
+        config = function()
+            require("plugins.configs.lsp")
+        end,
+    },
     {
         "williamboman/mason.nvim",
         dependencies = {
@@ -129,6 +134,7 @@ return {
         end,
     },
     {
+        -- lsp progress notifications
         "j-hui/fidget.nvim",
     },
     {
@@ -199,10 +205,29 @@ return {
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "nvim-neotest/neotest-go",
+            {
+                "fredrikaverpil/neotest-golang",
+                version = "*",
+                dependencies = {
+                    "leoluz/nvim-dap-go",
+                },
+            },
         },
         config = function()
             require("plugins.configs.neotest")
         end,
+    },
+
+    {
+        "andythigpen/nvim-coverage",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("coverage").setup()
+        end,
+        opts = {
+            commands = true, -- create commands
+            auto_reload = true, -- reload on file change
+        },
     },
 
     -- UI

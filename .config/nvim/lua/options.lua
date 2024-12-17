@@ -1,10 +1,4 @@
-local cmd = vim.cmd
 local opt = vim.opt
-
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_node_provider = 0
 
 vim.g.mapleader = ";"
 
@@ -43,15 +37,13 @@ opt.wildmode = { "longest", "full" }
 opt.wildmenu = true -- wildmenu, auto complete for commands
 -- mouse
 opt.mouse = "nivh"
-cmd("set mousehide") -- hide mouse when characters are typed
 -- scroll
 opt.startofline = false
 opt.timeoutlen = 500
 opt.grepprg = "rg --smart-case --color=never --no-heading -H -n --column"
 opt.scrolloff = 999
 -- clipboard
-cmd("set clipboard=unnamed")     -- sets the default copy register to be *
-cmd("set clipboard=unnamedplus") --  sets the default copy register to be +
+vim.opt.clipboard = "unnamed"
 -- folding
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
@@ -60,4 +52,14 @@ vim.wo.foldenable = false
 opt.termguicolors = true
 opt.background = "dark"
 opt.synmaxcol = 300
-cmd("filetype plugin indent on")
+
+opt.fillchars = {
+    horiz     = '━',
+    horizup   = '┻',
+    horizdown = '┳',
+    vert      = '┃',
+    vertleft  = '┫',
+    vertright = '┣',
+    verthoriz = '╋',
+    diff      = '╱',
+}

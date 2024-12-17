@@ -12,6 +12,9 @@ mason_lspconfig.setup({
     ensure_installed = {
         "gopls",
         "lua_ls",
+        "golangci_lint_ls",
+        "yamlls",
+        "rust_analyzer",
     },
     -- auto-install configured servers (with lspconfig)
     -- automatic_installation = true, -- not the same as ensure_installed
@@ -34,6 +37,7 @@ mason_null_ls.setup({
         "gitlint",
         "gofumpt",
         "goimports",
+        "gotestsum",
         "delve",
     },
     automatic_installation = true,
