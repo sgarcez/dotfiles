@@ -172,93 +172,17 @@ return {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "nvim-neotest/neotest-go",
+            { "fredrikaverpil/neotest-golang", version = "*" },
         },
-        config = function()
-            require("plugins.configs.neotest")
-        end,
-        keys = {
-            {
-                "<leader>tr",
-                mode = { "n" },
-                function()
-                    return require("neotest").run.run()
-                end,
-                desc = "Run tests",
-            },
-            {
-                "<leader>tf",
-                mode = { "n" },
-                function()
-                    return require("neotest").run.run(vim.fn.expand("%"))
-                end,
-                desc = "Run tests in file",
-            },
-            {
-                "<leader>td",
-                mode = { "n" },
-                function()
-                    return require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
-                end,
-                desc = "Run tests in file with dap",
-            },
-            {
-                "<leader>ta",
-                mode = { "n" },
-                function()
-                    return require("neotest").run.attach()
-                end,
-                desc = "Attach to test runner",
-            },
-            {
-                "<leader>to",
-                mode = { "n" },
-                function()
-                    return require("neotest").output_panel.toggle()
-                end,
-                desc = "Toggle output panel",
-            },
-        },
+        config = require("plugins.configs.neotest").config,
+        keys = require("plugins.configs.neotest").keys,
     },
 
     {
         "andythigpen/nvim-coverage",
         requires = "nvim-lua/plenary.nvim",
-        config = function()
-            require("coverage").setup({
-                auto_reload = true,
-            })
-        end,
-        opts = {
-            commands = true, -- create commands
-            auto_reload = true, -- reload on file change
-        },
-        keys = {
-            {
-                "<leader>tcl",
-                mode = { "n" },
-                function()
-                    return require("coverage").load()
-                end,
-                desc = "Load coverage",
-            },
-            {
-                "<leader>tct",
-                mode = { "n" },
-                function()
-                    return require("coverage").toggle()
-                end,
-                desc = "Toggle coverage",
-            },
-            {
-                "<leader>tcs",
-                mode = { "n" },
-                function()
-                    return require("coverage").summary()
-                end,
-                desc = "Show coverage summary",
-            },
-        },
+        opts = require("plugins.configs.coverage").opts,
+        keys = require("plugins.configs.coverage").keys,
     },
 
     -- UI
@@ -285,64 +209,7 @@ return {
         config = function()
             require("plugins.configs.dap")
         end,
-        keys = {
-            {
-                "<leader>dt",
-                mode = { "n" },
-                function()
-                    return require("dap").toggle_breakpoint()
-                end,
-                desc = "Toggle breakpoint",
-            },
-            {
-                "<leader>dr",
-                mode = { "n" },
-                function()
-                    return require("dap").repl.toggle()
-                end,
-                desc = "Toggle REPL",
-            },
-            {
-                "<leader>dc",
-                mode = { "n" },
-                function()
-                    return require("dap").continue()
-                end,
-                desc = "Continue",
-            },
-            {
-                "<leader>ds",
-                mode = { "n" },
-                function()
-                    return require("dap").step_over()
-                end,
-                desc = "Step over",
-            },
-            {
-                "<leader>di",
-                mode = { "n" },
-                function()
-                    return require("dap").step_into()
-                end,
-                desc = "Step into",
-            },
-            {
-                "<leader>do",
-                mode = { "n" },
-                function()
-                    return require("dap").step_out()
-                end,
-                desc = "Step out",
-            },
-            {
-                "<leader>dut",
-                mode = { "n" },
-                function()
-                    return require("dapui").toggle()
-                end,
-                desc = "Toggle UI",
-            },
-        },
+        keys = require("plugins.configs.dap_keymaps"),
     },
 
     -- comments

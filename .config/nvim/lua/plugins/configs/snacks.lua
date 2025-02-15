@@ -24,7 +24,7 @@ return {
 				},
 			},
 		},
-		scroll = { enabled = false },
+		scroll = { enabled = true },
 		statuscolumn = { enabled = false },
 		zen = { enabled = false },
 		scratch = { enabled = true },
