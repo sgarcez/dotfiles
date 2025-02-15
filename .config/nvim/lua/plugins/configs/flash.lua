@@ -13,9 +13,7 @@ return {
 		{
 			"gs",
 			mode = { "n", "x", "o" },
-			function()
-				return require("flash").jump()
-			end,
+			function() return require("flash").jump() end,
 		},
 		{
 			"gl",

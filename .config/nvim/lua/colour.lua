@@ -422,11 +422,11 @@ local highlights = {
 	NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
 	NoiceCmdlineIconSearch = { link = "Title" },
 	NoiceCmdlineIcon = { link = "Title" },
-    NoiceVirtualText = { fg = c.midLightGrey },
+	NoiceVirtualText = { fg = c.midLightGrey },
 
-    -- Coverage
-    CoverageCovered = { fg = c.oliveGreen },
-    CoverageUncovered = { fg = c.red },
+	-- Coverage
+	CoverageCovered = { fg = c.oliveGreen },
+	CoverageUncovered = { fg = c.red },
 }
 
 return {
