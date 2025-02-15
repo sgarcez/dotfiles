@@ -14,6 +14,13 @@ return {
         end,
     },
     {
+        -- uses virtual text and gutter signs to show available motions
+        "tris203/precognition.nvim",
+        opts = {
+            startVisible = false,
+        },
+    },
+    {
         "folke/flash.nvim",
         event = "VeryLazy",
         opts = require("plugins.configs.flash").opts,
@@ -28,29 +35,19 @@ return {
     -- navigation
     { "christoomey/vim-tmux-navigator" },
     {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        dependencies = {
-            "nvim-lua/popup.nvim",
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-            },
-            "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-ui-select.nvim",
-            "crispgm/telescope-heading.nvim",
-        },
-        config = function()
-            require("plugins.configs.telescope")
-        end,
-        cmd = "Telescope",
-    },
-    {
         "stevearc/oil.nvim",
         opts = {
             view_options = {
                 show_hidden = true,
+            },
+        },
+        keys = {
+            {
+                "-",
+                mode = { "n" },
+                function()
+                    return vim.cmd("Oil")
+                end,
             },
         },
     },
@@ -76,6 +73,15 @@ return {
             use_default_keymaps = false,
             max_join_length = 200,
         },
+        keys = {
+            {
+                "<leader>m",
+                mode = { "n" },
+                function()
+                    return require("treesj").toggle()
+                end,
+            },
+        },
     },
 
     -- snippets
@@ -84,25 +90,19 @@ return {
 
     -- completions
     {
-        "hrsh7th/nvim-cmp",
-        event = { "InsertEnter", "CmdLineEnter" },
-        -- event = "InsertEnter",
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = require("plugins.configs.copilot"),
+    },
+    {
+        "saghen/blink.cmp",
+        version = "*",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-calc",
-            "hrsh7th/cmp-emoji",
-            "hrsh7th/cmp-nvim-lsp-document-symbol",
-            "saadparwaiz1/cmp_luasnip",
-            "doxnit/cmp-luasnip-choice",
+            "giuxtaposition/blink-cmp-copilot",
         },
-        config = function()
-            require("plugins.configs.cmp")
-        end,
+        opts = require("plugins.configs.blink-cmp").opts,
+        opts_extend = { "sources.default" },
     },
     {
         "nvimtools/none-ls.nvim",
@@ -134,51 +134,18 @@ return {
         end,
     },
     {
+        "b0o/schemastore.nvim",
+    },
+    {
         -- lsp progress notifications
         "j-hui/fidget.nvim",
+        opts = {},
     },
     {
         "folke/trouble.nvim",
-        opts = {
-            -- mode = "document_diagnostics",
-            -- auto_open = false,
-            -- auto_close = true,
-            -- icons = false,
-            -- use_diagnostic_signs = true,
-        },
         cmd = "Trouble",
-        keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
-            },
-            {
-                "<leader>cl",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
-            },
-        },
+        opts = require("plugins.configs.trouble").opts,
+        keys = require("plugins.configs.trouble").keys,
     },
 
     -- langs
@@ -196,6 +163,7 @@ return {
         "stevearc/overseer.nvim",
         opts = {},
     },
+
     -- Test runners
     {
         "nvim-neotest/neotest",
@@ -205,53 +173,103 @@ return {
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "nvim-neotest/neotest-go",
-            {
-                "fredrikaverpil/neotest-golang",
-                version = "*",
-                dependencies = {
-                    "leoluz/nvim-dap-go",
-                },
-            },
         },
         config = function()
             require("plugins.configs.neotest")
         end,
+        keys = {
+            {
+                "<leader>tr",
+                mode = { "n" },
+                function()
+                    return require("neotest").run.run()
+                end,
+                desc = "Run tests",
+            },
+            {
+                "<leader>tf",
+                mode = { "n" },
+                function()
+                    return require("neotest").run.run(vim.fn.expand("%"))
+                end,
+                desc = "Run tests in file",
+            },
+            {
+                "<leader>td",
+                mode = { "n" },
+                function()
+                    return require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
+                end,
+                desc = "Run tests in file with dap",
+            },
+            {
+                "<leader>ta",
+                mode = { "n" },
+                function()
+                    return require("neotest").run.attach()
+                end,
+                desc = "Attach to test runner",
+            },
+            {
+                "<leader>to",
+                mode = { "n" },
+                function()
+                    return require("neotest").output_panel.toggle()
+                end,
+                desc = "Toggle output panel",
+            },
+        },
     },
 
     {
         "andythigpen/nvim-coverage",
         requires = "nvim-lua/plenary.nvim",
         config = function()
-            require("coverage").setup()
+            require("coverage").setup({
+                auto_reload = true,
+            })
         end,
         opts = {
             commands = true, -- create commands
             auto_reload = true, -- reload on file change
         },
+        keys = {
+            {
+                "<leader>tcl",
+                mode = { "n" },
+                function()
+                    return require("coverage").load()
+                end,
+                desc = "Load coverage",
+            },
+            {
+                "<leader>tct",
+                mode = { "n" },
+                function()
+                    return require("coverage").toggle()
+                end,
+                desc = "Toggle coverage",
+            },
+            {
+                "<leader>tcs",
+                mode = { "n" },
+                function()
+                    return require("coverage").summary()
+                end,
+                desc = "Show coverage summary",
+            },
+        },
     },
 
     -- UI
     {
-        -- hover UI for messages, cmdline and the popupmenu
+        -- hover UI for cmdline, popupmenu, lsp hover
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
         },
         opts = require("plugins.configs.noice"),
-    },
-    {
-        "folke/zen-mode.nvim",
-    },
-    {
-        "rcarriga/nvim-notify",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-    },
-    {
-        -- better quickfix with previews
-        "kevinhwang91/nvim-bqf",
-        ft = "qf",
     },
 
     -- debugger
@@ -267,15 +285,64 @@ return {
         config = function()
             require("plugins.configs.dap")
         end,
-    },
-
-    -- floating statuslines
-    {
-        "b0o/incline.nvim",
-        event = "BufReadPre",
-        config = function()
-            require("incline").setup()
-        end,
+        keys = {
+            {
+                "<leader>dt",
+                mode = { "n" },
+                function()
+                    return require("dap").toggle_breakpoint()
+                end,
+                desc = "Toggle breakpoint",
+            },
+            {
+                "<leader>dr",
+                mode = { "n" },
+                function()
+                    return require("dap").repl.toggle()
+                end,
+                desc = "Toggle REPL",
+            },
+            {
+                "<leader>dc",
+                mode = { "n" },
+                function()
+                    return require("dap").continue()
+                end,
+                desc = "Continue",
+            },
+            {
+                "<leader>ds",
+                mode = { "n" },
+                function()
+                    return require("dap").step_over()
+                end,
+                desc = "Step over",
+            },
+            {
+                "<leader>di",
+                mode = { "n" },
+                function()
+                    return require("dap").step_into()
+                end,
+                desc = "Step into",
+            },
+            {
+                "<leader>do",
+                mode = { "n" },
+                function()
+                    return require("dap").step_out()
+                end,
+                desc = "Step out",
+            },
+            {
+                "<leader>dut",
+                mode = { "n" },
+                function()
+                    return require("dapui").toggle()
+                end,
+                desc = "Toggle UI",
+            },
+        },
     },
 
     -- comments
@@ -300,28 +367,25 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
         event = "BufRead",
         opts = require("plugins.configs.gitsigns"),
     },
     { "rhysd/conflict-marker.vim" },
 
-    {
-        "almo7aya/openingh.nvim",
-    },
-
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        opts = require("plugins.configs.copilot"),
-    },
-
     -- misc
+    -- colour highlighter
     {
         "norcalli/nvim-colorizer.lua",
         opts = {
             "lua",
         },
+    },
+
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = require("plugins.configs.snacks").opts,
+        keys = require("plugins.configs.snacks").keys,
     },
 }

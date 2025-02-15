@@ -1,4 +1,5 @@
 return {
+    trouble = true,
 	signs = {
 		add = { text = "│" },
 		change = { text = "│" },

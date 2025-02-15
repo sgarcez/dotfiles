@@ -1,21 +1,21 @@
 local lspconfig = require("lspconfig")
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local capabilities = cmp_nvim_lsp.default_capabilities()
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 vim.api.nvim_create_augroup("autoformat_on_save", { clear = true })
 
 local on_attach_autofmt = function(client, bufnr)
-    -- autoformat on save
-    if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = "autoformat_on_save", buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = "autoformat_on_save",
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format()
-            end,
-        })
-    end
+    -- if client.supports_method("textDocument/formatting") then
+    --     vim.api.nvim_clear_autocmds({ group = "autoformat_on_save", buffer = bufnr })
+    --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --         group = "autoformat_on_save",
+    --         buffer = bufnr,
+    --         callback = function()
+    --             vim.lsp.buf.format()
+    --         end,
+    --     })
+    -- end
 
     if client.supports_method("textDocument/codeAction") then
         vim.api.nvim_clear_autocmds({ group = "autoformat_on_save", buffer = bufnr })
@@ -42,14 +42,24 @@ local on_attach_autofmt = function(client, bufnr)
 end
 
 lspconfig.yamlls.setup({
-    schemas = {
-        ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
-        ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-        ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
-        ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
-        ["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
-        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
-        "*compose*.{yml,yaml}",
+    capabilities = capabilities,
+    schemaStore = {
+        -- You must disable built-in schemaStore support if you want to use
+        -- this plugin and its advanced options like `ignore`.
+        enable = false,
+        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+        url = "",
+    },
+    schemas = require("schemastore").yaml.schemas(),
+})
+
+lspconfig.jsonls.setup({
+    capabilities = capabilities,
+    settings = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
     },
 })
 
@@ -135,25 +145,31 @@ lspconfig.gopls.setup({
     },
     on_attach = function(client, bufnr)
         on_attach_autofmt(client, bufnr)
-        if client.server_capabilities.inlayHintProvider then
-            vim.lsp.inlay_hint.enable(true)
-        end
-
+        -- inlay hints
+        -- if client.server_capabilities.inlayHintProvider then
+        -- vim.lsp.inlay_hint.enable(true)
+        -- end
         -- code lens
-        vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = bufnr,
-            callback = vim.lsp.codelens.refresh,
-        })
+        -- vim.lsp.codelens.refresh()
+        -- vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        -- 	buffer = bufnr,
+        -- 	callback = vim.lsp.codelens.refresh,
+        -- })
     end,
 })
 
 lspconfig.golangci_lint_ls.setup({
+    capabilities = capabilities,
     cmd = { "golangci-lint-langserver", "-debug" },
     init_options = {
         command = { "golangci-lint", "run", "--out-format", "json", "--issues-exit-code=1" },
     },
     filetypes = { "go" },
+})
+
+lspconfig.pylsp.setup({
+    capabilities = capabilities,
+    -- on_attach = on_attach_autofmt,
 })
 
 -- diagnostics
@@ -172,6 +188,8 @@ vim.diagnostic.config({
         prefix = "",
         scope = "cursor",
         wrap = true,
-        max_width = 80,
+        max_width = 120,
     },
 })
+vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, {})
+vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, {})

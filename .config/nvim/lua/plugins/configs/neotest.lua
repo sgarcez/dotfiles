@@ -1,15 +1,16 @@
 require("neotest").setup({
     adapters = {
         -- require("neotest-go"),
-        require("neotest-golang")({
-            runner = "gotestsum",
-            go_test_args = {
-                "-v",
-                "-race",
-                "-count=1",
-                "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
-            },
-        }),
+        -- vs
+        -- require("neotest-golang")({
+        --     runner = "gotestsum",
+        --     go_test_args = {
+        --         "-v",
+        --         "-race",
+        --         "-count=1",
+        --         "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+        --     },
+        -- }),
     },
     diagnostic = {
         enabled = true,

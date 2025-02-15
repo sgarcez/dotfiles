@@ -11,13 +11,6 @@ return {
 	},
 	keys = {
 		{
-			"m",
-			mode = { "o", "x" },
-			function()
-				return require("flash.plugins.treesitter").jump()
-			end,
-		},
-		{
 			"gs",
 			mode = { "n", "x", "o" },
 			function()
