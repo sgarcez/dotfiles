@@ -58,4 +58,3 @@ alias ghtoken 'set -gx GITHUB_TOKEN (gh auth token)'
 alias awsprofile='export AWS_PROFILE=$(aws configure list-profiles | fzf)'
 alias awsenvvars 'eval $(aws-sso-creds export)'
 alias awslogin='aws sso login'
-
