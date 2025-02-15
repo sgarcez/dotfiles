@@ -1,6 +1,0 @@
-configuration {
-	modi: "window,run,ssh";
-	dpi: 218;
-    font: "InputMono 10";
-}
-@import "/usr/share/rofi/themes/blue.rasi"
