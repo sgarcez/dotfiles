@@ -146,16 +146,6 @@ lspconfig.gopls.setup({
 	},
 	on_attach = function(client, bufnr)
 		on_attach_autofmt(client, bufnr)
-		-- inlay hints
-		-- if client.server_capabilities.inlayHintProvider then
-		-- vim.lsp.inlay_hint.enable(true)
-		-- end
-		-- code lens
-		-- vim.lsp.codelens.refresh()
-		-- vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-		-- 	buffer = bufnr,
-		-- 	callback = vim.lsp.codelens.refresh,
-		-- })
 	end,
 })
 
