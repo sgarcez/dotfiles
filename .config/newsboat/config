@@ -11,14 +11,13 @@ prepopulate-query-feeds yes
 # -- display -------------------------------------------------------------------
 
 articlelist-title-format ""
+articlelist-format "%4i %f %D %?T?;%-17T; ?%t"
 feedlist-title-format ""
 itemview-title-format ""
 show-keymap-hint no
 display-article-progress yes
 text-width 80
-# include "~/.config/newsboat/colors"
-include /usr/share/doc/newsboat/contrib/colorschemes/greenscreen
-# include /usr/share/doc/newsboat/contrib/colorschemes/nord
+include "~/.config/newsboat/colors"
 
 
 # -- navigation ----------------------------------------------------------------
@@ -40,3 +39,4 @@ bind-key k up article
 unbind-key C feedlist
 confirm-exit no
 cleanup-on-quit no
+browser "open %u"
