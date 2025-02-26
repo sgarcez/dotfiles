@@ -2,7 +2,8 @@ if not status is-interactive
     exit
 end
 
-set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin ~/.local/share/nvim/mason/bin $PATH
+set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin ~/.local/share/nvim/mason/bin ~/Applications $PATH
+set -gx PATH /Applications/WezTerm.app/Contents/MacOS $PATH
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx EDITOR nvim
 set -x GPG_TTY (tty)
@@ -17,9 +18,9 @@ if test -f ~/.config/fish/aliases-private.fish
     source ~/.config/fish/aliases-private.fish
 end
 
-if test -f ~/.theme.sh
-    bash ~/.theme.sh
-end
+# if test -f ~/.theme.sh
+#     bash ~/.theme.sh
+# end
 
 if command -q devbox
     set -gx NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
