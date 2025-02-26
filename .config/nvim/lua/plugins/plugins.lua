@@ -33,7 +33,13 @@ return {
 	},
 
 	-- navigation
-	{ "christoomey/vim-tmux-navigator" },
+	-- { "christoomey/vim-tmux-navigator" },
+	{
+		"mrjones2014/smart-splits.nvim",
+		opts = {
+			at_edge = "stop",
+		},
+	},
 	{
 		"stevearc/oil.nvim",
 		opts = {
@@ -136,7 +142,7 @@ return {
 		keys = require("plugins.configs.trouble").keys,
 	},
 
-	-- langs
+	-- languages
 	{
 		"simrat39/rust-tools.nvim",
 		opts = require("plugins.configs.rusttools"),
@@ -182,6 +188,24 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 		opts = require("plugins.configs.noice"),
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = require("plugins.configs.snacks").opts,
+		keys = require("plugins.configs.snacks").keys,
+	},
+	{
+		"folke/zen-mode.nvim",
+		keys = {
+			{ "<leader>z", "<cmd>ZenMode<CR>" },
+		},
+	},
+	{
+		"b0o/incline.nvim",
+		config = function() require("incline").setup() end,
+		event = "VeryLazy",
 	},
 
 	-- debugger
@@ -230,13 +254,5 @@ return {
 		opts = {
 			"lua",
 		},
-	},
-
-	{
-		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
-		opts = require("plugins.configs.snacks").opts,
-		keys = require("plugins.configs.snacks").keys,
 	},
 }

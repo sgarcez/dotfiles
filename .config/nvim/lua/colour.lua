@@ -19,6 +19,28 @@ local c = {
 	red = "#bf616a",
 }
 
+ -- c = {
+	-- offBlack = "#2b303b",
+	-- darkestGrey = "#343d46",
+	-- darkGrey = "#4f5b66",
+	-- midDarkGrey = "#65737e",
+	-- midLightGrey = "#a7adba",
+	-- lightGrey = "#c0c5ce",
+	-- lightestGrey = "#dfe1e8",
+	-- offwhite = "#eff1f5",
+	-- orange = "#e79c9c",
+ --    -- orange = "#efbdbd",
+	-- -- yellow = "#ebcb8b",
+	-- yellow = "#DDD8B8",
+	-- -- oliveGreen = "#a3be8c",
+ --    oliveGreen = "#B3CBB9",
+	-- waterGreen = "#96b5b4",
+	-- blueGrey = "#8fa1b3",
+	-- pink = "#bc9cb0",
+	-- brick = "#a7adba",
+	-- red = "#bf616a",
+-- }
+
 local highlights = {
 	Normal = { fg = c.lightGrey, bg = c.offBlack },
 	Bold = { bold = true },
