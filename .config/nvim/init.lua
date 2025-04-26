@@ -1,3 +1,5 @@
+require("globals")
+require("filetypes")
 require("options")
 require("autocmds")
 require("plugins.register")

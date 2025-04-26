@@ -52,5 +52,7 @@ require("nvim-treesitter.configs").setup({
 		"dockerfile",
 		"gitignore",
 		"regex",
+        "gotmpl",
+        "helm",
 	},
 })

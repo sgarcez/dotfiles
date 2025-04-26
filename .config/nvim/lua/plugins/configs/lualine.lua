@@ -1,7 +1,6 @@
 return {
 	options = {
 		icons_enabled = false,
-		-- theme = 'OceanicNext',
 		theme = "ayu_mirage",
 		globalstatus = true,
 		component_separators = { "", "" },

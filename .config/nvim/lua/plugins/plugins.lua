@@ -116,6 +116,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
+		dependencies = {
+			"williamboman/mason.nvim",
+		},
 		config = function() require("plugins.configs.lsp") end,
 	},
 	{
@@ -133,7 +136,15 @@ return {
 	{
 		-- lsp progress notifications
 		"j-hui/fidget.nvim",
-		opts = {},
+		event = "VeryLazy",
+		opts = {
+			notification = {
+				window = {
+					border = "rounded",
+					winblend = 0,
+				},
+			},
+		},
 	},
 	{
 		"folke/trouble.nvim",
@@ -195,6 +206,7 @@ return {
 		lazy = false,
 		opts = require("plugins.configs.snacks").opts,
 		keys = require("plugins.configs.snacks").keys,
+		init = require("plugins.configs.snacks").init,
 	},
 	{
 		"folke/zen-mode.nvim",
@@ -246,6 +258,10 @@ return {
 		opts = require("plugins.configs.gitsigns"),
 	},
 	{ "rhysd/conflict-marker.vim" },
+	{
+		"sindrets/diffview.nvim",
+		command = "DiffviewOpen",
+	},
 
 	-- misc
 	-- colour highlighter
@@ -254,5 +270,27 @@ return {
 		opts = {
 			"lua",
 		},
+	},
+
+	-- LLMs
+	{
+		"olimorris/codecompanion.nvim",
+		opts = {
+			strategies = {
+				chat = {
+					adapter = "githubmodels",
+				},
+				inline = {
+					adapter = "githubmodels",
+				},
+			},
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
+	{
+		"augmentcode/augment.vim",
 	},
 }

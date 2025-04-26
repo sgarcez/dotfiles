@@ -1,7 +1,5 @@
 local opt = vim.opt
 
-vim.g.mapleader = ";"
-
 opt.undofile = true -- use undo file
 opt.updatetime = 100 -- time (in ms) to write to swap file
 opt.expandtab = true -- expand tab
@@ -31,23 +29,29 @@ opt.signcolumn = "yes:1" -- show sign column (column of the line number)
 opt.showmatch = true -- show bracket match
 opt.cmdheight = 0 -- height of :command line
 opt.shortmess:append({ s = true, I = true, W = true, F = true })
+
 -- completion
 opt.wildignore = { "*.o", "*~", "*.pyc" }
 opt.wildmode = { "longest", "full" }
 opt.wildmenu = true -- wildmenu, auto complete for commands
+
 -- mouse
 opt.mouse = "nivh"
+
 -- scroll
 opt.startofline = false
 opt.timeoutlen = 500
 opt.grepprg = "rg --smart-case --color=never --no-heading -H -n --column"
 opt.scrolloff = 999
+
 -- clipboard
 vim.opt.clipboard = "unnamed"
+
 -- folding
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldenable = false
+
 -- colorscheme
 opt.termguicolors = true
 opt.background = "dark"

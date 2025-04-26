@@ -62,28 +62,6 @@ return {
 			},
 		},
 	},
-	-- routes = {
-	--     {
-	--         filter = {
-	--             event = "msg_show",
-	--             any = {
-	--                 { find = "%d+L, %d+B" },
-	--                 { find = "; after #%d+" },
-	--                 { find = "; before #%d+" },
-	--                 { find = "fewer lines" },
-	--             },
-	--         },
-	--         view = "mini",
-	--     },
-	--     {
-	--         filter = {
-	--             event = "msg_show",
-	--             kind = "",
-	--             find = "written",
-	--         },
-	--         opts = { skip = true },
-	--     },
-	-- },
 	win_options = {
 		winhighlight = {
 			Normal = "NormalFloat",

@@ -77,7 +77,7 @@ return {
 		statuscolumn = { enabled = false },
 		zen = { enabled = false },
 		scratch = { enabled = true },
-        terminal = { enabled = true },
+		terminal = { enabled = true },
 	},
 	keys = {
 		-- Top Pickers & Explorer
@@ -142,4 +142,20 @@ return {
 		{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
 	},
+	init = function()
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "VeryLazy",
+			callback = function()
+				Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+				Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+				Snacks.toggle.line_number():map("<leader>ul")
+				Snacks.toggle.inlay_hints():map("<leader>uh")
+				Snacks.toggle({
+					name = "Diffview",
+					get = function() return require("diffview.lib").get_current_view() ~= nil end,
+					set = function(state) vim.cmd("Diffview" .. (state and "Open" or "Close")) end,
+				}):map("<leader>ud")
+			end,
+		})
+	end,
 }

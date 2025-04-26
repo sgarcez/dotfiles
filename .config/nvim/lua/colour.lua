@@ -19,26 +19,26 @@ local c = {
 	red = "#bf616a",
 }
 
- -- c = {
-	-- offBlack = "#2b303b",
-	-- darkestGrey = "#343d46",
-	-- darkGrey = "#4f5b66",
-	-- midDarkGrey = "#65737e",
-	-- midLightGrey = "#a7adba",
-	-- lightGrey = "#c0c5ce",
-	-- lightestGrey = "#dfe1e8",
-	-- offwhite = "#eff1f5",
-	-- orange = "#e79c9c",
- --    -- orange = "#efbdbd",
-	-- -- yellow = "#ebcb8b",
-	-- yellow = "#DDD8B8",
-	-- -- oliveGreen = "#a3be8c",
- --    oliveGreen = "#B3CBB9",
-	-- waterGreen = "#96b5b4",
-	-- blueGrey = "#8fa1b3",
-	-- pink = "#bc9cb0",
-	-- brick = "#a7adba",
-	-- red = "#bf616a",
+-- c = {
+-- offBlack = "#2b303b",
+-- darkestGrey = "#343d46",
+-- darkGrey = "#4f5b66",
+-- midDarkGrey = "#65737e",
+-- midLightGrey = "#a7adba",
+-- lightGrey = "#c0c5ce",
+-- lightestGrey = "#dfe1e8",
+-- offwhite = "#eff1f5",
+-- orange = "#e79c9c",
+--    -- orange = "#efbdbd",
+-- -- yellow = "#ebcb8b",
+-- yellow = "#DDD8B8",
+-- -- oliveGreen = "#a3be8c",
+--    oliveGreen = "#B3CBB9",
+-- waterGreen = "#96b5b4",
+-- blueGrey = "#8fa1b3",
+-- pink = "#bc9cb0",
+-- brick = "#a7adba",
+-- red = "#bf616a",
 -- }
 
 local highlights = {
@@ -85,7 +85,7 @@ local highlights = {
 	CursorLine = { bg = c.darkestGrey },
 	CursorLineNr = { fg = c.midLightGrey, bg = c.darkestGrey },
 	QuickFixLine = { bg = c.darkestGrey },
-	PMenu = { fg = c.lightGrey, bg = c.darkestGrey },
+	PMenu = { fg = c.midLightGrey, bg = c.darkestGrey },
 	PMenuSel = { fg = c.darkestGrey, bg = c.lightGrey },
 	TabLine = { fg = c.midDarkGrey, bg = c.darkestGrey },
 	TabLineFill = { fg = c.midDarkGrey, bg = c.darkestGrey },
@@ -449,6 +449,12 @@ local highlights = {
 	-- Coverage
 	CoverageCovered = { fg = c.oliveGreen },
 	CoverageUncovered = { fg = c.red },
+
+    -- blink
+    BlinkCmpMenu = { fg = c.midLightGrey, bg = c.darkestGrey},
+    PmenuKind = { fg = c.midDarkGrey},
+ --    BlinkCmpMenuBorder = { fg = c.lightGrey, bg = c.lightGrey, bold = false },
+	BlinkCmpMenuSelection = { fg = c.darkestGrey, bg = c.midLightGrey },
 }
 
 return {

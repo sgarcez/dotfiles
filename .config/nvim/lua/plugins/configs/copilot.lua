@@ -1,7 +1,7 @@
 return {
 	suggestion = {
 		enabled = false,
-		-- auto_trigger = true,
+		auto_trigger = false,
 	},
 	panel = { enabled = false },
 	filetypes = {

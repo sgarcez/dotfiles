@@ -1,6 +1,12 @@
 return {
 	opts = {
-		keymap = { preset = "enter" },
+		keymap = {
+			preset = "enter",
+			-- ["<Tab>"] = {},
+			-- ["<S-Tab>"] = {},
+			["<Tab>"] = { "snippet_forward", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "fallback" },
+		},
 		appearance = {
 			-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 			-- Adjusts spacing to ensure icons are aligned
@@ -32,7 +38,22 @@ return {
 				},
 			},
 		},
+		signature = { enabled = true },
 		completion = {
+			menu = {
+				draw = {
+					columns = {
+						{ "label", "label_description", gap = 1 },
+						{ "kind" },
+					},
+				},
+			},
+			list = {
+				selection = {
+					preselect = false,
+					auto_insert = false,
+				},
+			},
 			documentation = {
 				auto_show = true,
 				window = {
