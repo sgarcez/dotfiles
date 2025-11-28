@@ -59,10 +59,7 @@ return {
 	-- treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"RRethy/nvim-treesitter-textsubjects",
-		},
+		branch = "main",
 		build = ":TSUpdate",
 		config = function() require("plugins.configs.treesitter") end,
 	},
@@ -90,12 +87,6 @@ return {
 
 	-- completions
 	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		opts = require("plugins.configs.copilot"),
-	},
-	{
 		"saghen/blink.cmp",
 		version = "*",
 		dependencies = {
@@ -116,13 +107,10 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
-		dependencies = {
-			"williamboman/mason.nvim",
-		},
 		config = function() require("plugins.configs.lsp") end,
 	},
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"jay-babu/mason-null-ls.nvim",
@@ -155,8 +143,10 @@ return {
 
 	-- languages
 	{
-		"simrat39/rust-tools.nvim",
-		opts = require("plugins.configs.rusttools"),
+		"mrcjkb/rustaceanvim",
+		version = "^5", -- Recommended
+		lazy = false, -- This plugin is already lazy
+		config = function() vim.g.rustaceanvim = require("plugins.configs.rustaceanvim") end,
 	},
 	{
 		"towolf/vim-helm",
@@ -207,6 +197,18 @@ return {
 		opts = require("plugins.configs.snacks").opts,
 		keys = require("plugins.configs.snacks").keys,
 		init = require("plugins.configs.snacks").init,
+	},
+    -- libs for folke projects
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
+				{ path = "lazy.nvim", words = { "LazyVim" } },
+			},
+		},
 	},
 	{
 		"folke/zen-mode.nvim",
@@ -274,23 +276,18 @@ return {
 
 	-- LLMs
 	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = require("plugins.configs.copilot"),
+	},
+	{
 		"olimorris/codecompanion.nvim",
-		opts = {
-			strategies = {
-				chat = {
-					adapter = "githubmodels",
-				},
-				inline = {
-					adapter = "githubmodels",
-				},
-			},
-		},
+		version = "v17.33.0",
+		opts = require("plugins.configs.codecompanion"),
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
-	},
-	{
-		"augmentcode/augment.vim",
 	},
 }

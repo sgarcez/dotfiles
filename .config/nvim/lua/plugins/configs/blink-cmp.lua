@@ -21,7 +21,6 @@ return {
 					module = "blink.cmp.sources.lsp",
 					score_offset = 99,
 				},
-
 				copilot = {
 					name = "copilot",
 					enabled = true,

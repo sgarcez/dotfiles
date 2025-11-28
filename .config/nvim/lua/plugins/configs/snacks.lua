@@ -5,46 +5,47 @@ return {
 		dashboard = {
 			enabled = true,
 			preset = {
-				header = [[
-              .7
-            .'/
-           / /
-          / /
-         / /
-        / /
-       / /
-      / /
-     / /
-    / /
-  __|/
-,-\__\
-|f-"Y\|
-\()7L/
- cgD                            __ _
- |\(                          .'  Y '>,
-  \ \                        / _   _   \
-   \\\                       )(_) (_)(|}
-    \\\                      {  4A   } /
-     \\\                      \uLuJJ/\l
-      \\\                     |3    p)/
-       \\\___ __________      /nnm_n//
-       c7___-__,__-)\,__)(".  \_>-<_/D
-                  //V     \_"-._.__G G_c__.-__<"/ ( \
-                         <"-._>__-,G_.___)\   \7\
-                        ("-.__.| \"<.__.-" )   \ \
-                        |"-.__"\  |"-.__.-".\   \ \
-                        ("-.__"". \"-.__.-".|    \_\
-                        \"-.__""|!|"-.__.-".)     \ \
-                         "-.__""\_|"-.__.-"./      \ l
-                          ".__""">G>-.__.-">       .--,_
-                              ""  G
-]],
+-- 				header = [[
+--               .7
+--             .'/
+--            / /
+--           / /
+--          / /
+--         / /
+--        / /
+--       / /
+--      / /
+--     / /
+--   __|/
+-- ,-\__\
+-- |f-"Y\|
+-- \()7L/
+--  cgD                            __ _
+--  |\(                          .'  Y '>,
+--   \ \                        / _   _   \
+--    \\\                       )(_) (_)(|}
+--     \\\                      {  4A   } /
+--      \\\                      \uLuJJ/\l
+--       \\\                     |3    p)/
+--        \\\___ __________      /nnm_n//
+--        c7___-__,__-)\,__)(".  \_>-<_/D
+--                   //V     \_"-._.__G G_c__.-__<"/ ( \
+--                          <"-._>__-,G_.___)\   \7\
+--                         ("-.__.| \"<.__.-" )   \ \
+--                         |"-.__"\  |"-.__.-".\   \ \
+--                         ("-.__"". \"-.__.-".|    \_\
+--                         \"-.__""|!|"-.__.-".)     \ \
+--                          "-.__""\_|"-.__.-"./      \ l
+--                           ".__""">G>-.__.-">       .--,_
+--                               ""  G
+-- ]],
 				keys = {
 					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
 					{ icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
 					{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
 					{ icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
 					{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+					{ icon = " ", key = "M", desc = "Mason", action = ":Mason", enabled = package.loaded.mason ~= nil },
 					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
 				},
 			},

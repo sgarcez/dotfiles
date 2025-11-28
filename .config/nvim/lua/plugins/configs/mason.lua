@@ -15,6 +15,9 @@ mason_lspconfig.setup({
 		"golangci_lint_ls",
 		"yamlls",
 		"rust_analyzer",
+		"terraformls",
+		"helm_ls",
+		"jsonls",
 	},
 	-- auto-install configured servers (with lspconfig)
 	-- automatic_installation = true, -- not the same as ensure_installed
@@ -27,15 +30,14 @@ mason_null_ls.setup({
 		"stylua",
 		"shfmt",
 		"shellcheck",
-		"terraform-ls",
-		"helm-ls",
-		"yaml-language-server",
+
+
 		"gomodifytags",
 		"gofumpt",
 		"impl",
 		"checkmake",
 		"gitlint",
-		"gofumpt",
+
 		"goimports",
 		"gotestsum",
 		"delve",

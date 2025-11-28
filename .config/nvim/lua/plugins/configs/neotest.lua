@@ -2,8 +2,6 @@ return {
 	config = function()
 		local opts = {
 			adapters = {
-				-- require("neotest-go"),
-				-- vs
 				require("neotest-golang")({
 					runner = "gotestsum",
 					go_test_args = {
@@ -12,8 +10,10 @@ return {
 						"-count=1",
 						"-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
 					},
+					dap_go_enabled = true,
 				}),
 			},
+			log_level = vim.log.levels.DEBUG,  -- Enable debug logging
 			diagnostic = {
 				enabled = true,
 			},
@@ -29,7 +29,7 @@ return {
 			discovery = {
 				-- Drastically improve performance in ginormous projects by
 				-- only AST-parsing the currently opened buffer.
-				enabled = false,
+				enabled = true,
 				-- Number of workers to parse files concurrently.
 				-- A value of 0 automatically assigns number based on CPU.
 				-- Set to 1 if experiencing lag.

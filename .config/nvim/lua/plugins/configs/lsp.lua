@@ -8,7 +8,7 @@ local on_attach_autofmt = function(client, bufnr)
 			buffer = bufnr,
 			callback = function()
 				local win = vim.api.nvim_get_current_win()
-				local enc = client.offset_encoding or "utf-16"
+				local enc = client.offmeter_integrationet_encoding or "utf-16"
 				local params = vim.lsp.util.make_range_params(win, enc)
 				params.context = { only = { "source.organizeImports" } }
 				local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
@@ -41,8 +41,8 @@ local servers = {
 				},
 				completeUnimported = true,
 				usePlaceholders = true,
-				buildFlags = { "-tags=integration,dbintegration,vpn_integration" },
-				gofumpt = true,
+				buildFlags = { "-tags=integration,dbintegration,vpn_integration,meter_integration" },
+				gofumpt = false,
 				-- ["local"] = "", -- sadly disable separate local import group.
 				analyses = {
 					ST1003 = false,
@@ -51,13 +51,31 @@ local servers = {
 					shadow = false,
 				},
 				codelenses = {
-					gc_details = true,
+					gc_details = false,
 					generate = true,
+					regenerate_cgo = true,
+					run_govulncheck = true,
 					test = true,
 					tidy = true,
 					upgrade_dependency = true,
 					vendor = true,
 				},
+				-- codelenses = {
+				-- 	gc_details = true,
+				-- 	generate = true,
+				-- 	test = true,
+				-- 	tidy = true,
+				-- 	upgrade_dependency = true,
+				-- 	vendor = true,
+				-- },
+				-- diagnostic = {
+				-- 	annotations = {
+				-- 		bounds = true,
+				-- 		inline = true,
+				-- 		escape = true,
+				-- 		["nil"] = true,
+				-- 	},
+				-- },
 			},
 		},
 	},
@@ -80,13 +98,6 @@ local servers = {
 				-- make the language server recognize "vim" global
 				diagnostics = {
 					globals = { "vim" },
-				},
-				workspace = {
-					-- make language server aware of runtime files
-					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.stdpath("config") .. "/lua"] = true,
-					},
 				},
 			},
 		},
@@ -120,10 +131,13 @@ local servers = {
 		},
 	},
 
-	terraformls = {},
+	terraformls = {
+		on_attach = on_attach_autofmt,
+	},
 }
 
 for server, settings in pairs(servers) do
+	settings.capabilities = require("blink.cmp").get_lsp_capabilities(settings.capabilities)
 	vim.lsp.config(server, settings)
 	vim.lsp.enable(server)
 end

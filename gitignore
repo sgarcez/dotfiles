@@ -13,3 +13,6 @@ cover.cov
 .envrc
 devbox.json
 devbox.lock
+
+codecompanion-workspace.json
+.claude
