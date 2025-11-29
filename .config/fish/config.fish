@@ -2,6 +2,8 @@ if not status is-interactive
     exit
 end
 
+~/.local/bin/mise activate fish | source
+
 set -gx PATH ~/.local/bin ~/bin ~/go/bin ~/.cargo/bin ~/.local/share/nvim/mason/bin ~/Applications $PATH
 set -gx PATH /Applications/WezTerm.app/Contents/MacOS $PATH
 set -gx XDG_CONFIG_HOME "$HOME/.config"
@@ -21,11 +23,6 @@ end
 # if test -f ~/.theme.sh
 #     bash ~/.theme.sh
 # end
-
-if command -q devbox
-    set -gx NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
-    devbox global shellenv --init-hook | source
-end
 
 if command -q starship
     set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
@@ -47,3 +44,9 @@ end
 # No greeting when starting an interactive shell.
 function fish_greeting
 end
+
+if test ~/.config/fish/config_private.fish
+    source ~/.config/fish/config_private.fish
+end
+
+set -gx ANTHROPIC_API_KEY (bat ~/.config/anthropic/api_key 2>/dev/null)

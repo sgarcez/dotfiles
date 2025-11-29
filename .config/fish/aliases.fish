@@ -52,8 +52,6 @@ abbr -a kns kubens
 abbr -a ktx kubectx
 abbr -a tf terraform
 
-abbr -a dg devbox global
-
 alias ghtoken 'set -gx GITHUB_TOKEN (gh auth token)'
 alias awsprofile='export AWS_PROFILE=$(aws configure list-profiles | fzf)'
 alias awsenvvars 'eval $(aws-sso-creds export)'
