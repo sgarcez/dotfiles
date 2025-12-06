@@ -20,9 +20,9 @@ if test -f ~/.config/fish/aliases-private.fish
     source ~/.config/fish/aliases-private.fish
 end
 
-# if test -f ~/.theme.sh
-#     bash ~/.theme.sh
-# end
+if test -f ~/.config/fish/theme.sh
+    bash ~/.config/fish/theme.sh
+end
 
 if command -q starship
     set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
@@ -45,8 +45,6 @@ end
 function fish_greeting
 end
 
-if test ~/.config/fish/config_private.fish
-    source ~/.config/fish/config_private.fish
-end
-
-set -gx ANTHROPIC_API_KEY (bat ~/.config/anthropic/api_key 2>/dev/null)
+# if test ~/.config/fish/config_private.fish
+#     source ~/.config/fish/config_private.fish
+# end
