@@ -45,6 +45,11 @@ end
 function fish_greeting
 end
 
-# if test ~/.config/fish/config_private.fish
-#     source ~/.config/fish/config_private.fish
-# end
+if test ~/.config/fish/config_private.fish
+    source ~/.config/fish/config_private.fish
+end
+
+set -gx ANTHROPIC_API_KEY (bat ~/.config/anthropic/api_key 2>/dev/null)
+
+# opencode
+fish_add_path /Users/sergio/.opencode/bin

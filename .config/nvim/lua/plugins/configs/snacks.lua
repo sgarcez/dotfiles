@@ -5,6 +5,7 @@ return {
 		dashboard = {
 			enabled = true,
 			preset = {
+                header = "",
 -- 				header = [[
 --               .7
 --             .'/

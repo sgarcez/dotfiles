@@ -10,13 +10,17 @@ error_symbol = "[◊](bold red)"
 symbol = "go "
 
 [aws]
-disabled = true
+symbol = "aws "
+disabled = false
 
 [buf]
 disabled = true
 
+[terraform]
+symbol = "tf "
+
 [docker_context]
-disabled = true
+disabled = false
 symbol = "docker-context "
 
 [nix_shell]

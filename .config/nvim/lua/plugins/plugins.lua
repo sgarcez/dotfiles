@@ -90,7 +90,7 @@ return {
 		"saghen/blink.cmp",
 		version = "*",
 		dependencies = {
-			"giuxtaposition/blink-cmp-copilot",
+            "fang2hou/blink-copilot",
 		},
 		opts = require("plugins.configs.blink-cmp").opts,
 		opts_extend = { "sources.default" },

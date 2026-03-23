@@ -41,7 +41,7 @@ local servers = {
 				},
 				completeUnimported = true,
 				usePlaceholders = true,
-				buildFlags = { "-tags=integration,dbintegration,vpn_integration,meter_integration" },
+				buildFlags = { "-tags=integration,dbintegration,vpn_integration,meter_integration,e2e" },
 				gofumpt = false,
 				-- ["local"] = "", -- sadly disable separate local import group.
 				analyses = {
