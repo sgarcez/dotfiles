@@ -49,7 +49,13 @@ if test -f ~/.config/fish/config_private.fish
     source ~/.config/fish/config_private.fish
 end
 
-set -gx ANTHROPIC_API_KEY (bat ~/.config/anthropic/api_key 2>/dev/null)
+if test -f ~/.config/private/anthropic_api_key
+    set -gx ANTHROPIC_API_KEY (bat ~/.config/private/anthropic_api_key 2>/dev/null)
+end
+
+if test -f ~/.config/private/openrouter_api_key
+    set -gx OPENROUTER_API_KEY (bat ~/.config/private/openrouter_api_key 2>/dev/null)
+end
 
 # opencode
 fish_add_path /Users/sergio/.opencode/bin
