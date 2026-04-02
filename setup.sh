@@ -100,6 +100,7 @@ setup() {
         "$SCRIPT_DIR/.config/task:$HOME/.config/task"
         "$SCRIPT_DIR/.config/tmux:$HOME/.config/tmux"
         "$SCRIPT_DIR/.config/wezterm:$HOME/.config/wezterm"
+        "$SCRIPT_DIR/.config/mise:$HOME/.config/mise"
     )
     
     # Create symlinks

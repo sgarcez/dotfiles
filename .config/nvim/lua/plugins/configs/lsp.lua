@@ -89,6 +89,14 @@ local servers = {
 	},
 
 	rust_analyzer = {},
+
+	zls = {
+		cmd = { "zls" },
+		filetypes = { "zig", "zir" },
+		-- root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
+		-- single_file_support = true,
+	},
+
 	lua_ls = {
 		settings = {
 			Lua = {

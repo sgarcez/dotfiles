@@ -11,13 +11,14 @@ mason.setup({
 mason_lspconfig.setup({
 	ensure_installed = {
 		"gopls",
-		"lua_ls",
+        "zls",
+		-- "lua_ls",
 		"golangci_lint_ls",
-		"yamlls",
-		"rust_analyzer",
-		"terraformls",
-		"helm_ls",
-		"jsonls",
+		-- "yamlls",
+		-- "rust_analyzer",
+		-- "terraformls",
+		-- "helm_ls",
+		-- "jsonls",
 	},
 	-- auto-install configured servers (with lspconfig)
 	-- automatic_installation = true, -- not the same as ensure_installed
@@ -30,14 +31,11 @@ mason_null_ls.setup({
 		"stylua",
 		"shfmt",
 		"shellcheck",
-
-
 		"gomodifytags",
 		"gofumpt",
 		"impl",
 		"checkmake",
 		"gitlint",
-
 		"goimports",
 		"gotestsum",
 		"delve",
