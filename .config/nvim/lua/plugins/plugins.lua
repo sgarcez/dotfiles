@@ -90,17 +90,31 @@ return {
 		"saghen/blink.cmp",
 		version = "*",
 		dependencies = {
-            "fang2hou/blink-copilot",
+			"fang2hou/blink-copilot",
 		},
 		opts = require("plugins.configs.blink-cmp").opts,
 		opts_extend = { "sources.default" },
 	},
+
+	-- formatting
 	{
-		"nvimtools/none-ls.nvim",
-		config = function() require("plugins.configs.none-ls") end,
-		dependencies = {
-			"gbprod/none-ls-shellcheck.nvim",
-		},
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		opts = require("plugins.configs.conform"),
+	},
+
+	-- linting
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		config = function()
+			local lint = require("lint")
+			lint.linters_by_ft = require("plugins.configs.nvim-lint").linters_by_ft
+			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+				callback = function() lint.try_lint() end,
+			})
+		end,
 	},
 
 	-- LSP / Diagnostics
@@ -113,16 +127,15 @@ return {
 		"mason-org/mason.nvim",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
-			"jay-babu/mason-null-ls.nvim",
-			"nvimtools/none-ls.nvim",
 		},
 		config = function() require("plugins.configs.mason") end,
 	},
 	{
 		"b0o/schemastore.nvim",
 	},
+
+	-- lsp progress notifications
 	{
-		-- lsp progress notifications
 		"j-hui/fidget.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -134,6 +147,8 @@ return {
 			},
 		},
 	},
+
+	-- diagnostics list and quickfix list
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
@@ -175,7 +190,7 @@ return {
 
 	{
 		"andythigpen/nvim-coverage",
-		requires = "nvim-lua/plenary.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 		opts = require("plugins.configs.coverage").opts,
 		keys = require("plugins.configs.coverage").keys,
 	},
@@ -198,7 +213,7 @@ return {
 		keys = require("plugins.configs.snacks").keys,
 		init = require("plugins.configs.snacks").init,
 	},
-    -- libs for folke projects
+	-- libs for folke projects
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",

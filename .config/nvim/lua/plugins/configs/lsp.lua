@@ -8,7 +8,7 @@ local on_attach_autofmt = function(client, bufnr)
 			buffer = bufnr,
 			callback = function()
 				local win = vim.api.nvim_get_current_win()
-				local enc = client.offmeter_integrationet_encoding or "utf-16"
+				local enc = client.offset_encoding or "utf-16"
 				local params = vim.lsp.util.make_range_params(win, enc)
 				params.context = { only = { "source.organizeImports" } }
 				local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
@@ -88,8 +88,6 @@ local servers = {
 		filetypes = { "go" },
 	},
 
-	rust_analyzer = {},
-
 	zls = {
 		cmd = { "zls" },
 		filetypes = { "zig", "zir" },
@@ -120,13 +118,17 @@ local servers = {
 	},
 
 	yamlls = {
-		schemaStore = {
-			-- Disable built-in schemaStore support to use schemastore plugin
-			enable = false,
-			-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-			url = "",
+		settings = {
+			yaml = {
+				schemaStore = {
+					-- Disable built-in schemaStore support to use schemastore plugin
+					enable = false,
+					-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+					url = "",
+				},
+				schemas = require("schemastore").yaml.schemas(),
+			},
 		},
-		schemas = require("schemastore").yaml.schemas(),
 	},
 
 	helm_ls = {

@@ -1,36 +1,18 @@
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
-local mason_null_ls = require("mason-null-ls")
+local registry = require("mason-registry")
 
 mason.setup({
 	ui = {
 		border = "rounded",
 	},
-})
-
-mason_lspconfig.setup({
 	ensure_installed = {
-		"gopls",
-        "zls",
-		-- "lua_ls",
-		"golangci_lint_ls",
-		-- "yamlls",
-		-- "rust_analyzer",
-		-- "terraformls",
-		-- "helm_ls",
-		-- "jsonls",
-	},
-	-- auto-install configured servers (with lspconfig)
-	-- automatic_installation = true, -- not the same as ensure_installed
-})
-
-mason_null_ls.setup({
-	ensure_installed = {
-		"markdownlint-cli2",
-		"hadolint",
 		"stylua",
 		"shfmt",
 		"shellcheck",
+		"golangci-lint",
+		"markdownlint-cli2",
+		"hadolint",
 		"gomodifytags",
 		"gofumpt",
 		"impl",
@@ -40,5 +22,19 @@ mason_null_ls.setup({
 		"gotestsum",
 		"delve",
 	},
-	automatic_installation = true,
+})
+
+mason_lspconfig.setup({
+	ensure_installed = {
+		"gopls",
+		"zls",
+		-- "lua_ls",
+		"golangci_lint_ls",
+		-- "yamlls",
+		-- "terraformls",
+		-- "helm_ls",
+		-- "jsonls",
+	},
+	-- auto-install configured servers (with lspconfig)
+	-- automatic_installation = true, -- not the same as ensure_installed
 })
