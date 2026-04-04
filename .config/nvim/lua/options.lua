@@ -23,6 +23,7 @@ opt.pumheight = 15 -- maximum number of items to show in the completion popup
 opt.hidden = true
 opt.cursorline = false -- show cursor line
 opt.modeline = false
+opt.exrc = true -- source .nvim.lua / .nvimrc from project directories
 opt.ruler = true -- show ruler line
 opt.signcolumn = "yes:1" -- show sign column (column of the line number)
 -- opt.iskeyword:append("-")  -- consider string-string as whole word

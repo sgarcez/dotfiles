@@ -15,6 +15,16 @@ dap.adapters.delve_connect = function(cb, conf)
 	})
 end
 
+-- Pure TCP connection to a headless dlv server (no local dlv subprocess).
+-- Use this in per-project .nvim.lua files with request="attach", mode="remote".
+dap.adapters.delve_headless = function(cb, conf)
+	cb({
+		type = "server",
+		host = conf.host or "127.0.0.1",
+		port = conf.port,
+	})
+end
+
 dap.adapters.delve = {
 	type = "server",
 	port = "${port}",
@@ -28,17 +38,15 @@ dap.adapters.delve = {
 -- Project-specific remote configurations (substitutePath etc.) should be added
 -- in a per-project .nvim.lua file, e.g.:
 --
---   vim.list_extend(require("dap").configurations.go, {
---     {
---       type = "delve_connect",
---       name = "Connect to service",
---       request = "attach",
---       mode = "remote",
---       port = 40000,
---       substitutePath = {
---         { from = "${workspaceFolder}", to = "/go/src/github.com/myorg/myrepo" },
---         { from = "/go/src/github.com/myorg/myrepo", to = "${workspaceFolder}" },
---       },
+--   table.insert(require("dap").configurations.go, {
+--     type = "delve_headless",  -- pure TCP, no local dlv subprocess
+--     name = "Connect to service",
+--     request = "attach",
+--     mode = "remote",
+--     port = 2345,
+--     substitutePath = {
+--       { from = "${workspaceFolder}", to = "/src" },
+--       { from = "/src", to = "${workspaceFolder}" },
 --     },
 --   })
 dap.configurations.go = {

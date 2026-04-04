@@ -343,19 +343,17 @@ local highlights = {
 	CoverageCovered = { fg = c.oliveGreen },
 	CoverageUncovered = { fg = c.red },
 
-    -- blink
-    BlinkCmpMenu = { fg = c.midLightGrey, bg = c.darkestGrey},
-    PmenuKind = { fg = c.midDarkGrey},
- --    BlinkCmpMenuBorder = { fg = c.lightGrey, bg = c.lightGrey, bold = false },
+	-- blink
+	BlinkCmpMenu = { fg = c.midLightGrey, bg = c.darkestGrey },
+	PmenuKind = { fg = c.midDarkGrey },
+	--    BlinkCmpMenuBorder = { fg = c.lightGrey, bg = c.lightGrey, bold = false },
 	BlinkCmpMenuSelection = { fg = c.darkestGrey, bg = c.midLightGrey },
 }
 
 return {
 	setup = function()
 		vim.cmd("syntax reset")
-		if vim.g.colors_name then
-			vim.cmd("hi clear")
-		end
+		if vim.g.colors_name then vim.cmd("hi clear") end
 		vim.o.termguicolors = true
 		vim.o.background = "dark"
 		vim.g.colors_name = "sg"
