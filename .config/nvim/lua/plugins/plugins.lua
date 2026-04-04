@@ -7,7 +7,6 @@ return {
 			show_help = false,
 			show_keys = false,
 		},
-		event = "VeryLazy",
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 600
@@ -22,14 +21,12 @@ return {
 	},
 	{
 		"folke/flash.nvim",
-		event = "VeryLazy",
 		opts = require("plugins.configs.flash").opts,
 		keys = require("plugins.configs.flash").keys,
 	},
 	{
 		-- auto enable and disable search highlighting
 		"romainl/vim-cool",
-		event = "VeryLazy",
 	},
 
 	-- navigation
@@ -83,17 +80,17 @@ return {
 
 	-- snippets
 	{ "L3MON4D3/LuaSnip" },
-	{ "rafamadriz/friendly-snippets", lazy = false },
+	{ "rafamadriz/friendly-snippets" },
 
 	-- completions
 	{
 		"saghen/blink.cmp",
-		version = "*",
 		dependencies = {
-            "fang2hou/blink-copilot",
+			"fang2hou/blink-copilot",
 		},
+		build = "cargo build --release",
 		opts = require("plugins.configs.blink-cmp").opts,
-		opts_extend = { "sources.default" },
+		-- opts_extend = { "sources.default" },
 	},
 	{
 		"nvimtools/none-ls.nvim",
@@ -106,7 +103,6 @@ return {
 	-- LSP / Diagnostics
 	{
 		"neovim/nvim-lspconfig",
-		event = "VimEnter",
 		config = function() require("plugins.configs.lsp") end,
 	},
 	{
@@ -124,7 +120,6 @@ return {
 	{
 		-- lsp progress notifications
 		"j-hui/fidget.nvim",
-		event = "VeryLazy",
 		opts = {
 			notification = {
 				window = {
@@ -144,8 +139,6 @@ return {
 	-- languages
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		lazy = false, -- This plugin is already lazy
 		config = function() vim.g.rustaceanvim = require("plugins.configs.rustaceanvim") end,
 	},
 	{
@@ -184,7 +177,6 @@ return {
 	{
 		-- hover UI for cmdline, popupmenu, lsp hover
 		"folke/noice.nvim",
-		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
@@ -193,12 +185,11 @@ return {
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
-		lazy = false,
 		opts = require("plugins.configs.snacks").opts,
 		keys = require("plugins.configs.snacks").keys,
 		init = require("plugins.configs.snacks").init,
 	},
-    -- libs for folke projects
+	-- libs for folke projects
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -219,7 +210,6 @@ return {
 	{
 		"b0o/incline.nvim",
 		config = function() require("incline").setup() end,
-		event = "VeryLazy",
 	},
 
 	-- debugger
@@ -256,7 +246,6 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufRead",
 		opts = require("plugins.configs.gitsigns"),
 	},
 	{ "rhysd/conflict-marker.vim" },
@@ -278,12 +267,10 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = "InsertEnter",
 		opts = require("plugins.configs.copilot"),
 	},
 	{
 		"olimorris/codecompanion.nvim",
-		version = "v17.33.0",
 		opts = require("plugins.configs.codecompanion"),
 		dependencies = {
 			"nvim-lua/plenary.nvim",
