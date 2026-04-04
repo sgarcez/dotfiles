@@ -16,7 +16,7 @@ opt.display = "msgsep"
 opt.ignorecase = true -- search with ignore case
 opt.smartcase = false
 opt.hlsearch = true -- highlight search
-opt.incsearch = false -- no incremental search
+opt.incsearch = true -- incremental search
 opt.inccommand = "nosplit" -- live substitute preview
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.pumheight = 15 -- maximum number of items to show in the completion popup
@@ -49,7 +49,7 @@ vim.opt.clipboard = "unnamed"
 
 -- folding
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.wo.foldenable = false
 
 -- colorscheme

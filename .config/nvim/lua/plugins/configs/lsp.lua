@@ -1,31 +1,5 @@
-vim.api.nvim_create_augroup("autoformat_on_save", { clear = true })
-local on_attach_autofmt = function(client, bufnr)
-	if client.supports_method("textDocument/codeAction") then
-		vim.api.nvim_clear_autocmds({ group = "autoformat_on_save", buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = "autoformat_on_save",
-			-- pattern = "*.go",
-			buffer = bufnr,
-			callback = function()
-				local win = vim.api.nvim_get_current_win()
-				local enc = client.offset_encoding or "utf-16"
-				local params = vim.lsp.util.make_range_params(win, enc)
-				params.context = { only = { "source.organizeImports" } }
-				local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-				for _, res in pairs(result or {}) do
-					for _, r in pairs(res.result or {}) do
-						if r.edit then vim.lsp.util.apply_workspace_edit(r.edit, enc) end
-					end
-				end
-				vim.lsp.buf.format({ async = false })
-			end,
-		})
-	end
-end
-
 local servers = {
 	gopls = {
-		on_attach = on_attach_autofmt,
 		cmd = { "gopls" },
 		filetypes = { "go", "gomod", "gowork", "gotmpl" },
 		settings = {
@@ -141,9 +115,7 @@ local servers = {
 		},
 	},
 
-	terraformls = {
-		on_attach = on_attach_autofmt,
-	},
+	terraformls = {},
 }
 
 for server, settings in pairs(servers) do

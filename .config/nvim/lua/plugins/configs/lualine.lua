@@ -1,7 +1,7 @@
 return {
 	options = {
 		icons_enabled = false,
-		theme = "ayu_mirage",
+		theme = "auto",
 		globalstatus = true,
 		component_separators = { "", "" },
 		section_separators = { "", "" },

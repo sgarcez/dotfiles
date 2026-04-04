@@ -171,6 +171,7 @@ return {
 	-- Task runner
 	{
 		"stevearc/overseer.nvim",
+		cmd = { "OverseerRun", "OverseerToggle", "OverseerOpen" },
 		opts = {},
 	},
 
@@ -254,11 +255,12 @@ return {
 	-- comments
 	{
 		"numToStr/Comment.nvim",
+		event = "BufReadPost",
 		config = function() require("Comment").setup() end,
 	},
 
 	-- registers
-	{ "junegunn/vim-peekaboo" },
+	{ "junegunn/vim-peekaboo", event = "VeryLazy" },
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = require("plugins.configs.lualine"),
@@ -266,15 +268,11 @@ return {
 
 	-- git
 	{
-		"kdheepak/lazygit.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		event = "BufRead",
 		opts = require("plugins.configs.gitsigns"),
 	},
-	{ "rhysd/conflict-marker.vim" },
+	{ "rhysd/conflict-marker.vim", event = "BufReadPost" },
 	{
 		"sindrets/diffview.nvim",
 		command = "DiffviewOpen",
@@ -284,6 +282,7 @@ return {
 	-- colour highlighter
 	{
 		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPost",
 		opts = {
 			"lua",
 		},

@@ -14,5 +14,5 @@ g.loaded_python3_provider = 0
 g.mapleader = ';'
 
 -- augment
-g.augment_workspace_folders = {'~/code/docker/build-service'}
+-- g.augment_workspace_folders -- set per-project in .nvim.lua
 g.augment_disable_completions = false

@@ -25,6 +25,22 @@ dap.adapters.delve = {
 }
 
 -- https://github.com/go-delve/delve/blob/master/Documentation/api/dap/README.md
+-- Project-specific remote configurations (substitutePath etc.) should be added
+-- in a per-project .nvim.lua file, e.g.:
+--
+--   vim.list_extend(require("dap").configurations.go, {
+--     {
+--       type = "delve_connect",
+--       name = "Connect to service",
+--       request = "attach",
+--       mode = "remote",
+--       port = 40000,
+--       substitutePath = {
+--         { from = "${workspaceFolder}", to = "/go/src/github.com/myorg/myrepo" },
+--         { from = "/go/src/github.com/myorg/myrepo", to = "${workspaceFolder}" },
+--       },
+--     },
+--   })
 dap.configurations.go = {
 	{
 		type = "delve",
@@ -35,7 +51,6 @@ dap.configurations.go = {
 	{
 		-- https://stackoverflow.com/questions/55643722/dlv-debug-fail-due-to-undefined-object-in-same-package
 		-- https://stackoverflow.com/questions/77498761/how-to-create-a-debug-configuration-for-a-specific-go-file-in-vscode
-		-- https://github.com/go-delve/delve/blob/master/Documentation/api/dap/README.md
 		-- must set breakpoints before running
 		type = "delve",
 		name = "Debug cmd (Arguments)",
@@ -46,57 +61,6 @@ dap.configurations.go = {
 			local argument_string = vim.fn.input("Program arguments: ")
 			return vim.fn.split(argument_string, " ", true)
 		end,
-	},
-	{
-		type = "delve_connect",
-		name = "Connect to proxy",
-		request = "attach",
-		mode = "remote",
-		port = 40000,
-		substitutePath = {
-			{
-				from = "${workspaceFolder}",
-				to = "/go/src/github.com/docker/build-service",
-			},
-			{
-				from = "/go/src/github.com/docker/build-service",
-				to = "${workspaceFolder}",
-			},
-		},
-	},
-	{
-		type = "delve_connect",
-		name = "Connect to brain",
-		request = "attach",
-		mode = "remote",
-		port = 40001,
-		substitutePath = {
-			{
-				from = "${workspaceFolder}",
-				to = "/go/src/github.com/docker/build-service",
-			},
-			{
-				from = "/go/src/github.com/docker/build-service",
-				to = "${workspaceFolder}",
-			},
-		},
-	},
-	{
-		type = "delve_connect",
-		name = "Connect to insights",
-		request = "attach",
-		mode = "remote",
-		port = 40005,
-		substitutePath = {
-			{
-				from = "${workspaceFolder}",
-				to = "/go/src/github.com/docker/build-service",
-			},
-			{
-				from = "/go/src/github.com/docker/build-service",
-				to = "${workspaceFolder}",
-			},
-		},
 	},
 	{
 		type = "delve",

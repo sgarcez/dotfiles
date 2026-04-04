@@ -8,8 +8,6 @@ require("nvim-treesitter").setup({
 		},
 	},
 	indent = { enable = false },
-	autotag = { enable = true },
-	matchup = { enable = true },
 	ensure_installed = {
 		"bash",
 		"css",

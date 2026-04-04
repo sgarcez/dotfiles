@@ -13,7 +13,7 @@ return {
 					dap_go_enabled = true,
 				}),
 			},
-			log_level = vim.log.levels.DEBUG,  -- Enable debug logging
+			log_level = vim.log.levels.WARN,
 			diagnostic = {
 				enabled = true,
 			},
